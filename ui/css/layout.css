@@ -1,0 +1,62 @@
+.m1,
+.ml1,
+.mr1 {
+    margin: .5rem;
+}
+
+.ml1 {
+    margin-left: .25rem;
+}
+
+.mr1 {
+    margin-right: .25rem;
+}
+
+.m2 {
+    margin: .75rem;
+}
+
+.m3,
+.ml3,
+.mr3 {
+    margin: 1rem;
+}
+
+.p1 {
+    padding: .5rem;
+}
+
+.pr1 {
+    padding-right: .5rem;
+}
+
+.p2 {
+    padding: .75rem;
+}
+
+.p3 {
+    padding: 1rem;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+@media only screen and (min-width: 768px) {
+    .container {
+        width: 85%
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .container {
+        width: 80%
+    }
+}
+
+@media only screen and (min-width: 1220px) {
+    .container {
+        width: 70%
+    }
+}
