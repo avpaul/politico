@@ -16,6 +16,14 @@
     margin: .75rem;
 }
 
+.ml2 {
+    margin-left: .75rem;
+}
+
+.mr2 {
+    margin-right: .75rem;
+}
+
 .m3,
 .ml3,
 .mr3 {

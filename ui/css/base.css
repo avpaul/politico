@@ -67,6 +67,14 @@ body {
     text-transform: capitalize;
 }
 
+.text-white {
+    color: #ffffff;
+}
+
+.w-n {
+    font-weight: 300;
+}
+
 a,
 a[href]:not([class]) {
     color: var(--main-color);
@@ -79,6 +87,13 @@ h2 {
     font-weight: 500;
 }
 
+h3 {
+    font-size: 1.6rem;
+    font-family: 'ubuntu', sans-serif;
+    font-weight: 400;
+
+}
+
 @media only screen and (min-width: 992px) {
     h2 {
         font-size: 2.5rem;
@@ -88,8 +103,7 @@ h2 {
 
 @media only screen and (min-width: 768px) {
     h2 {
-        font-size: 2.5rem;
-
+        font-size: 2.4rem;
     }
 
     html {
