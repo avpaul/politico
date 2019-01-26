@@ -16,12 +16,7 @@
 
 <body>
     <div class="container">
-        <div class="log-status m2">
-            <!-- if user is logged in show the name else show a login link -->
-            <a href="./login.html" class="login-username">login</a>
-            <div class="separator"></div>
-            <a href="./signup.html" class="log-action">signup</a>
-        </div>
+
         <!-- navigation bar -->
         <nav class='nav'>
             <!-- icon -->
@@ -57,9 +52,46 @@
                     </li>
                 </ul>
             </div>
-
+            <!-- CONTENT -->
         </nav>
+
+        <div class="jumbotron">
+            <h2 class="text-primary">Have a vision?</h2>
+            <h3 class="text-secondary">Make the right decision!</h3>
+        </div>
+
+        <!-- FORM -->
+        <div>
+            <form action="#" class="card form">
+                <div class="card-title">Reset Your Password</div>
+                <div class="card-content">
+                    <div class="field-group">
+                        <label for="user-email" class="field-name">Email:</label>
+                        <input type="text" name="email" id="user-email" class="input">
+                    </div>
+                    <div class="field-group">
+                        <label for="user-password" class="field-name">New password:</label>
+                        <input type="password" name="password" id="user-password" class="input">
+                    </div>
+                    <div class="field-group">
+                        <label for="user-password-rep" class="field-name">Repeat new password:</label>
+                        <input type="password" name="password" id="user-password-rep" class="input">
+                    </div>
+                    <div class="other-options">
+                        <a href="./signup.html" class="text-white">Signup</a>
+                    </div>
+                </div>
+                <div class="card-action">
+                    <button class="btn">change</button>
+                </div>
+            </form>
+        </div>
+        <footer class="p3">
+            <p class="text-secondary footer-logo-text">&copy; 2019 Politico</p>
+        </footer>
     </div>
+    <div class="overlay-sc"></div>
+    <script src="../js/index.js"></script>
 </body>
 
 </html>

@@ -1,3 +1,4 @@
+/* CORRECT MARGIN AND PADDING ON THE LOGIN STATUS TO THE NAV BAR FOR COSISTENCY */
 /* login status */
 .log-status {
     display: flex;
@@ -92,10 +93,11 @@ section {
 }
 
 /* CARD BOX */
+/* MAKE WIDTH SETTINGS SPECIFIC TO THE COMPONENT INHERITING THE CARD */
 .card {
     display: block;
     height: auto;
-    max-width: 45%;
+    /* max-width: 45%; */
     box-shadow: #00000024 0px 3px 4px;
     border-radius: 5px;
     margin: .5rem;
@@ -198,6 +200,7 @@ section {
 
 
 /* RELATED TO HOME PAGE */
+/* ITS ALSO ON ALL PAGES */
 .user-info {
     display: flex;
     justify-content: center;
@@ -223,6 +226,149 @@ section {
     text-align: center;
 }
 
+.jumbotron {
+    width: 80%;
+    margin: 1.5rem auto 2rem auto;
+}
+
+.jumbotron h3 {
+    display: inline-block;
+    margin-top: -1rem;
+}
+
+/* FORMS */
+.card.form {
+    background-color: var(--secondary-color);
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 1rem;
+    color: #ffffff
+}
+
+.card.form .card-content {
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.card-title {
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+.card-action {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 91%;
+    margin: .75rem 0;
+}
+
+.field-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: center;
+    margin: .5rem;
+}
+
+.field-group .input,
+.field-input {
+    height: 34px;
+    width: 250px;
+    font-size: 18px;
+    border: none;
+    border-radius: 2px;
+    padding: .25rem .3rem;
+}
+
+.field-group .field-name {
+    font-size: 18px;
+    padding: .25rem .5rem;
+
+}
+
+.field-group .input:focus {
+    outline: none;
+}
+
+.other-options {
+    text-align: right;
+    margin: 1rem .5rem 1rem 0;
+    ;
+}
+
+.other-options>a {
+    color: #ffffff;
+    border-bottom: #000000 2px solid;
+    font-weight: 300;
+}
+
+.other-options>a:last-child {
+    margin-left: .25rem;
+}
+
+select.field-input {
+    width: fit-content
+}
+
+select.field-input:focus {
+    outline-color: var(--main-color);
+    color: var(--main-color);
+    /* background-color: #F9F9F9 */
+}
+
+/* BUTTONS */
+.btn {
+    border: none;
+    font-size: 18px;
+    letter-spacing: .1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    padding: .25rem 1rem;
+    height: 30px;
+    border-radius: 2px;
+    background-color: #ffffff;
+}
+
+/* TABLE */
+table {
+    border-collapse: collapse;
+}
+
+thead th {
+    text-transform: uppercase;
+    /* font-size: 18px; */
+}
+
+tbody td {
+    text-transform: capitalize;
+}
+
+th,
+td {
+    border-bottom: var(--main-color) 2px solid;
+    padding: .5rem .75rem;
+    font-size: 16px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.results-container {
+    margin: 1rem;
+    display: flex;
+    justify-content: center;
+    background-color: #F9F9F9;
+    padding: 1rem 0 1.25rem 0;
+    color: var(--main-color);
+}
+
+.office-name {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+/* SELECT  */
+
 /* UTILITIES */
 /* SEPARATOR */
 .separator {
@@ -234,6 +380,7 @@ section {
 }
 
 /* Prevent scrolling when overlay is active */
+/* ANIMATE DISPLAY CHANGE */
 .overlay-sc {
     display: none;
     position: absolute;
