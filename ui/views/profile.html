@@ -10,8 +10,8 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Ubuntu:400,500,700" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="../../icons/icon-54.png" sizes="54 54">
     <link rel="stylesheet" href="../css/base.css">
-    <link rel="stylesheet" href="../css/layout.css">
     <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/layout.css">
 </head>
 
 <body>
@@ -47,7 +47,7 @@
                         <a href="./parties.html" class="link-item">parties</a>
                     </li>
                     <li class="menu-item">
-                        <a href="./" class="link-item">available offices</a>
+                        <a href="./available-offices.html" class="link-item">available offices</a>
                     </li>
                     <li class="menu-item">
                         <a href="./politicians.html" class="link-item">running politicians</a>
@@ -58,8 +58,60 @@
                 </ul>
             </div>
 
+
         </nav>
+        <div>
+            <!-- user info -->
+            <div class="user-info">
+                <h2 class="w-n text-primary m2">My Profile</h2>
+                <div class="center mb2">
+                    <img src="../../images/profile.jpg" class="user-image mb2"></img>
+                    <button class="btn red-outline">change</button>
+                </div>
+                <div class="field-group">
+                    <label for="user-name" class="field-name">Name:</label>
+                    <input type="text" name="name" id="user-name" class="input">
+                </div>
+                <div class="field-group">
+                    <label for="user-party" class="field-name">Party:</label>
+                    <select name="office" id="user-party" class="field-input">
+                        <option value="">Choose your party</option>
+                        <option value="democratic-party">democratic party</option>
+                        <option value="green-party">green party</option>
+                        <option value="liberals">liberals</option>
+                        <option value="workers-union">workers union</option>
+                    </select>
+                </div>
+            </div>
+            <div class="card text-primary user-votes">
+                <div class="card-title">my votes</div>
+                <div class="card-content">
+                    <div class="vote">
+                        <div class="voted-office">city mayor</div>
+                        <div class="voted-candidate">mulinda thomas</div>
+                    </div>
+                    <div class="vote">
+                        <div class="voted-office">head of ICT</div>
+                        <div class="voted-candidate">paul greg</div>
+                    </div>
+                    <div class="vote">
+                        <div class="voted-office">accountant</div>
+                        <div class="voted-candidate">mutoni elise</div>
+                    </div>
+                </div>
+                <div class="card-action">
+                    <a href="./results.html" class="btn red-outline">see election results</a>
+                </div>
+            </div>
+        </div>
+
+        <footer class="p3">
+            <p class="text-secondary footer-logo-text">&copy; 2019 Politico</p>
+        </footer>
     </div>
+    <div class="overlay-sc"></div>
+    <script src="../js/index.js"></script>
+
 </body>
 
 </html>

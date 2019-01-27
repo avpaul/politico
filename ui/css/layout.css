@@ -12,6 +12,8 @@
     margin-right: .25rem;
 }
 
+
+
 .m2 {
     margin: .75rem;
 }
@@ -22,6 +24,10 @@
 
 .mr2 {
     margin-right: .75rem;
+}
+
+.mb2 {
+    margin-bottom: .75rem;
 }
 
 .m3,
@@ -38,17 +44,41 @@
     padding-right: .5rem;
 }
 
+.pl1 {
+    padding-left: .5rem;
+}
+
+.pb1 {
+    padding-bottom: .5rem;
+}
+
 .p2 {
     padding: .75rem;
+}
+
+.pb2 {
+    padding-bottom: .75rem;
 }
 
 .p3 {
     padding: 1rem;
 }
 
+.pl3 {
+    padding-left: 1rem;
+}
+
+.pb3 {
+    padding-bottom: 1rem;
+}
+
 .container {
     width: 90%;
     margin: 0 auto;
+}
+
+.center {
+    text-align: center;
 }
 
 @media only screen and (min-width: 768px) {
