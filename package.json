@@ -5,7 +5,6 @@
   "scripts": {
     "start": "node ./bin/www",
     "test": "nyc --reporter=html --reporter=text mocha",
-    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
   },
   "dependencies": {
     "acorn": "^6.0.6",
