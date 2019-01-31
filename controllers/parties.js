@@ -21,6 +21,18 @@ module.exports.createParty = (req, res) => {
   res.status(200);
   res.json({
     status: 200,
-    data
+    data,
   });
 };
+
+module.exports.deleteParty = (req, res) => {
+  const id = req.params.id;
+  if (!id) {
+    res.json(400);
+    res.json({
+      status: 400,
+      error: 'no id found',
+    });
+    return;
+  }
+}
