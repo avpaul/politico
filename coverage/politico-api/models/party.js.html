@@ -20,31 +20,31 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">35.29% </span>
+        <span class="strong">76.47% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>6/17</span>
+        <span class='fraction'>13/17</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">50% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/4</span>
+        <span class='fraction'>2/4</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">40% </span>
+        <span class="strong">80% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>2/5</span>
+        <span class='fraction'>4/5</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">37.5% </span>
+        <span class="strong">75% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>6/16</span>
+        <span class='fraction'>12/16</span>
       </div>
     </div>
     <p class="quiet">
       Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
     </p>
   </div>
-  <div class='status-line low'></div>
+  <div class='status-line medium'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -84,8 +84,7 @@
 <a name='L36'></a><a href='#L36'>36</a>
 <a name='L37'></a><a href='#L37'>37</a>
 <a name='L38'></a><a href='#L38'>38</a>
-<a name='L39'></a><a href='#L39'>39</a>
-<a name='L40'></a><a href='#L40'>40</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L39'></a><a href='#L39'>39</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -101,15 +100,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -125,41 +123,40 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">class Party {
-  constructor() {
-    this.parties = [];
-  }
-&nbsp;
-  create(props) {
-    this.parties.push({ ...props });
-    const id = this.parties.length - 1;
-    const name = this.parties[id].name;
-    return [{
-      id,
-      name,
-    }];
-  }
-&nbsp;
-<span class="fstat-no" title="function not covered" >  de</span>lete(id) {
-    const p = <span class="cstat-no" title="statement not covered" >this.parties[id];</span>
-    let rmParties;
-<span class="cstat-no" title="statement not covered" >    if (p) {</span>
-<span class="cstat-no" title="statement not covered" >      rmParties = this.parties.filter(<span class="fstat-no" title="function not covered" >pa</span>rty =&gt; <span class="cstat-no" title="statement not covered" >party !== p)</span>;</span>
-<span class="cstat-no" title="statement not covered" >      this.parties = rmParties;</span>
-<span class="cstat-no" title="statement not covered" >      return true;</span>
-    } else {
-<span class="cstat-no" title="statement not covered" >      return null;</span>
+    constructor() {
+        this.parties = [];
     }
-  }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  fi</span>ndOne(id) {
-    const party = <span class="cstat-no" title="statement not covered" >this.parties[id];</span>
-<span class="cstat-no" title="statement not covered" >    if (party) {</span>
-<span class="cstat-no" title="statement not covered" >      return party;</span>
-    } else {
-<span class="cstat-no" title="statement not covered" >      return null;</span>
+    create(props) {
+        this.parties.push({ ...props });
+        const id = this.parties.length - 1;
+        const name = this.parties[id].name;
+        return [{
+            id,
+            name,
+        }];
     }
+&nbsp;
+    delete(id) {
+        const p = this.parties[id];
+        let rmParties;
+        if (p) {
+            rmParties = this.parties.filter(party =&gt; party !== p);
+            this.parties = rmParties;
+            return true;
+        }
+        return false;
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    fi</span>ndOne(id) {
+        const party = <span class="cstat-no" title="statement not covered" >this.parties[id];</span>
+<span class="cstat-no" title="statement not covered" >        if (party) {</span>
+<span class="cstat-no" title="statement not covered" >            return party;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        return null;</span>
+&nbsp;
     // (party) ? return party : null;
-  }
+    }
 }
 &nbsp;
 module.exports = Party;
@@ -169,7 +166,7 @@ module.exports = Party;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Jan 31 2019 10:11:24 GMT+0200 (Central Africa Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Jan 31 2019 20:17:14 GMT+0200 (Central Africa Time)
 </div>
 </div>
 <script src="../../prettify.js"></script>
