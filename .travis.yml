@@ -1,3 +1,11 @@
 language: node_js
 node_js:
   - "11.8.0"
+sudo: false
+install:
+  - npm install -g nyc codecov
+script:
+  - nyc report --reporter=text-lcov > coverage.lcov && codecov
+
+
+
