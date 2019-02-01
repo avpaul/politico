@@ -10,7 +10,7 @@ before_script:
   - ./cc-test-reporter before-build
 script:
   - nyc report --reporter=text-lcov > coverage.lcov && codecov
-  - nyc --reporter=lcov npm run unit
+  - nyc --reporter=lcov npm run test
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
