@@ -44,8 +44,17 @@ class Party {
             return party;
         }
         return null;
+    }
 
-    // (party) ? return party : null;
+    findAll(n) {
+        if (n) {
+            const ps = [];
+            for (let i = 0; i < n; (i + 1)) {
+                if (this.parties[i]) ps.push(this.parties[i]);
+            }
+            return ps;
+        }
+        return this.parties;
     }
 
     changeName(id, n) {

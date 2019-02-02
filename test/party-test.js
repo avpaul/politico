@@ -40,6 +40,44 @@ describe('#createParty', () => {
     });
 });
 
+describe('#getParty', () => {
+    // GET ONE PARTY
+    context('GET /v1/parties/:id', () => {
+        it('should return one party and a status code of 200', (done) => {
+            chai.request(app)
+                .get('/v1/parties/0')
+                .end((error, res) => {
+                    res.should.have.status(200);
+                    res.body.data.should.be.an('array');
+                    res.body.data.length.should.eql(1);
+                    done();
+                });
+        });
+        // WHEN ID IS NOT FOUND
+        it('should return an error message and a status code of 400', (done) => {
+            chai.request(app)
+                .get('/v1/parties/:10')
+                .end((error, res) => {
+                    res.should.have.status(400);
+                    res.body.error.should.be.a('string');
+                    done();
+                });
+        });
+    });
+    // GET n OR all PARTIES
+    context('GET /v1/parties', () => {
+        it('should return an array of n or all parties with a 200 status code', (done) => {
+            chai.request(app)
+                .get('/v1/parties')
+                .end((error, res) => {
+                    res.should.have.status(200);
+                    res.body.data.should.be.an('array');
+                    done();
+                });
+        });
+    });
+});
+
 describe('#editParty', () => {
     context('PATCH /v1/parties/:id', () => {
         // WHEN ID & NAME IS PROVIDED
