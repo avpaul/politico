@@ -3,14 +3,14 @@ node_js:
   - "11.8.0"
 sudo: false
 install:
-  - npm install -g nyc codecov coveralls mocha chai
+  - npm install -g nyc codecov coveralls 
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 script:
-#  - nyc report --reporter=text-lcov > coverage.lcov | coveralls && codecov
-  - nyc npm test && nyc report --reporter=text-lcov | coveralls
+  - nyc report --reporter=text-lcov > coverage.lcov && codecov
+  - nyc report --reporter=text-lcov | coveralls
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
