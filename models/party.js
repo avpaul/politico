@@ -13,6 +13,20 @@ class Party {
         }];
     }
 
+    updateAll(id, props) {
+        if (!this.parties[id]) {
+            return {
+                error: 'party not found',
+            };
+        }
+        this.parties[id] = { ...props };
+        const name = this.parties[id].name;
+        return [{
+            id,
+            name,
+        }];
+    }
+
     delete(id) {
         const p = this.parties[id];
         let rmParties;
@@ -32,6 +46,19 @@ class Party {
         return null;
 
     // (party) ? return party : null;
+    }
+
+    changeName(id, n) {
+        if (!this.parties[id]) {
+            return {
+                error: 'party not found',
+            };
+        }
+        this.parties[id].name = n;
+        return [{
+            id,
+            name: this.parties[id].name,
+        }];
     }
 }
 

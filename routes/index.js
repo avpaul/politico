@@ -9,8 +9,8 @@ router.post('/parties', parties.createParty);
 /* delete political party */
 router.delete('/parties/:id', parties.deleteParty);
 /* edit a specific party name */
-router.patch('parties/:id/name', parties.changeNamne);
+router.patch('/parties/:id/name', parties.changeName);
 /* edit all party properties */
-router.put('parties/:id', parties);
+router.put('/parties/:id', parties.changeAll);
 
 module.exports = router;
