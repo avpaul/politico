@@ -44,3 +44,11 @@ module.exports.deleteParty = (req, res) => {
         });
     }
 };
+
+module.exports.changeNamne = (req, res) => {
+    const id = req.params.id;
+    const name = req.body.name;
+    if (name) {
+        res.status(200);
+    }
+}

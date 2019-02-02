@@ -8,5 +8,9 @@ const router = express.Router();
 router.post('/parties', parties.createParty);
 /* delete political party */
 router.delete('/parties/:id', parties.deleteParty);
+/* edit a specific party name */
+router.patch('parties/:id/name', parties.changeNamne);
+/* edit all party properties */
+router.put('parties/:id', parties);
 
 module.exports = router;
