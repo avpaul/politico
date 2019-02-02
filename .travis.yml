@@ -14,7 +14,7 @@ after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 after_success:
 #  - npm run coverage
-  - 'cat ./js-given/coverage/lcov.info | ./node_modules/.bin/coveralls'
+  - 'cat ./coverage/lcov.info | ./node_modules/.bin/coveralls'
 
 #notifications:
 #  email: false
