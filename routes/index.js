@@ -4,13 +4,22 @@ const parties = require('../controllers/parties');
 
 const router = express.Router();
 
-/* Create political party */
+// CREATE POLITICAL PARTY
 router.post('/parties', parties.createParty);
-/* delete political party */
+
+// DELETE POLITICAL PARTY
 router.delete('/parties/:id', parties.deleteParty);
-/* edit a specific party name */
+
+// EDIT A SPECIFIC PARTY NAME
 router.patch('/parties/:id/name', parties.changeName);
-/* edit all party properties */
+
+// EDIT ALL PARTY PROPERTIES
 router.put('/parties/:id', parties.changeAll);
+
+// GET ALL PARTIES
+router.get('/parties', parties.getAll);
+
+// GET ONE PARTY
+router.get('/parties/:id', parties.getOne);
 
 module.exports = router;

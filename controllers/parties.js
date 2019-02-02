@@ -87,3 +87,41 @@ module.exports.changeAll = (req, res) => {
         data,
     });
 };
+
+module.exports.getOne = (req, res) => {
+    const id = req.params.id;
+    const d = db.party.findOne(id);
+    if (d) {
+        res.status(200);
+        res.json({
+            status: 200,
+            data: [
+                d,
+            ],
+        });
+        return;
+    }
+    res.status(400);
+    res.json({
+        status: 400,
+        error: 'id doesn\'t exist',
+    });
+};
+
+module.exports.getAll = (req, res) => {
+    const n = req.body.number;
+    const d = db.party.findAll(n);
+    if (d) {
+        res.status(200);
+        res.json({
+            status: 200,
+            data: d,
+        });
+        return;
+    }
+    res.status(200);
+    res.json({
+        status: 200,
+        error: 'no party found',
+    });
+};

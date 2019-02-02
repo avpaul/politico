@@ -43,13 +43,13 @@ describe('#createParty', () => {
 describe('#getParty', () => {
     // GET ONE PARTY
     context('GET /v1/parties/:id', () => {
-        it('should return an array of one party and a status code of 200', (done) => {
+        it('should return one party and a status code of 200', (done) => {
             chai.request(app)
-                .get('/v1/parties/:0')
+                .get('/v1/parties/0')
                 .end((error, res) => {
                     res.should.have.status(200);
                     res.body.data.should.be.an('array');
-                    res.body.data.length.equal(1);
+                    res.body.data.length.should.eql(1);
                     done();
                 });
         });
