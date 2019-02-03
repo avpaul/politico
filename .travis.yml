@@ -3,9 +3,11 @@ node_js:
   - "11.8.0"
 sudo: false
 install:
-  - npm install -g nyc codecov
+  - npm install -g nyc codecov coveralls
 script:
   - nyc report --reporter=text-lcov > coverage.lcov && codecov
+  - nyc report --reporter=text-lcov | coveralls"
+
 
 
 
