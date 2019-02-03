@@ -3,4 +3,4 @@ node_modules/
 coverage
 coverage.lcov
 report.*.json
-#.coveralls.yml
+.coveralls.yml
