@@ -6,7 +6,7 @@ install:
   - npm install -g nyc codecov coveralls
 script:
   - nyc report --reporter=text-lcov > coverage.lcov && codecov
-  - nyc ./node_modules/mocha/bin/mocha && nyc report --reporter=text-lcov | coveralls
+  - nyc ./node_modules/mocha/bin/_mocha && nyc report --reporter=text-lcov | coveralls
 
 
 
