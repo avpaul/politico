@@ -1,6 +1,7 @@
 // import express from 'express';
 const express = require('express');
 const parties = require('../controllers/parties');
+const offices = require('../controllers/offices');
 
 const router = express.Router();
 
@@ -21,5 +22,7 @@ router.get('/parties', parties.getAll);
 
 // GET ONE PARTY
 router.get('/parties/:id', parties.getOne);
+
+router.post('/offices', offices.create);
 
 module.exports = router;

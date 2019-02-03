@@ -3,7 +3,7 @@
  *  or not restarted  */
 
 const Party = require('../models/party');
-
-// const party = new Party();
+const Office = require('../models/offices');
 
 module.exports.party = new Party();
+module.exports.office = new Office();
