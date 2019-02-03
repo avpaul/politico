@@ -109,7 +109,7 @@ module.exports.getOne = (req, res) => {
 };
 
 module.exports.getAll = (req, res) => {
-    const n = req.body.number;
+    const n = (req.body.number) ? Number(req.body.number) : null;
     const d = db.party.findAll(n);
     if (d) {
         res.status(200);

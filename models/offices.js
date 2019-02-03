@@ -4,8 +4,8 @@ class Office {
     }
 
     create(props) {
-        this.offices.push({ ...props });
-        const id = this.offices.length - 1;
+        const id = this.offices.length;
+        this.offices.push({ id, ...props });
         const n = this.offices[id].name;
         const t = this.offices[id].type;
         return [{
@@ -13,6 +13,26 @@ class Office {
             name: n,
             type: t,
         }];
+    }
+
+    findOne(id) {
+        const office = this.offices[id];
+        if (office) {
+            return office;
+        }
+        return null;
+    }
+
+    findAll(n) {
+        if (n) {
+            const nOffices = (n > this.offices.length) ? this.offices.length : n;
+            const of = [];
+            for (let i = 0; i < nOffices; (i += 1)) {
+                if (this.offices[i]) of.push(this.offices[i]);
+            }
+            return of;
+        }
+        return this.offices;
     }
 }
 

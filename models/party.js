@@ -4,8 +4,8 @@ class Party {
     }
 
     create(props) {
-        this.parties.push({ ...props });
-        const id = this.parties.length - 1;
+        const id = this.parties.length;
+        this.parties.push({ id, ...props });
         const name = this.parties[id].name;
         return [{
             id,
@@ -48,8 +48,9 @@ class Party {
 
     findAll(n) {
         if (n) {
+            const nParties = (n > this.parties.length) ? this.parties.length : n;
             const ps = [];
-            for (let i = 0; i < n; (i + 1)) {
+            for (let i = 0; i < nParties; (i += 1)) {
                 if (this.parties[i]) ps.push(this.parties[i]);
             }
             return ps;
