@@ -5,8 +5,7 @@ const app = require('../app');
 chai.use(chaihttp);
 chai.should();
 
-describe('#createOffice', () => {
-
+describe('#offices', () => {
     // CREATE OFFICE
     context('POST /v1/offices', () => {
         it('should return created office props and 201 status code', (done) => {
