@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "nyc --reporter=html --reporter=text --reporter=lcov mocha",
+    "test": "nyc --reporter=html --reporter=text --reporter=lcov --reporter=text-lcov mocha",
     "coveralls": "nyc mocha && nyc report --reporter=text-lcov | coveralls"
   },
   "dependencies": {
