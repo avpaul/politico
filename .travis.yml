@@ -3,10 +3,12 @@ node_js:
   - "11.8.0"
 sudo: false
 install:
-  - npm install -g nyc codecov coveralls
+  - npm install
+#  - npm install -g nyc codecov coveralls
 script:
-  - nyc ./node_modules/.bin/_mocha && nyc report --reporter=text-lcov | coveralls
-  - nyc report --reporter=text-lcov > coverage.lcov && codecov
+#  - nyc report --reporter=text-lcov > coverage.lcov && codecov
+  - npm test
+after_script: npm run coverage
 
 
 
