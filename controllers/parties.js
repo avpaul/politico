@@ -1,15 +1,20 @@
 const db = require('../config/db');
 
-module.exports.createParty = (req, res) => {
-    const b = req.body;
-    if (!b.name || !b.logoUrl || !b.description) {
+function checkRequired(res, body) {
+    if (!body.name || !body.logoUrl || !body.description) {
         res.status(400);
         res.json({
             status: 400,
             error: 'no data found',
         });
-        return;
+        return true;
     }
+    return false;
+}
+
+module.exports.createParty = (req, res) => {
+    const b = req.body;
+    if (checkRequired(res, b)) return;
 
     const data = db.party.create({
         name: b.name,
@@ -67,14 +72,8 @@ module.exports.changeName = (req, res) => {
 module.exports.changeAll = (req, res) => {
     const id = req.params.id;
     const b = req.body;
-    if (!b.name || !b.logoUrl || !b.description) {
-        res.status(400);
-        res.json({
-            status: 400,
-            error: 'no data found',
-        });
-        return;
-    }
+    if (checkRequired(res, b)) return;
+
     const data = db.party.updateAll(id, {
         name: b.name,
         hqAddress: b.hqAddress,
