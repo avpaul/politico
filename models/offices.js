@@ -24,15 +24,15 @@ class Office {
     }
 
     findAll(n) {
-        if (n) {
-            const nOffices = (n > this.offices.length) ? this.offices.length : n;
-            const of = [];
-            for (let i = 0; i < nOffices; (i += 1)) {
-                if (this.offices[i]) of.push(this.offices[i]);
-            }
-            return of;
+        if (!n) {
+            return this.offices;
         }
-        return this.offices;
+        const nOffices = (n > this.offices.length) ? this.offices.length : n;
+        const of = [];
+        for (let i = 0; i < nOffices; (i += 1)) {
+            if (this.offices[i]) of.push(this.offices[i]);
+        }
+        return of;
     }
 }
 

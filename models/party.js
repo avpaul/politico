@@ -47,15 +47,15 @@ class Party {
     }
 
     findAll(n) {
-        if (n) {
-            const nParties = (n > this.parties.length) ? this.parties.length : n;
-            const ps = [];
-            for (let i = 0; i < nParties; (i += 1)) {
-                if (this.parties[i]) ps.push(this.parties[i]);
-            }
-            return ps;
+        if (!n) {
+            return this.parties;
         }
-        return this.parties;
+        const nParties = (n > this.parties.length) ? this.parties.length : n;
+        const ps = [];
+        for (let i = 0; i < nParties; (i += 1)) {
+            if (this.parties[i]) ps.push(this.parties[i]);
+        }
+        return ps;
     }
 
     changeName(id, n) {
