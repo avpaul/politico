@@ -5,8 +5,8 @@ sudo: false
 install:
   - npm install -g nyc codecov coveralls
 script:
+  - nyc report --reporter=text-lcov | coveralls
   - nyc report --reporter=text-lcov > coverage.lcov && codecov
-  - nyc ./node_modules/bin/_mocha && nyc report --reporter=text-lcov | coveralls
 
 
 
