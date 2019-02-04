@@ -1,10 +1,20 @@
 {
   "name": "politico-api",
   "version": "0.0.0",
-  "private": true,
+  "private": false,
+  "author": "avpaul <vabimana@gmail.com> ",
   "scripts": {
     "start": "node ./bin/www",
     "test": "nyc --reporter=html --reporter=text mocha",
+  },
+  "homepage": "avpaul.github.io/politico",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/avpaul/politico-api"
+  },
+  "engines": {
+    "node": "11.8.0",
+    "npm": "6.5.0"
   },
   "dependencies": {
     "acorn": "^6.0.6",
