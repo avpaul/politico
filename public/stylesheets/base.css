@@ -1,0 +1,134 @@
+/* VARIABLES */
+:root {
+    --main-color: #051E3E;
+    --secondary-color: #851E3E;
+    --accent: #651E3E;
+    --card-back: #F9F9F9;
+
+}
+
+/* Do a CSS reset */
+* {
+    margin: 0;
+    margin-block-end: 0;
+    margin-block-start: 0;
+    padding: 0;
+    padding-block-end: 0;
+    box-sizing: inherit;
+}
+
+html,
+body {
+    font-family: 'lato', sans-serif;
+    font-size: 15px;
+    max-width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+    line-height: 1.4;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    position: relative;
+    min-height: 100%
+}
+
+@media(max-width:500px) {
+    body {
+        width: 100%;
+    }
+}
+
+.color-primary {
+    color: var(--main-color);
+}
+
+.color-secondary {
+    color: var(--secondary-color);
+}
+
+.text-primary {
+    color: var(--main-color);
+}
+
+.text-secondary {
+    color: var(--secondary-color);
+}
+
+.bg-primary {
+    background-color: var(--main-color)
+}
+
+.bg-secondary {
+    background-color: var(--secondary-color)
+}
+
+.text-uppercase {
+    text-transform: uppercase;
+}
+
+.text-capital {
+    text-transform: capitalize;
+}
+
+.text-white {
+    color: #ffffff;
+}
+
+.w-n {
+    font-weight: 300;
+}
+
+a,
+a[href]:not([class]) {
+    color: var(--main-color);
+    text-decoration: none;
+    user-select: none;
+}
+
+a:focus {
+    outline: 0;
+    box-shadow: none;
+}
+
+h2 {
+    font-size: 1.8rem;
+    font-family: 'ubuntu', sans-serif;
+    font-weight: 500;
+}
+
+h3 {
+    font-size: 1.4rem;
+    font-family: 'ubuntu', sans-serif;
+    font-weight: 400;
+}
+
+@media only screen and (min-width: 375px) {
+    h2 {
+        font-size: 2.2rem;
+    }
+
+    h3 {
+        font-size: 1.6rem;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    h2 {
+        font-size: 2.5rem;
+
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    h2 {
+        font-size: 2.3rem;
+    }
+
+    html {
+        font-size: 18px;
+    }
+}
