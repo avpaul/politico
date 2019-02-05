@@ -1,7 +1,5 @@
 const express = require('express');
-const router = express.Router();
 
-/* GET users listing. */
-router.get('/', );
+const router = express.Router();
 
 module.exports = router;
