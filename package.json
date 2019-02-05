@@ -1,7 +1,7 @@
 {
   "name": "politico-api",
   "version": "0.0.0",
-  "private": false,
+  "private": true,
   "author": "avpaul <vabimana@gmail.com> ",
   "scripts": {
     "start": "node ./bin/www",
