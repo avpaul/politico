@@ -12,12 +12,16 @@
     margin-right: .25rem;
 }
 
-
+.mb1{
+    margin-bottom: .25rem;
+}
 
 .m2 {
     margin: .75rem;
 }
-
+.mt2{
+    margin-top: .75rem;
+}
 .ml2 {
     margin-left: .75rem;
 }
@@ -89,6 +93,17 @@
 
 .center {
     text-align: center;
+}
+.d-flex{
+    display: flex;
+    flex-wrap: wrap;
+}
+.f-direction-row{
+    flex-direction: row;
+}
+.f-center{
+    justify-content: center;
+    align-content: center;
 }
 
 @media only screen and (min-width: 768px) {

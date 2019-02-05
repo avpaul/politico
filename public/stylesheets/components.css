@@ -353,6 +353,10 @@ select option {
     height: 30px;
     border-radius: 2px;
     background-color: #ffffff;
+    cursor: pointer;
+}
+.btn:focus{
+    outline: none;
 }
 
 a.btn {

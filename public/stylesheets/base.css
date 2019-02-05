@@ -10,10 +10,7 @@
 /* Do a CSS reset */
 * {
     margin: 0;
-    margin-block-end: 0;
-    margin-block-start: 0;
     padding: 0;
-    padding-block-end: 0;
     box-sizing: inherit;
 }
 
@@ -21,7 +18,7 @@ html,
 body {
     font-family: 'lato', sans-serif;
     font-size: 15px;
-    max-width: 100%;
+    min-width: 100%;
     margin: 0 auto;
     box-sizing: border-box;
     line-height: 1.4;
