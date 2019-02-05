@@ -19,8 +19,36 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+if (process.env.mode === 'dev') {
+    const browserSync = require('browser-sync');
+    const bs = browserSync.create().init({
+        files: './public/stylesheets/',
+        logSnippet: false,
+        online: false,
+        logConnections: true,
+        ghostMode: {
+            clicks: true,
+            forms: true,
+            scroll: true,
+        },
+        browser: 'google chrome',
+        plugins: [{
+            module: 'bs-html-injector',
+            options: {
+                files: ['./views/**.pug'],
+            },
+        }],
+    });
+    app.use(require('connect-browser-sync')(bs, { injectHead: true }));
+}
+
 app.use('/v1', indexRouter);
 app.use('/v1/users', usersRouter);
+
+// HANDLE HOME PAGE
+app.get('/', (req, res) => {
+    res.render('home');
+});
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

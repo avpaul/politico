@@ -1,13 +1,20 @@
 # Politico-api 
-![Build Status](https://travis-ci.com/avpaul/politico-api.svg?branch=develop) 
-[![Coverage Status](https://coveralls.io/repos/github/avpaul/politico-api/badge.svg?branch=add-coveralls)](https://coveralls.io/github/avpaul/politico-api?branch=develop) 
+![Build Status](https://travis-ci.com/avpaul/politico-api.svg?branch=master) 
+[![Coverage Status](https://coveralls.io/repos/github/avpaul/politico-api/badge.svg?branch=add-coveralls)](https://coveralls.io/github/avpaul/politico-api?branch=master) 
 [![Maintainability](https://api.codeclimate.com/v1/badges/7f1405edf9b964256eb1/maintainability)](https://codeclimate.com/github/avpaul/politico-api/maintainability) 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
+<p align="center">
+  <a href="https://peoplevote.herokuapp.com/">
+    <img
+      alt="Node.js"
+      src="https://peoplevote.herokuapp.com/images/Politico_256-72.svg"
+      width="500"
+    />
+  </a>
+</p>
 
-![Politico](./public/images/politico.png)
-
-We are used to _ballot box elections_ and the whole process it takes until we get election results.
+We are used to _*ballot box elections*_ and the whole process it takes until we get election results.
 Polling places, ballot box, ballot paper, counting votes and so on can be expensive and tedious.
 Technology especially internet powers many things nowadays from booking your next vacation ticket 
 to doing business across the five continents from home! It's time to take our elections online :computer: :+1:
