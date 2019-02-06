@@ -7,7 +7,7 @@
 <p align="center">
   <a href="https://peoplevote.herokuapp.com/">
     <img
-      alt="Node.js"
+      alt="Politico"
       src="https://peoplevote.herokuapp.com/images/Politico_256-72.svg"
       width="500"
     />
