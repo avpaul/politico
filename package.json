@@ -1,7 +1,7 @@
 {
   "name": "politico-api",
   "version": "0.0.0",
-  "private": false,
+  "private": true,
   "author": "avpaul <vabimana@gmail.com> ",
   "scripts": {
     "start": "node ./bin/www",
@@ -28,8 +28,11 @@
     "pug": "2.0.0-beta11"
   },
   "devDependencies": {
+    "browser-sync": "^2.26.3",
+    "bs-html-injector": "^3.0.3",
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
+    "connect-browser-sync": "^2.1.0",
     "coveralls": "^3.0.2",
     "eslint": "^5.3.0",
     "eslint-config-airbnb": "^17.1.0",
