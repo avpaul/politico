@@ -107,14 +107,12 @@ section {
 .card {
     display: block;
     height: auto;
-    /* max-width: 45%; */
     box-shadow: #00000024 0px 3px 4px;
     border-radius: 5px;
     margin: .5rem;
 }
 
 .card-image {
-    height: 100%;
     width: 100%;
 }
 
@@ -386,7 +384,7 @@ table {
 
 thead th {
     text-transform: uppercase;
-    /* font-size: 18px; */
+    /*color: var(--accent-color);*/
 }
 
 tbody td {
@@ -465,8 +463,15 @@ td {
     padding-bottom: .25rem;
 }
 
+.candidate-view {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto
+}
+
 .candidate.card {
     font-size: 1.2rem;
+    background-color: #ffffff;
 }
 
 .candidate-view .heading,
@@ -476,7 +481,7 @@ td {
     flex-direction: row;
     justify-content: flex-start;
     align-content: center;
-    color: var(--main-color);
+    color: var(--accent-color);
 }
 
 .candidate-view .heading i {
@@ -485,19 +490,19 @@ td {
 
 .party-view .heading i,
 .office-view .heading i {
-
     line-height: 1.6;
 }
 
 .candidate-view .heading h2,
 .party-view .heading h2,
 .office-view .heading h2 {
-    margin-left: .5rem;
+    margin-left: .6rem;
 }
 
 .candidate .card-image img {
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
+    height: 400px;
 }
 
 .candidate .card-title {
@@ -557,7 +562,14 @@ td {
 .profile-view {
     margin: 1rem;
 }
-
+.all-candidates {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.all-candidates .card{
+    height: 400px;
+}
 /* UTILITIES */
 /* SEPARATOR */
 .separator {
@@ -577,7 +589,7 @@ td {
     width: 100%;
     height: 100%;
     z-index: 500;
-    background-color: #00000038
+    background-color: #00000050
 }
 
 .overlay-sc.show {
@@ -638,6 +650,9 @@ td {
     a.btn {
         line-height: 1.4;
     }
+    .jumbotron{
+        width: 70%;
+    }
     .jumbotron h3 {
         margin-top: 0;
     }
@@ -645,6 +660,7 @@ td {
         display: flex;
         flex-direction: row;
         width: auto;
+        height: 500px;
     }
 
     .card-title {
@@ -658,9 +674,14 @@ td {
     .candidate.card .card-content {
         padding: 1rem 2rem;
     }
-
+    .candidate-view .heading i {
+        line-height: 2.2
+    }
+    .candidate .card-image img {
+        height: 500px;
+    }
     .candidate-view {
-        width: 95%;
+        width: 80%;
         margin: 0 auto;
     }
     .card.form {
@@ -703,7 +724,12 @@ td {
     .all-results .card {
         width: 45%;
     }
+    .all-candidates .card{
+        width: 30%;
+        height: 500px;
+    }
 
+    .all-candidates,
     .all-offices,
     .all-results,
     .admin-panels {
@@ -711,13 +737,15 @@ td {
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .all-results .office-result .office-name {
         font-size: 1.2rem;
     }
 
-    /* .candidate-view .heading, */
     .party-view .heading,
     .office-view .heading {
         justify-content: center;
@@ -740,26 +768,24 @@ td {
         width: 40%;
         margin: 1rem;
     }
-
+    .profile-view,
     .candidate-view {
-        width: 90%;
+        width: 80%;
+        margin: 1rem auto;
+    }
+    .all-offices,
+    .all-results,
+    .admin-panels {
+        width: 85%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .results-container.card{
+        max-width: 40%;
     }
 }
 
 @media only screen and (min-width: 1420px) {
-    .candidate-name {
-        font-size: 2rem;
-    }
-
-    .candidate-office {
-        font-size: 1.3rem;
-
-    }
-
-    .party-name {
-        font-size: 2rem;
-    }
-
     .card.form .card-action {
         margin-top: 2.2rem;
         width: 78%;

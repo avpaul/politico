@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Politico-Shape tommorow by voting!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Ubuntu:400,500,700" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="../../icons/politico-192.png" sizes="54 54">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="log-status m2">
+            <!-- if user is logged in show the name else show a login link -->
+            <a href="./login.html" class="login-username">login</a>
+            <div class="separator"></div>
+            <a href="./signup.html" class="log-action">signup</a>
+        </div>
+        <!-- navigation bar -->
+        <nav class='nav'>
+            <!-- icon -->
+            <a href="../../index.html" class="nav-icon">
+                <img src="../../icons/Politico_fist.svg" alt="">
+                <p class="icon-text text-primary">Politico</p>
+            </a>
+            <div class="menu-bar dropdown-trigger">
+                <i class="zmdi zmdi-menu zmdi-hc-3x color-primary"></i>
+            </div>
+            <!-- MENU DROPDOWN -->
+            <div class="dropdown">
+                <!-- user info -->
+                <div class="user-info">
+                    <img src="../../images/profile.jpg" class="user-image"></img>
+                    <p class="user-name">avpaul</p>
+                </div>
+                <ul class="menu">
+                    <li class="menu-item">
+                        <a href="./profile.html" class="link-item">my profile & votes</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="./parties.html" class="link-item">parties</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="./available-offices.html" class="link-item">available offices</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="./politicians.html" class="link-item">running politicians</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="./results.html" class="link-item">election results</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="./admin-panel.html" class="link-item">admin panel</a>
+                    </li>
+                </ul>
+            </div>
+
+        </nav>
+        <h2 class="w-n ml3 text-primary">Admin Panel</h2>
+        <div class="admin-panels">
+            <!-- <div class="all-panels"> -->
+            <div class="card admin-panel p3">
+                <div class="card-title text-capital text-primary">parties</div>
+                <div class="card-content pb3 pl1">
+                    <a href="./edit-party.html" class="text-capital content-link">democratic party</a>
+                    <a href="./edit-party.html" class="text-capital content-link">green party</a>
+                    <a href="./edit-party.html" class="text-capital content-link">liberals</a>
+                    <a href="./edit-party.html" class="text-capital content-link">workers union</a>
+                </div>
+                <div class="card-action ">
+                    <a href="add-party.pug" class="btn red-outline">add</a>
+                </div>
+            </div>
+            <div class="card admin-panel p3">
+                <div class="card-title text-capital text-primary">government offices</div>
+                <div class="card-content pb3 pl1">
+
+                    <a href="./edit-office.html" class="text-capital content-link">city mayor</a>
+                    <a href="./edit-office.html" class="text-capital content-link">head ICT</a>
+                    <a href="./edit-office.html" class="text-capital content-link">accountant</a>
+                    <a href="./edit-office.html" class="text-capital content-link">urban planning</a>
+                </div>
+                <div class="card-action pb3">
+                    <a href="add-office.pug" class="btn red-outline">add</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="p3">
+        <p class="text-secondary footer-logo-text">&copy; 2019 Politico</p>
+    </footer>
+    <div class="overlay-sc"></div>
+    <script src="../js/index.js"></script>
+
+</body>
+
+</html>
