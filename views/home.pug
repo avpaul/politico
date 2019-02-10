@@ -3,7 +3,7 @@ html
         meta(charset="utf-8")
         meta(http-equiv="X-UA-Compatible" content="IE=edge")
         meta(name="viewport" content="width=device-width, initial-scale=1")
-        title='Politico-Shape tomorrow by voting!'
+        title='Shape tomorrow by voting!'
         link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css")
         link(href="https://fonts.googleapis.com/css?family=Lato:400,700|Ubuntu:400,500,700" rel="stylesheet")
         link(rel="shortcut icon" type="image/png" href="/images/politico-192.png" sizes="54 54")
@@ -12,103 +12,33 @@ html
         link(rel="stylesheet" href="/stylesheets/components.css")
         link(rel="stylesheet" href="/stylesheets/home.css")
 
-    body
-        div.f-container
+    body.bg-dark
+        div.container
             // navigation bar
             nav.nav
                 a.nav-icon(href="/")
-                    img(src="/images/Politico_fist.svg" alt="")
+                    img(src="/images/Politico_fist.svg" alt="Politico")
                     p.icon-text.text-primary Politico
 
                 div.menu
-                    a(href="https://avpaul.github.io/politico") ui
-                    a(href="#docs-container") docs
-                    a(href="https://github.com/avpaul/politico-api")
-                        i.zmdi.zmdi-github
+                    a(href="/about") about
+                    a(href="/login") login
 
-            div.main-container
+            div.main-content
                 img.main-bg(src='/images/main-bg2.jpg' alt="Photo by Joakim Honkasalo on Unsplash")
                 //Photo by Joakim Honkasalo on Unsplash
                 div.main-bg-overlay
-                    div.d-flex.f-direction-row.overlay-top
-                        div.action-block
-                            p Shape tomorrow
-                            p By voting today
-                            button.btn.red-outline sign up
+                    div.action-block
+                        p Shape tomorrow
+                        p By voting today
+                        a.btn.red-outline(href="/signup") sign up
 
-                        div.illustrator-container
-                            div.illustrator-layer-1
-                            div.illustrator-layer-2
-                            img.voter-illustrator(src='/images/voter-illustrator-1.jpg')
+                    div.illustrator-container
+                        div.illustrator-layer-1
+                        div.illustrator-layer-2
+                        img.voter-illustrator(src='/images/voter-illustrator-1.jpg')
 
-                    div.d-flex.f-center.api-down.mb2
-                        div.api-down-text
-                            div.text-uppercase api
-                            div.text-uppercase documentation
-                        a.btn.api-down-btn(href="#docs-container")
-                            i.zmdi.zmdi-chevron-down.zmdi-hc-4x
+            footer.p3
+                p.footer-logo-text.color-accent &copy; 2019 Politico
 
-            div.mt2
-                h2.text-primary.text-capital.center.mb2 politico API documentation
-                a#docs-container
-                div.card.docs
-                    .card-content
-                        .endpoint
-                            .endpoint-route
-                                i.text-secondary POST
-                                |&nbsp;&nbsp;/parties
-                            .endpoint-spec
-                                i.zmdi.zmdi-long-arrow-return.text-secondary.zmdi-hc-flip-horizontal
-                                |&nbsp;create a political party
-                        .endpoint
-                            .endpoint-route
-                                i.text-secondary GET
-                                |&nbsp;&nbsp; /parties/:id
-                            .endpoint-spec
-                                i.zmdi.zmdi-long-arrow-return.text-secondary.zmdi-hc-flip-horizontal
-                                |&nbsp;Fetch a specific ​ political party​ record
-                        .endpoint
-                            .endpoint-route
-                                i.text-secondary GET
-                                |&nbsp;&nbsp; /parties
-                            .endpoint-spec
-                                i.zmdi.zmdi-long-arrow-return.text-secondary.zmdi-hc-flip-horizontal
-                                |&nbsp;Fetch all ​ political parties​ records
-                        .endpoint
-                            .endpoint-route
-                                i.text-secondary PATCH
-                                |&nbsp;&nbsp; /parties/:id/name
-                            .endpoint-spec
-                                i.zmdi.zmdi-long-arrow-return.text-secondary.zmdi-hc-flip-horizontal
-                                |&nbsp;Edit the name of a specific ​ political party​
-                        .endpoint
-                            .endpoint-route
-                                i.text-secondary DELETE
-                                |&nbsp;&nbsp; /parties/id
-                            .endpoint-spec
-                                i.zmdi.zmdi-long-arrow-return.text-secondary.zmdi-hc-flip-horizontal
-                                |&nbsp;Delete a specific ​ political party
-                        .endpoint
-                            .endpoint-route
-                                i.text-secondary POST
-                                |&nbsp;&nbsp; /offices
-                            .endpoint-spec
-                                i.zmdi.zmdi-long-arrow-return.text-secondary.zmdi-hc-flip-horizontal
-                                |&nbsp;Create a ​ political office​
-                        .endpoint
-                            .endpoint-route
-                                i.text-secondary GET
-                                |&nbsp;&nbsp; /offices
-                            .endpoint-spec
-                                i.zmdi.zmdi-long-arrow-return.text-secondary.zmdi-hc-flip-horizontal
-                                |&nbsp;Fetch all ​ political offices​ records
-                        .endpoint
-                            .endpoint-route
-                                i.text-secondary GET
-                                |&nbsp;&nbsp; /offices/:id
-                            .endpoint-spec
-                                i.zmdi.zmdi-long-arrow-return.text-secondary.zmdi-hc-flip-horizontal
-                                |&nbsp;Fetch a specific ​ political office​ record
-
-        footer.p3
-            p.text-secondary.footer-logo-text &copy; 2019 Politico
+            block afterFooter

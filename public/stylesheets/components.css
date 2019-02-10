@@ -45,8 +45,8 @@
     max-height: 100%;
     font-family: 'ubuntu', sans-serif;
     font-weight: 500;
-    font-size: 2.4rem;
-    line-height: 1.5;
+    font-size: 2rem;
+    line-height: 1.4;
 }
 
 .menu-bar i {
@@ -240,12 +240,17 @@ section {
 
 .jumbotron {
     width: 80%;
-    margin: 1.5rem auto 2rem auto;
+    padding-top: 1.5rem;
+    padding-bottom: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--accent-color);
 }
 
 .jumbotron h3 {
     display: inline-block;
-    margin-top: -1rem;
+    /*margin-top: -1rem;*/
+    /*for pc*/
 }
 
 /* FORMS */
@@ -253,8 +258,11 @@ section {
     background-color: var(--secondary-color);
     max-width: 90%;
     margin: 0 auto;
-    padding: 1rem;
-    color: #ffffff
+    padding: 2rem 1rem;
+    color: #ffffff;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
 }
 
 .card.form .card-content {
@@ -265,6 +273,8 @@ section {
 .card-title {
     font-size: 1.8rem;
     text-align: center;
+    /*for pc*/
+    margin: 1rem auto;
 }
 
 .card-action {
@@ -272,32 +282,44 @@ section {
     flex-direction: row;
     justify-content: flex-end;
     width: 91%;
-    margin: .75rem 0;
+    margin: .75rem 0 0 0;
+    flex-grow: 1;
+    align-items: flex-end;
 }
 
 .field-group {
     display: flex;
-    flex-direction: column;
+    /*flex-direction: column;*/
     /* justify-content: center; */
     align-content: center;
-    margin: .5rem;
+    /*margin: 1rem;*/
+    /*for pc*/
+    margin: 2rem 1rem;
+    flex-direction: row;
 }
 
 .field-group .input,
 .field-input {
-    height: 34px;
-    width: 250px;
+    /*height: 34px;*/
+    /*width: 250px;*/
     font-size: 18px;
     border: none;
     border-radius: 2px;
     padding: .25rem .3rem;
+    /*for pc*/
+    width: 300px;
+    height: 38px;
 }
 
 .field-group .field-name {
-    font-size: 18px;
+    /*font-size: 18px;*/
     padding: .25rem .5rem;
     display: inline-block;
-    width: 70px;
+    /*for pc*/
+    /*min-width: 70px;*/
+    width: 100px;
+    text-align: right;
+    font-size: 1.2rem;
 }
 
 .field-group .input:focus {
@@ -315,17 +337,20 @@ section {
 
 .other-options {
     text-align: right;
-    margin: 1rem .5rem 1rem 0;
+    margin: 1rem 1rem 1rem 0;
 }
 
 .other-options>a {
     color: #ffffff;
     border-bottom: #000000 2px solid;
     font-weight: 300;
+
 }
 
 .other-options>a:last-child {
-    margin-left: .25rem;
+    /*margin-left: .25rem;*/
+    /*for pc/*/
+    margin-left: .5rem;
 }
 
 select.field-input {
@@ -347,13 +372,14 @@ select option {
     border: none;
     font-size: 18px;
     letter-spacing: .05rem;
-    font-weight: 500;
+    font-weight: 700;
     text-transform: uppercase;
     padding: .25rem 1rem;
     height: 30px;
     border-radius: 2px;
     background-color: #ffffff;
     cursor: pointer;
+    font-family: 'lato', sans-serif;
 }
 .btn:focus{
     outline: none;
@@ -648,7 +674,7 @@ td {
     }
 
     .field-group .field-name {
-        width: 90px;
+        min-width: 120px;
     }
 
     .profile-view {
@@ -724,8 +750,8 @@ td {
     }
 
     .card.form .card-action {
-        margin-top: 2rem;
-        width: 80%;
+        margin-top: 2.2rem;
+        width: 78%;
     }
 
 }

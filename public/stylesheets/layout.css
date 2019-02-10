@@ -85,10 +85,10 @@
 }
 
 .container {
-    height: auto;
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
-    padding-bottom: 70px;
+    min-height: 100%;
+    padding-top: 72px;
 }
 
 .center {
@@ -107,19 +107,10 @@
 }
 
 @media only screen and (min-width: 768px) {
-    .container {
-        width: 85%
-    }
+
 }
 
-@media only screen and (min-width: 992px) {
-    .container {
-        width: 80%
-    }
-}
+@media only screen and (min-width: 992px) {}
 
-@media only screen and (min-width: 1420px) {
-    .container {
-        width: 70%
-    }
-}
+
+@media only screen and (min-width: 1420px) {}
