@@ -1,18 +1,24 @@
-// import express from 'express';
 const express = require('express');
-const parties = require('../controllers/parties');
-const offices = require('../controllers/offices');
 
 const router = express.Router();
 
-router.post('/parties', parties.createParty);
-router.delete('/parties/:id', parties.deleteParty);
-router.patch('/parties/:id/name', parties.changeName);
-router.put('/parties/:id', parties.changeAll);
-router.get('/parties', parties.getAll);
-router.get('/parties/:id', parties.getOne);
-router.post('/offices', offices.create);
-router.get('/offices', offices.getAll);
-router.get('/offices/:id', offices.getOne);
+router.get('/', (req, res) => {
+    res.render('home');
+});
+router.get('/signup', (req, res) => {
+    res.render('signup');
+});
+
+router.get('/login', (req, res) => {
+    res.render('login');
+});
+
+router.get('/reset', (req, res) => {
+    res.render('/reset');
+});
+
+router.get('/profile', (req, res) => {
+    res.render('userProfile');
+});
 
 module.exports = router;

@@ -74,7 +74,7 @@ footer {
     font-size: 1.4rem;
     font-family: 'ubuntu', sans-serif;
     font-weight: 500;
-    line-height: 2;
+    line-height: 1.5;
 }
 
 section {
@@ -164,13 +164,12 @@ section {
 .dropdown {
     display: none;
     position: absolute;
-    top: 0px;
-    right: 0px;
+    top: 1px;
+    right: 1%;
     z-index: 1000;
     background-color: #ffffff;
     box-shadow: #00000024 0px 3px 4px;
     flex-direction: column;
-    border-radius: 4px;
     justify-content: center;
     align-content: center;
     padding: 1.5rem;
@@ -197,10 +196,7 @@ section {
     display: inline-block;
     font-size: 1.3rem;
     text-transform: capitalize;
-    margin-top: .5rem;
-    margin-bottom: 0;
-    margin-left: .5rem;
-    margin-right: .5rem;
+    margin: .5rem .5rem 0 .5rem;
     width: 100%;
 }
 
@@ -209,10 +205,12 @@ section {
     border-bottom: var(--secondary-color) 2px solid;
 }
 
-
-
 /* RELATED TO HOME PAGE */
 /* ITS ALSO ON ALL PAGES */
+
+.card.user-info{
+    background-color: #ffffff;
+}
 .user-info {
     display: flex;
     justify-content: center;
@@ -222,8 +220,8 @@ section {
 }
 
 .user-image {
-    height: 156px;
-    width: 156px;
+    height: 192px;
+    width: 192px;
     border-radius: 50%;
     display: block;
     margin: 0 auto .25rem auto;
@@ -249,18 +247,17 @@ section {
 
 .jumbotron h3 {
     display: inline-block;
-    /*margin-top: -1rem;*/
-    /*for pc*/
+    margin-top: -.5rem;
 }
 
 /* FORMS */
 .card.form {
     background-color: var(--secondary-color);
-    max-width: 90%;
+    max-width: 85%;
     margin: 0 auto;
     padding: 2rem 1rem;
     color: #ffffff;
-    min-height: 500px;
+    min-height: 400px;
     display: flex;
     flex-direction: column;
 }
@@ -273,8 +270,6 @@ section {
 .card-title {
     font-size: 1.8rem;
     text-align: center;
-    /*for pc*/
-    margin: 1rem auto;
 }
 
 .card-action {
@@ -289,51 +284,48 @@ section {
 
 .field-group {
     display: flex;
-    /*flex-direction: column;*/
-    /* justify-content: center; */
+    flex-direction: column;
     align-content: center;
-    /*margin: 1rem;*/
-    /*for pc*/
-    margin: 2rem 1rem;
-    flex-direction: row;
+    justify-content: center;
+    margin: 1rem auto 0 auto;
+    width: fit-content;
 }
 
 .field-group .input,
 .field-input {
-    /*height: 34px;*/
-    /*width: 250px;*/
     font-size: 18px;
     border: none;
-    border-radius: 2px;
+    border-radius: 1px;
     padding: .25rem .3rem;
-    /*for pc*/
-    width: 300px;
+    width: 280px;
     height: 38px;
 }
 
 .field-group .field-name {
-    /*font-size: 18px;*/
     padding: .25rem .5rem;
     display: inline-block;
-    /*for pc*/
-    /*min-width: 70px;*/
-    width: 100px;
-    text-align: right;
+    min-width: 100px;
+    text-align: left;
     font-size: 1.2rem;
 }
 
 .field-group .input:focus {
     outline: none;
 }
-
-.user-info .field-group {
+.user-info .field-group:last-of-type{
     flex-direction: row;
+}
+.user-info .field-group:last-of-type .field-name{
+    line-height: 2;
 }
 
 .user-info .input {
     border: var(--main-color) 1px solid;
     margin-left: .25rem;
-}
+}  .updateUserInfo{
+       width: fit-content;
+       margin: 1rem auto;;
+   }
 
 .other-options {
     text-align: right;
@@ -348,8 +340,6 @@ section {
 }
 
 .other-options>a:last-child {
-    /*margin-left: .25rem;*/
-    /*for pc/*/
     margin-left: .5rem;
 }
 
@@ -359,7 +349,7 @@ select.field-input {
 }
 
 select.field-input:focus {
-    outline-color: var(--main-color);
+    outline-color: transparent;
     color: var(--main-color);
 }
 
@@ -375,7 +365,7 @@ select option {
     font-weight: 700;
     text-transform: uppercase;
     padding: .25rem 1rem;
-    height: 30px;
+    height: 36px;
     border-radius: 2px;
     background-color: #ffffff;
     cursor: pointer;
@@ -383,10 +373,6 @@ select option {
 }
 .btn:focus{
     outline: none;
-}
-
-a.btn {
-    line-height: 1.2;
 }
 
 .red-outline {
@@ -568,6 +554,10 @@ td {
     margin: 0 .5rem;
 }
 
+.profile-view {
+    margin: 1rem;
+}
+
 /* UTILITIES */
 /* SEPARATOR */
 .separator {
@@ -587,7 +577,7 @@ td {
     width: 100%;
     height: 100%;
     z-index: 500;
-    background-color: #00000028
+    background-color: #00000038
 }
 
 .overlay-sc.show {
@@ -608,9 +598,6 @@ td {
 }
 
 @media only screen and (min-width: 768px) {
-    .nav {
-        height: 56px;
-    }
 
     .nav-icon>.icon-text {
         font-size: 2.4rem;
@@ -649,16 +636,20 @@ td {
     }
 
     a.btn {
-        line-height: 1;
+        line-height: 1.4;
     }
-
+    .jumbotron h3 {
+        margin-top: 0;
+    }
     .candidate.card {
         display: flex;
         flex-direction: row;
         width: auto;
-
     }
 
+    .card-title {
+        margin: 1rem auto;
+    }
     .candidate.card .card-action {
         justify-content: flex-start;
         padding-top: 1rem;
@@ -672,16 +663,36 @@ td {
         width: 95%;
         margin: 0 auto;
     }
+    .card.form {
+        min-height: 500px;
 
+    }
+    .field-group {
+        margin: 2rem 1rem;
+        flex-direction: row;
+    }
+
+    .field-group .input,
+    .field-input {
+        width: 300px;
+    }
     .field-group .field-name {
         min-width: 120px;
+        text-align: right;
     }
+
 
     .profile-view {
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-content: center;
+    }
+    .profile-view .field-group {
+        margin: 2rem auto 0 auto;
+    }
+    .profile-view .field-name {
+        width: 150px;
     }
 
     .profile-view .user-votes .card-action {
