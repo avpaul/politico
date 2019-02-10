@@ -1,7 +1,34 @@
-doctype html
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+    head
+        meta(charset="utf-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        title='Politico-Shape tomorrow by voting!'
+        link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css")
+        link(href="https://fonts.googleapis.com/css?family=Lato:400,700|Ubuntu:400,500,700" rel="stylesheet")
+        link(rel="shortcut icon" type="image/png" href="/images/politico-192.png" sizes="54 54")
+        link(rel="stylesheet" href="/stylesheets/base.css")
+        link(rel="stylesheet" href="/stylesheets/layout.css")
+        link(rel="stylesheet" href="/stylesheets/components.css")
+        link(rel="stylesheet" href="/stylesheets/home.css")
+
+    body.bg-dark
+        div.f-container
+            // navigation bar
+            nav.nav
+                a.nav-icon(href="/")
+                    img(src="/images/Politico_fist.svg" alt="Politico")
+                    p.icon-text.text-primary Politico
+
+                div.menu
+                    a(href="/about") about
+                    a(href="/login") login
+
+                block dropdown
+
+            block content
+
+            footer.p3
+                p.footer-logo-text.color-accent &copy; 2019 Politico
+
+            block afterFooter
