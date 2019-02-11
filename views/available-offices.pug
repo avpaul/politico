@@ -1,0 +1,130 @@
+html
+    head
+        meta(charset="utf-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        title='Shape tomorrow by voting!'
+        link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css")
+        link(href="https://fonts.googleapis.com/css?family=Lato:400,700|Ubuntu:400,500,700" rel="stylesheet")
+        link(rel="shortcut icon" type="image/png" href="/images/favicon.png" sizes="54 54")
+        link(rel="stylesheet" href="/stylesheets/base.css")
+        link(rel="stylesheet" href="/stylesheets/layout.css")
+        link(rel="stylesheet" href="/stylesheets/components.css")
+        link(rel="stylesheet" href="/stylesheets/home.css")
+
+    body.bg-dark
+        div.container
+            // navigation bar
+            nav.nav
+                a.nav-icon(href="/")
+                    img(src="/images/politico.svg" alt="Politico")
+                    p.icon-text Politico
+
+                div.menu
+                    a.link-item(href="/parties") parties
+                    a.link-item(href="/politicians") politicians
+                    a.link-item(href="/availableoffices") offices
+                    a.link-item(href="/results") results
+                    a.link-item(href="/admin") admin
+                    a.link-item(href="/profile") profile
+                    button.btn.link-item(href="/admin") logout
+
+                button.dropdown-trigger
+                    img.dropdown-trigger-img(src="/images/profile.jpg")
+
+                div.dropdown
+                    div.user-info
+                        img.user-image(src="/images/profile.jpg")
+                        p.user-name avpaul
+
+                    ul.dropdown-menu.mobile
+                        li.menu-item
+                            a.link-item(href="/profile") my profile & votes
+
+                        li.menu-item
+                            a.link-item(href="/parties") parties
+
+                        li.menu-item
+                            a.link-item(href="/availableoffices") available offices
+
+                        li.menu-item
+                            a.link-item(href="/politicians") running politicians
+
+                        li.menu-item
+                            a.link-item(href="/results") election results
+
+                        li.menu-item
+                            a.link-item(href="/admin") admin panel
+
+                        li.menu-item
+                            button.btn.link-item(href="/admin") logout
+
+            .all-offices
+                .jumbotron
+                    h2.w-n.text-accent Available Offices
+
+                .p3.card.text-primary.office
+                    .card-title.text-accent city mayor
+                    .card-content
+                        .office-candidates Running candidates: 5
+                        .office-description
+                            |But I must explain to you how all this mistaken idea of denouncing pleasure and praising
+                            |pain
+                            |was born and I will give you a complete account of the system, and expound the actual
+                            |teachings
+                            |of the great explorer of the truth, the master-builder of human happiness. No one rejects,
+                            |dislikes, or avoids pleasure itself, because it is.
+
+                    .card-action
+                        button.btn.btn-outline.red-outline run for this office
+
+                .p3.card.text-primary.office
+                    .card-title.text-accent city mayor
+                    .card-content
+                        .office-candidates Running candidates: 5
+                        .office-description
+                            | But I must explain to you how all this mistaken idea of denouncing pleasure and praising
+                            | pain
+                            | was born and I will give you a complete account of the system, and expound the actual
+                            | teachings
+                            | of the great explorer of the truth, the master-builder of human happiness. No one rejects,
+                            | dislikes, or avoids pleasure itself, because it is.
+
+                    .card-action
+                        button.btn.btn-outline.red-outline run for this office
+
+                .p3.card.text-primary.office
+                    .card-title.text-accent city mayor
+                    .card-content
+                        .office-candidates Running candidates: 5
+                        .office-description
+                            | But I must explain to you how all this mistaken idea of denouncing pleasure and praising
+                            | pain
+                            | was born and I will give you a complete account of the system, and expound the actual
+                            | teachings
+                            | of the great explorer of the truth, the master-builder of human happiness. No one rejects,
+                            | dislikes, or avoids pleasure itself, because it is.
+
+                    .card-action
+                        button.btn.btn-outline.red-outline run for this office
+
+                .p3.card.text-primary.office
+                    .card-title.text-accent city mayor
+                    .card-content
+                        .office-candidates Running candidates: 5
+                        .office-description
+                            | But I must explain to you how all this mistaken idea of denouncing pleasure and praising
+                            | pain
+                            | was born and I will give you a complete account of the system, and expound the actual
+                            | teachings
+                            | of the great explorer of the truth, the master-builder of human happiness. No one rejects,
+                            | dislikes, or avoids pleasure itself, because it is.
+
+                    .card-action
+                        button.btn.btn-outline.red-outline run for this office
+
+            footer.p3
+                p.footer-logo-text.text-accent &copy; 2019 Politico
+
+        div.overlay-sc
+        script(src="/javascripts/index.js")

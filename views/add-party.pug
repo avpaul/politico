@@ -1,0 +1,95 @@
+html
+    head
+        meta(charset="utf-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        title='Shape tomorrow by voting!'
+        link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css")
+        link(href="https://fonts.googleapis.com/css?family=Lato:400,700|Ubuntu:400,500,700" rel="stylesheet")
+        link(rel="shortcut icon" type="image/png" href="/images/favicon.png" sizes="54 54")
+        link(rel="stylesheet" href="/stylesheets/base.css")
+        link(rel="stylesheet" href="/stylesheets/layout.css")
+        link(rel="stylesheet" href="/stylesheets/components.css")
+        link(rel="stylesheet" href="/stylesheets/home.css")
+
+    body.bg-dark
+        div.container
+            // navigation bar
+            nav.nav
+                a.nav-icon(href="/")
+                    img(src="/images/politico.svg" alt="Politico")
+                    p.icon-text Politico
+
+                div.menu
+                    a.link-item(href="/parties") parties
+                    a.link-item(href="/politicians") politicians
+                    a.link-item(href="/availableoffices") offices
+                    a.link-item(href="/results") results
+                    a.link-item(href="/admin") admin
+                    a.link-item(href="/profile") profile
+                    button.btn.link-item(href="/admin") logout
+
+                button.dropdown-trigger
+                    img.dropdown-trigger-img(src="/images/profile.jpg")
+
+                div.dropdown
+                    div.user-info
+                        img.user-image(src="/images/profile.jpg")
+                        p.user-name avpaul
+
+                    ul.dropdown-menu.mobile
+                        li.menu-item
+                            a.link-item(href="/profile") my profile & votes
+
+                        li.menu-item
+                            a.link-item(href="/parties") parties
+
+                        li.menu-item
+                            a.link-item(href="/availableoffices") available offices
+
+                        li.menu-item
+                            a.link-item(href="/politicians") running politicians
+
+                        li.menu-item
+                            a.link-item(href="/results") election results
+
+                        li.menu-item
+                            a.link-item(href="/admin") admin panel
+
+                        li.menu-item
+                            button.btn.link-item(href="/admin") logout
+
+            div.party-view
+                .heading.mt2.mb2.ml3
+                    a(href="/admin")
+                        i.zmdi.zmdi-arrow-left.zmdi-hc-2x.text-accent
+                    h2.text-capital.card-title new party
+
+                div.card.party.text-primary
+
+                    div.card-content.p3
+                        div.field-group
+                            label.field-name(for="user-name") Name:
+                            input.input(type="text" name="name" id="user-name")
+
+                        div.field-group
+                            label.field-name(for="party-address") Address:
+                            input.input(type="text" name="party address" id="party-address")
+
+                        div.field-group
+                            label.field-name(for="party-logo") Logo:
+                            input.input(type="file" name="party-logo" id="party-logo")
+
+                        div.field-group
+                            label.field-name(for="party-desc") Description:
+                            textarea.input(name="party-description" id="party-desc" cols="30" rows="10")
+
+                        div.card-action
+                            button.btn.red-outline cancel
+                            button.btn.red-outline save
+
+            footer.p3
+                p.footer-logo-text.text-accent &copy; 2019 Politico
+
+        div.overlay-sc
+        script(src="/javascripts/index.js")

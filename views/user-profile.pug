@@ -3,10 +3,10 @@ html
         meta(charset="utf-8")
         meta(http-equiv="X-UA-Compatible" content="IE=edge")
         meta(name="viewport" content="width=device-width, initial-scale=1")
-        title='Politico-Shape tomorrow by voting!'
+        title='Shape tomorrow by voting!'
         link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css")
         link(href="https://fonts.googleapis.com/css?family=Lato:400,700|Ubuntu:400,500,700" rel="stylesheet")
-        link(rel="shortcut icon" type="image/png" href="/images/politico-192.png" sizes="54 54")
+        link(rel="shortcut icon" type="image/png" href="/images/favicon.png" sizes="54 54")
         link(rel="stylesheet" href="/stylesheets/base.css")
         link(rel="stylesheet" href="/stylesheets/layout.css")
         link(rel="stylesheet" href="/stylesheets/components.css")
@@ -17,19 +17,27 @@ html
             // navigation bar
             nav.nav
                 a.nav-icon(href="/")
-                    img(src="/images/Politico_fist.svg" alt="Politico")
-                    p.icon-text.text-primary Politico
+                    img(src="/images/politico.svg" alt="Politico")
+                    p.icon-text Politico
+
+                div.menu
+                    a.link-item(href="/parties") parties
+                    a.link-item(href="/politicians") politicians
+                    a.link-item(href="/availableoffices") offices
+                    a.link-item(href="/results") results
+                    a.link-item(href="/admin") admin
+                    a.link-item(href="/profile") profile
+                    button.btn.link-item(href="/admin") logout
 
                 button.dropdown-trigger
                     img.dropdown-trigger-img(src="/images/profile.jpg")
-                    //i.zmdi.zmdi-chevron-down.zmdi-hc-2x
 
                 div.dropdown
                     div.user-info
                         img.user-image(src="/images/profile.jpg")
                         p.user-name avpaul
 
-                    ul.dropdown-menu
+                    ul.dropdown-menu.mobile
                         li.menu-item
                             a.link-item(href="/profile") my profile & votes
 
@@ -37,7 +45,7 @@ html
                             a.link-item(href="/parties") parties
 
                         li.menu-item
-                            a.link-item(href="/available-offices") available offices
+                            a.link-item(href="/availableoffices") available offices
 
                         li.menu-item
                             a.link-item(href="/politicians") running politicians
@@ -46,12 +54,15 @@ html
                             a.link-item(href="/results") election results
 
                         li.menu-item
-                            a.link-item(href="/admin-panel") admin panel
+                            a.link-item(href="/admin") admin panel
+
+                        li.menu-item
+                            button.btn.link-item(href="/admin") logout
 
             div.profile-view
                 //user info
                 div.card.user-info
-                    h3.w-n.color-accent.m2 My Profile
+                    h3.text-accent.m2 My Profile
                     div.center.mb2
                         img.user-image.mb2(src="/images/profile.jpg")
                         button.btn.red-outline.text-primary change
@@ -96,7 +107,7 @@ html
                     button.btn.red-outline.m1.updateUserInfo.text-primary save changes
 
                 div.card.text-primary.user-votes
-                    h3.w-n.color-accent.mt1.mb1 My votes
+                    h3.text-accent.mt1.mb1 My votes
                     div.card-content
                         div.vote
                             div.voted-office city mayor
@@ -114,7 +125,7 @@ html
                         a.btn.red-outline(href="/results") see election results
 
             footer.p3
-                p.footer-logo-text.color-accent &copy; 2019 Politico
-        block afterFooter
-            div.overlay-sc
-            script(src="/javascripts/index.js")
+                p.footer-logo-text.text-accent &copy; 2019 Politico
+
+        div.overlay-sc
+        script(src="/javascripts/index.js")

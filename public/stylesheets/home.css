@@ -15,11 +15,17 @@
     color: #ffffff;
     margin-left: .25rem;
 }
-
+.menu{
+    display: none;
+}
+.menu.show{
+    display: block;
+}
+.dropdown-trigger{
+     display: block;}
 .menu a[href]{
     color: #ffffff;
     text-transform: uppercase;
-    /*font-size: 1.3rem;*/
     text-align: center;
     height: 100%;
     display: inline-block;
@@ -43,7 +49,7 @@
     background-color: transparent;
     cursor: pointer;
     position: relative;
-    margin-right: .5rem;
+    margin-right: 1rem;
 }
 .dropdown-trigger:focus{
     outline: none;
@@ -141,7 +147,11 @@
 
 
 @media only screen and (min-width: 768px) {
-
+    .menu{
+        display: block;
+    }.dropdown-trigger{
+             display: none;
+         }
     .nav {
         height: 72px;
         box-shadow: #00000024 0 3px 4px;
