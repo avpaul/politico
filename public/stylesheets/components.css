@@ -108,7 +108,6 @@ section {
     display: block;
     height: auto;
     box-shadow: #00000024 0px 3px 4px;
-    border-radius: 5px;
     margin: .5rem;
 }
 
@@ -119,7 +118,6 @@ section {
 .card-image img {
     width: 100%;
     height: 100%;
-    border-radius: 5px;
 }
 
 .card-overlay {
@@ -153,7 +151,6 @@ section {
 }
 
 .party-name {
-    /* font-size: 1rem; */
     color: #ffffff;
     text-align: center;
 }
@@ -236,8 +233,7 @@ section {
 
 .jumbotron {
     width: 80%;
-    padding-top: 1.5rem;
-    padding-bottom: 2rem;
+    padding: 1.5rem 0;
     margin-left: auto;
     margin-right: auto;
     color: var(--accent-color);
@@ -278,6 +274,7 @@ section {
     margin: .75rem 0 0 0;
     flex-grow: 1;
     align-items: flex-end;
+    flex-wrap: wrap;
 }
 
 .field-group {
@@ -310,13 +307,14 @@ section {
 .field-group .input:focus {
     outline: none;
 }
-.user-info .field-group:last-of-type{
+.user-info .field-group:last-of-type,
+.field-group.select-field{
     flex-direction: row;
 }
-.user-info .field-group:last-of-type .field-name{
+.user-info .field-group:last-of-type .field-name,
+.field-group.select-field .field-name{
     line-height: 2;
 }
-
 .user-info .input {
     border: var(--main-color) 1px solid;
     margin-left: .25rem;
@@ -334,8 +332,7 @@ section {
     color: #ffffff;
     border-bottom: #000000 2px solid;
     font-weight: 300;
-
-}
+  }
 
 .other-options>a:last-child {
     margin-left: .5rem;
@@ -384,7 +381,6 @@ table {
 
 thead th {
     text-transform: uppercase;
-    /*color: var(--accent-color);*/
 }
 
 tbody td {
@@ -405,7 +401,6 @@ td {
     display: flex;
     justify-content: center;
     background-color: var(--card-back);
-
     padding: 1rem 0 1.25rem 0;
     color: var(--main-color);
 }
@@ -415,9 +410,8 @@ td {
     font-weight: 500;
 }
 
-.office-candidates {
-    display: flex;
-    flex-direction: row;
+.office-description, .office-candidates{
+    font-size: 1.2rem;
 }
 
 .office.card,
@@ -458,8 +452,7 @@ td {
     text-transform: capitalize;
 }
 
-.office.card .office-candidates {
-    font-size: 18px;
+.office-candidates {
     padding-bottom: .25rem;
 }
 
@@ -490,7 +483,7 @@ td {
 
 .party-view .heading i,
 .office-view .heading i {
-    line-height: 1.6;
+    line-height: 1.3;
 }
 
 .candidate-view .heading h2,
@@ -542,8 +535,6 @@ td {
 
 .party.card textarea,
 .office.card textarea {
-
-    width: 100%;
     height: 200px;
 }
 
@@ -555,17 +546,22 @@ td {
 
 .party.card .card-action .btn,
 .office.card .card-action .btn {
-
-    margin: 0 .5rem;
+    margin: .25rem .5rem;
 }
 
 .profile-view {
     margin: 1rem;
 }
-.all-candidates {
+.all-candidates,
+.all-offices,.party-view,
+.admin-panels {
     width: 90%;
     margin-left: auto;
     margin-right: auto;
+}
+.all-offices .card,
+.all-candidates .card {
+    margin-bottom: 2rem;
 }
 .all-candidates .card{
     height: 400px;
@@ -692,6 +688,12 @@ td {
         margin: 2rem 1rem;
         flex-direction: row;
     }
+    .party-view .field-group {
+        margin: 2rem auto;
+    }
+    .party-view .card-action {
+        padding-right: 4rem;
+    }
 
     .field-group .input,
     .field-input {
@@ -745,16 +747,13 @@ td {
     .all-results .office-result .office-name {
         font-size: 1.2rem;
     }
-
-    .party-view .heading,
-    .office-view .heading {
-        justify-content: center;
-        padding-left: 0;
+    .all-offices .card,
+    .all-candidates .card{
+        margin-bottom: 1rem;
     }
 
-    .party-view .heading h2,
-    .office-view .heading h2 {
-        margin-left: .75rem;
+    .party-view .heading i, .office-view .heading i{
+        line-height: 2.3;
     }
 
     .party-view .card,
@@ -775,6 +774,7 @@ td {
     }
     .all-offices,
     .all-results,
+    .party-view,
     .admin-panels {
         width: 85%;
         margin-left: auto;

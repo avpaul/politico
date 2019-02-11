@@ -6,7 +6,7 @@ html
         title='Shape tomorrow by voting!'
         link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css")
         link(href="https://fonts.googleapis.com/css?family=Lato:400,700|Ubuntu:400,500,700" rel="stylesheet")
-        link(rel="shortcut icon" type="image/png" href="/images/politico-192.png" sizes="54 54")
+        link(rel="shortcut icon" type="image/png" href="/images/favicon.png" sizes="54 54")
         link(rel="stylesheet" href="/stylesheets/base.css")
         link(rel="stylesheet" href="/stylesheets/layout.css")
         link(rel="stylesheet" href="/stylesheets/components.css")
@@ -14,13 +14,12 @@ html
 
     body.bg-dark
         div.container
-            // navigation bar
             nav.nav
                 a.nav-icon(href="/")
-                    img(src="/images/Politico_fist.svg" alt="Politico")
+                    img(src="/images/politico.svg" alt="Politico")
                     p.icon-text.text-primary Politico
 
-                div.menu
+                div.menu.show
                     a(href="/about") about
                     a(href="/login") login
 
@@ -39,6 +38,6 @@ html
                         img.voter-illustrator(src='/images/voter-illustrator-1.jpg')
 
             footer.p3
-                p.footer-logo-text.color-accent &copy; 2019 Politico
+                p.footer-logo-text.text-accent &copy; 2019 Politico
 
             block afterFooter

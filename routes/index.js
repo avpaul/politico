@@ -21,11 +21,14 @@ router.get('/profile', (req, res) => {
     res.render('user-profile');
 });
 
-router.get('/addoffice', (req, res) => {
+router.get('/offices/new', (req, res) => {
     res.render('add-office');
 });
+router.get('/offices/:id/edit', (req, res) => {
+    res.render('edit-office');
+});
 
-router.get('/addparty', (req, res) => {
+router.get('/parties/new', (req, res) => {
     res.render('add-party');
 });
 
@@ -41,11 +44,10 @@ router.get('/candidates/:id', (req, res) => {
     res.render('candidate');
 });
 
-router.get('/offices/:id', (req, res) => {
-    res.render('edit-office');
-});
-
 router.get('/parties/:id', (req, res) => {
+    res.render('party');
+});
+router.get('/parties/:id/edit', (req, res) => {
     res.render('edit-party');
 });
 
