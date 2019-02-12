@@ -1,0 +1,101 @@
+.container {
+    padding-top: 0;
+    background-color: #ffffff;
+}
+
+footer {
+    background-color: #ffffff;
+}
+
+.banner {
+    height: 500px;
+    background-image: url('../assets/banner-bg.jpg');
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}
+
+.banner-tagline {
+    width: fit-content;
+    margin: 0 auto;
+    font-size: 1.8rem;
+    text-align: center;
+    color: var(--accent-color);
+    font-weight: 700;
+    border-bottom: 1px #ffffff50 solid;
+}
+
+.banner-intro {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #ffffff;
+    width: 60%;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.banner-action {
+    text-align: center
+}
+
+.banner-action .btn {
+    display: inline-block;
+    height: 64px;
+    font-size: 1.4rem;
+    border-radius: 40px;
+    text-transform: none;
+    line-height: 2;
+    color: var(--secondary-color)
+}
+
+.home-band {
+    padding-top: 1rem;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+
+}
+
+.politico-features {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    padding: 2rem;
+}
+
+.feature-icon {
+    color: var(--secondary-color);
+    text-align: center;
+}
+
+.feature-title {
+    color: var(--accent-color);
+    font-size: 1.6rem;
+    font-family: 'ubuntu';
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.feature-description {
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    font-family: 'ubuntu';
+    text-align: center;
+}
+
+.main-content {
+    height: 100%;
+    position: relative;
+}
+
+.main-bg {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: -100;
+
+}
