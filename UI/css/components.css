@@ -113,6 +113,7 @@ section {
 
 .card-image {
     width: 100%;
+    height: 100%;
 }
 
 .card-image img {
@@ -683,6 +684,9 @@ td {
     .card.form {
         min-height: 500px;
 
+    }
+    .card.form.reset {
+        min-height: 200px;
     }
     .field-group {
         margin: 2rem 1rem;

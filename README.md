@@ -55,7 +55,7 @@ To start the application run `npm start` or use [Nodemon](https://www.nodemon.io
 $ npm test
 ```
 
-![test results](./public/images/test.png)
+![test results](UI/assets/test.png)
 
 ### License
 MIT &COPY; [avpaul](https://www.github.com/avpaul)

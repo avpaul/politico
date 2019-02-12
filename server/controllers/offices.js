@@ -49,7 +49,7 @@ module.exports.getAll = (req, res) => {
     if (!d) {
         res.status(200);
         res.json({
-            status: 200,
+            status: 400,
             error: 'no office found',
         });
         return;

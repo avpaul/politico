@@ -4,8 +4,8 @@
   "private": true,
   "author": "avpaul <vabimana@gmail.com> ",
   "scripts": {
-    "start": "node ./bin/www",
-    "test": "nyc mocha",
+    "start": "node ./server/bin/www",
+    "test": "nyc mocha ./server/tests/",
     "test:local": "nyc --reporter=html --reporter=lcov mocha",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
