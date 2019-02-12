@@ -5,7 +5,7 @@ sudo: false
 install:
   - npm install
 script:
-  - npm tests
+  - npm test
 after_script: npm run coverage
 
 
