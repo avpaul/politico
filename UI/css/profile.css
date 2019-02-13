@@ -1,0 +1,62 @@
+.profile-cards {
+    display: flex;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    flex-direction: row;
+    position: relative;
+}
+
+.profile-cards .card {
+    max-width: 40%;
+    width: 40%;
+    background-color: #ffffff;
+}
+
+.field-group .field-name {
+    width: 150px;
+    color: var(--main-color);
+}
+
+.btn.updateUserInfo {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card.user-votes {
+    padding: 2rem;
+    justify-content: flex-start;
+}
+
+.vote:not(:first-of-type) {
+    margin-top: .5rem;
+}
+
+.voted-office {
+    font-size: 1.4rem;
+    text-transform: capitalize;
+    margin-bottom: -.25rem;
+}
+
+.voted-candidate {
+    text-transform: capitalize;
+    padding-left: .5rem;
+}
+
+.card-action {
+    width: 100%;
+    justify-content: center;
+    flex-grow: 0;
+    margin-top: 2rem;
+}
+
+.field-group {
+    padding-right: 1rem;
+}
+
+.show-panel {
+    position: absolute;
+    right: 25px;
+    top: 15px;
+}

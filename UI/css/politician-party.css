@@ -1,0 +1,42 @@
+body {}
+
+.jumbotron {
+    width: 70%
+}
+
+.jumbotron select {
+    margin-left: 1rem;
+}
+
+.card {
+    background-color: #ffffff;
+}
+
+.candidate-office,
+.candidate-name,
+.party-name {
+    color: #ffffff;
+}
+
+.candidate-name,
+.party-name {
+    font-size: 1.3rem;
+}
+
+.candidate-office {
+    font-size: 1.1rem;
+}
+
+.candidate-qualification {
+    font-size: 1.3rem;
+}
+
+.card.candidate {
+    padding: 0;
+    justify-content: left;
+}
+
+.jumbotron h2 {
+    display: inline-block;
+    margin-left: .5rem;
+}

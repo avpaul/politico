@@ -1,0 +1,34 @@
+/* TABLE */
+table {
+    border-collapse: collapse;
+    margin: 0 auto;
+    color: var(--primary-color);
+}
+
+thead th {
+    text-transform: uppercase;
+}
+
+tbody td {
+    text-transform: capitalize;
+}
+
+th,
+td {
+    border-bottom: var(--main-color) 2px solid;
+    padding: .5rem .75rem;
+    font-size: 16px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.office-name {
+    font-size: 1.2rem;
+    text-align: center;
+    color: var(--accent-color);
+    padding: .5rem 0;
+}
+
+.jumbotron {
+    width: 70%;
+}
