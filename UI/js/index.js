@@ -1,7 +1,9 @@
 class Dropdown {
     constructor(ui) {
         this.active = false;
-        this.elts = { ...ui };
+        this.elts = {
+            ...ui
+        };
     }
 
     init() {

@@ -1,0 +1,30 @@
+.card {
+    margin-top: 4rem;
+}
+
+.field-group .field-name {
+    width: 150px;
+}
+
+.input[type="file"] {
+    border: none;
+}
+
+.card-action {
+    width: 75%;
+}
+
+.card-action .btn {
+    margin-right: 1rem;
+}
+
+.card.edit .card-action {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: flex-end;
+}
+
+.field-group {
+    padding-right: 1rem;
+}

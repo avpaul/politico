@@ -17,7 +17,7 @@ describe('#offices', () => {
                     description: 'The city mayor is the head of the city he is in charge of everything happening in the city',
                 })
                 .end((error, res) => {
-                    res.should.have.status(200);
+                    res.should.have.status(201);
                     res.body.data.should.be.an('array');
                     res.body.data.length.should.eql(1);
                     done();
