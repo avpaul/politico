@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Shape tomorrow by voting!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Ubuntu:400,500,700" rel="stylesheet"/>
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png" sizes="54 54"/>
+    <link rel="stylesheet" href="../css/base.css"/>
+    <link rel="stylesheet" href="../css/layout.css"/>
+    <link rel="stylesheet" href="../css/components.css"/>
+    <link rel="stylesheet" href="../css/home.css"/>
+</head>
+<body class="bg-dark">
+<div class="container">
+    <!-- navigation bar-->
+    <nav class="nav">
+        <a class="nav-icon" href="index.html">
+            <img src="../assets/politico.svg" alt="Politico"/>
+            <p class="icon-text">Politico</p>
+        </a>
+        <div class="menu">
+            <a class="link-item" href="./parties.html">parties</a>
+            <a class="link-item" href="./politicians.html">politicians</a>
+            <a class="link-item" href="./available-offices.html">offices</a>
+            <a class="link-item" href="./results.html">results</a>
+            <a class="link-item" href="./admin-panel.html">admin</a>
+            <a class="link-item" href="./user-profile.html">profile</a>
+            <button class="btn link-item">logout</button>
+        </div>
+        <button class="dropdown-trigger">
+            <img class="dropdown-trigger-img" src="../assets/profile.jpg" alt=""/>
+        </button>
+        <div class="dropdown">
+            <div class="user-info">
+                <img class="user-image" src="../assets/profile.jpg" alt=""/>
+                <p class="user-name">avpaul</p>
+            </div>
+            <ul class="dropdown-menu mobile">
+                <li class="menu-item">
+                    <a class="link-item" href="./user-profile.html">my profile & votes</a>
+                </li>
+                <li class="menu-item">
+                    <a class="link-item" href="./parties.html">parties</a>
+                </li>
+                <li class="menu-item">
+                    <a class="link-item" href="./available-offices.html">available offices</a>
+                </li>
+                <li class="menu-item">
+                    <a class="link-item" href="./politicians.html">running politicians</a>
+                </li>
+                <li class="menu-item">
+                    <a class="link-item" href="./results.html">election results</a>
+                </li>
+                <li class="menu-item">
+                    <a class="link-item" href="./admin-panel.html">admin panel</a>
+                </li>
+                <li class="menu-item">
+                    <button class="btn link-item">logout</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="jumbotron">
+        <h2 class="w-n color-accent mb1">Political parties</h2>
+        <select class="field-input" id="office-type" name="office">
+            <option value="">Choose Office</option>
+            <option value="city-mayor">City Mayor</option>
+            <option value="ict-office">Head Of ICT</option>
+            <option value="accountant">Accountant</option>
+        </select>
+    </div>
+    <div class="all-candidates">
+        <div class="card card-overlay">
+            <div class="card-image">
+                <img src="../assets/p2.jpg" alt="Mulinda Thomas"/>
+            </div>
+            <a class="overlay-content p1 bg-accent" href="./party.html">
+            <p class="party-name text-uppercase">dc for union</p>
+            </a>
+        </div>
+        <div class="card card-overlay">
+            <div class="card-image">
+                <img src="../assets/p1.jpg" alt="Mulinda Thomas"/>
+            </div>
+            <a class="overlay-content p1 bg-accent" href="./party.html">
+            <p class="party-name text-uppercase">green party</p>
+            </a>
+        </div>
+        <div class="card card-overlay">
+            <div class="card-image">
+                <img src="../assets/p3.jpg" alt="Mulinda Thomas"/>
+            </div>
+            <a class="overlay-content p1 bg-accent" href="./party.html">
+            <p class="party-name text-uppercase">democrats</p>
+            </a>
+        </div>
+        <div class="card card-overlay">
+            <div class="card-image">
+                <img src="../assets/p2.jpg" alt="Mulinda Thomas"/>
+            </div>
+            <a class="overlay-content p1 bg-accent" href="./party.html">
+            <p class="party-name text-uppercase">dc for union</p>
+            </a>
+        </div>
+        <div class="card card-overlay">
+            <div class="card-image">
+                <img src="../assets/p1.jpg" alt="Mulinda Thomas"/>
+            </div>
+            <a class="overlay-content p1 bg-accent" href="./party.html">
+            <p class="party-name text-uppercase">green party</p>
+            </a>
+        </div>
+        <div class="card card-overlay">
+            <div class="card-image">
+                <img src="../assets/p3.jpg" alt="Mulinda Thomas"/>
+            </div>
+            <a class="overlay-content p1 bg-accent" href="./party.html">
+            <p class="party-name text-uppercase">democrats</p>
+            </a>
+        </div>
+    </div>
+    <footer class="p3">
+        <p class="footer-logo-text text-accent">&copy; 2019 Politico</p>
+    </footer>
+    <div class="overlay-sc"></div>
+    <script src="../js/index.js"></script>
+</div>
+</body>
+</html>
