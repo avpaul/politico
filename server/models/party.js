@@ -21,17 +21,17 @@ class Party {
     }
 
     updateAll(id, props) {
-        const duplicate = this.parties.some(party => party.name === props.name);
-        if (duplicate) {
-            return {
-                error: 'party with same name exists',
-            };
-        }
         const partyIndex = this.parties.findIndex(party => party.id === Number(id));
         if (partyIndex <= -1) {
             return {
                 status: 404,
                 error: `party with id ${id} not found`,
+            };
+        }
+        const duplicate = this.parties.some(party => party.name === props.name);
+        if (duplicate) {
+            return {
+                error: 'party with same name exists',
             };
         }
         this.parties[partyIndex] = { id: Number(id), ...props };

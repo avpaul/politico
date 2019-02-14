@@ -5,21 +5,27 @@ import app from '../../app';
 chai.use(chaihttp);
 chai.should();
 
+const office = {
+    type: 'federal',
+    name: 'mayor',
+    description: `Role of the mayor. As the head of the city, the mayor officially speaks 
+                  for both the government and the community as a whole. In all statutory 
+                  cities and in most charter cities, the mayor is the presiding officer 
+                  and a regular member of the city council.`,
+};
+
 describe('#offices', () => {
     // CREATE OFFICE
     context('POST /v1/offices', () => {
-        it('should return created office props and 201 status code', (done) => {
+        it('should return created office name and 201 status code', (done) => {
             chai.request(app)
                 .post('/v1/offices')
-                .send({
-                    type: 'state',
-                    name: 'city mayor',
-                    description: 'The city mayor is the head of the city he is in charge of everything happening in the city',
-                })
+                .send(office)
                 .end((error, res) => {
                     res.should.have.status(201);
                     res.body.data.should.be.an('array');
                     res.body.data.length.should.eql(1);
+                    res.body.data[0].name.should.eql(office.name);
                     done();
                 });
         });
@@ -33,7 +39,9 @@ describe('#offices', () => {
                 .end((error, res) => {
                     res.should.have.status(200);
                     res.body.data.should.be.an('array');
-                    res.body.data[0].name.should.be.a('string');
+                    res.body.data[0].name.should.eql(office.name);
+                    res.body.data[0].type.should.eql(office.type);
+                    res.body.data[0].id.should.eql(1);
                     done();
                 });
         });
@@ -48,7 +56,9 @@ describe('#offices', () => {
                 .end((error, res) => {
                     res.should.have.status(200);
                     res.body.data.should.be.an('array');
-                    res.body.data[0].name.should.be.a('string');
+                    res.body.data[0].name.should.eql(office.name);
+                    res.body.data[0].type.should.eql(office.type);
+                    res.body.data[0].id.should.eql(1);
                     done();
                 });
         });

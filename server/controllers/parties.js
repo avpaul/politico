@@ -1,3 +1,4 @@
+// db: database
 const db = require('../config/db');
 const Validator = require('../helpers/validator');
 

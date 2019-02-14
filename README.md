@@ -1,5 +1,5 @@
-# Politico-api 
-![Build Status](https://travis-ci.com/avpaul/politico-api.svg?branch=develop) 
+# Politico
+[![Build Status](https://travis-ci.com/avpaul/politico.svg?branch=develop)](https://travis-ci.com/avpaul/politico)
 [![Coverage Status](https://coveralls.io/repos/github/avpaul/politico-api/badge.svg?branch=develop)](https://coveralls.io/github/avpaul/politico-api?branch=develop) 
 [![Maintainability](https://api.codeclimate.com/v1/badges/7f1405edf9b964256eb1/maintainability)](https://codeclimate.com/github/avpaul/politico-api/maintainability) 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
@@ -8,8 +8,8 @@
   <a href="https://peoplevote.herokuapp.com/">
     <img
       alt="Politico"
-      src="./UI/assets/Politico_256-72.svg"
-      width="500"
+      src="https://avpaul.github.io/politico/UI/assets/Politico_256-72.svg"
+      width="500px"
     />
   </a>
 </p>
@@ -25,8 +25,8 @@ to doing business across the five continents from home! It's time to take our el
 *Politico* is a digital voting system which make use of internet to allow people to vote in an 
 election and have there votes counted online.
 
-Politico-API creates API end points for the [Politico app.](http://avpaul.github.io/politico) It the second challenge for the Andela 
-pre-bootcamp project in cycle 3 Rwanda.
+### Gh-pages and heroku app links
+Politico front end is hosted on gh-pages [Politico UI](http://avpaul.github.io/politico) and the API end points are hosted on heroku [Politico API](https://peoplevote.herokuapp.com)
 
 ### Framework and Technologies used
 *Built with*
@@ -34,7 +34,7 @@ pre-bootcamp project in cycle 3 Rwanda.
 * [Expressjs](https://www.expressjs.com)
 
 *API end-points tested by*
-* [Mocha](https://www.mochajs.org)
+* [Mocha](https://www.mochajs.org) & [Chai](chaijs.com)
 * [Postman](https://www.getpostman.com)
 
 *Continuous Integration and test coverage by*
@@ -49,6 +49,28 @@ $ cd ./politico-api
 $ npm install
 ```
 To start the application run `npm start` or use [Nodemon](https://www.nodemon.io) for restarting server on save.
+### Features
+- Create a political party
+- Delete a political party
+- Create a government office
+- Edit a party's entries
+- Get all created political parties
+- Get a specific political party
+- Get all created political offices
+- Get a specific political office
+
+#### Endpoints to create, views available products and create sale records
+*HTTP Method*|*End point* | *Public Access*|*Action*
+:----------|:---------|:------------:|:-----
+POST | /v1/parties | true | Create a political party
+GET | /v1/parties | true | Fetch all ​ political parties​ records
+GET | /v1/parties/<parties_id> | true | Fetch a specific ​ political party​ record
+PATCH | /V1/parties/<parties_id>/name | true | Edit the name of a specific ​ political party​
+PUT | /v1/parties/<parties_id> | true | Edit details of a of a specific ​ political party
+DELETE | /v1/parties/<parties_id> | true | Delete a specific ​ political party
+POST | /v1/office | true | Create a ​ political office
+GET | /v1/office | true | Fetch all ​ political offices​ records
+GET | /v1/offices/<office_id> | true | Fetch a specific ​ political office​ record
 
 ### Tests
 ```
