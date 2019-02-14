@@ -1,81 +1,77 @@
 <!DOCTYPE html>
 <html lang="eng">
+
 <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Shape tomorrow by voting!</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css"/>
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Ubuntu:400,500,700" rel="stylesheet"/>
-    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png" sizes="54 54"/>
-    <link rel="stylesheet" href="../css/base.css"/>
-    <link rel="stylesheet" href="../css/layout.css"/>
-    <link rel="stylesheet" href="../css/components.css"/>
-    <link rel="stylesheet" href="../css/home.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Ubuntu:400,500,700" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/layout.css" />
+    <link rel="stylesheet" href="../css/shared.css" />
+    <link rel="stylesheet" href="../css/card.css" />
+    <link rel="stylesheet" href="../css/admin.css" />
 </head>
+
 <body class="bg-dark">
-<div class="container">
-    <!-- navigation bar-->
-    <nav class="nav">
-        <a class="nav-icon" href="index.html">
-            <img src="../assets/politico.svg" alt="Politico"/>
-            <p class="icon-text">Politico</p>
-        </a>
-        <div class="menu">
-            <a class="link-item" href="./parties.html">parties</a>
-            <a class="link-item" href="./politicians.html">politicians</a>
-            <a class="link-item" href="./available-offices.html">offices</a>
-            <a class="link-item" href="./results.html">results</a>
-            <a class="link-item" href="./admin-panel.html">admin</a>
-            <a class="link-item" href="./user-profile.html">profile</a>
-            <button class="btn link-item">logout</button>
-        </div>
-        <button class="dropdown-trigger">
-            <img class="dropdown-trigger-img" src="../assets/profile.jpg" alt=""/>
-        </button>
-        <div class="dropdown">
-            <div class="user-info">
-                <img class="user-image" src="../assets/profile.jpg" alt=""/>
-                <p class="user-name">avpaul</p>
+    <div class="container">
+        <!-- navigation bar-->
+        <nav class="nav">
+            <a class="nav-icon" href="index.html">
+                <img src="../assets/politico.svg" alt="Politico" />
+                <p class="icon-text">Politico</p>
+            </a>
+            <div class="menu">
+                <a class="link-item" href="./parties.html">parties</a>
+                <a class="link-item" href="./politicians.html">politicians</a>
+                <a class="link-item" href="./available-offices.html">offices</a>
+                <a class="link-item" href="./results.html">results</a>
+                <a class="link-item" href="./user-profile.html">profile</a>
+                <a href="index.html" class="btn link-item">logout</a>
             </div>
-            <ul class="dropdown-menu mobile">
-                <li class="menu-item">
-                    <a class="link-item" href="./user-profile.html">my profile & votes</a>
-                </li>
-                <li class="menu-item">
-                    <a class="link-item" href="./parties.html">parties</a>
-                </li>
-                <li class="menu-item">
-                    <a class="link-item" href="./available-offices.html">available offices</a>
-                </li>
-                <li class="menu-item">
-                    <a class="link-item" href="./politicians.html">running politicians</a>
-                </li>
-                <li class="menu-item">
-                    <a class="link-item" href="./results.html">election results</a>
-                </li>
-                <li class="menu-item">
-                    <a class="link-item" href="./admin-panel.html">admin panel</a>
-                </li>
-                <li class="menu-item">
-                    <button class="btn link-item">logout</button>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <div class="party-view">
-        <div class="heading mt2 mb2 ml3"><a href="index.html"><i class="zmdi zmdi-arrow-left zmdi-hc-2x text-accent"></i></a>
+            <button class="dropdown-trigger">
+                <img class="dropdown-trigger-img" src="../assets/profile.jpg" alt="" />
+            </button>
+            <div class="dropdown">
+                <div class="user-info">
+                    <img class="user-image" src="../assets/profile.jpg" alt="" />
+                    <p class="user-name">avpaul</p>
+                </div>
+                <ul class="dropdown-menu mobile">
+                    <li class="menu-item">
+                        <a class="link-item" href="./user-profile.html">my profile & votes</a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="link-item" href="./parties.html">parties</a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="link-item" href="./available-offices.html">available offices</a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="link-item" href="./politicians.html">running politicians</a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="link-item" href="./results.html">election results</a>
+                    </li>
+                    <li class="menu-item">
+                        <button class="btn link-item">logout</button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <form class="card form text-primary edit">
             <h2 class="text-capital card-title">edit office</h2>
-        </div>
-        <div class="card party text-primary">
             <div class="card-content p3">
                 <div class="field-group">
                     <label class="field-name" for="office-name">Name:</label>
-                    <input class="input" type="text" name="office name" id="office-name"/>
+                    <input class="input" type="text" name="office name" id="office-name" required />
                 </div>
                 <div class="field-group select-field">
                     <label class="field-name" for="office-type">Type:</label>
-                    <select class="text-capital field-input ml1" id="office-type" name="office type">
+                    <select class="text-capital field-input ml1" id="office-type" name="office type" required>
                         <option value="">Office type</option>
                         <option value="local government">local government</option>
                         <option value="state"> state</option>
@@ -88,18 +84,18 @@
                     <textarea class="input" name="party-description" id="party-desc" cols="30" rows="10"></textarea>
                 </div>
                 <div class="card-action">
-                    <button class="btn red-outline">cancel</button>
+                    <a href="admin-panel.html" class="btn red-outline">cancel</a>
                     <button class="btn red-outline">delete</button>
-                    <button class="btn red-outline">save</button>
+                    <button class="btn red-outline" type="submit">save</button>
                 </div>
             </div>
-        </div>
+        </form>
+        <footer class="p3">
+            <p class="footer-logo-text text-accent">&copy; 2019 Politico</p>
+        </footer>
     </div>
-    <footer class="p3">
-        <p class="footer-logo-text text-accent">&copy; 2019 Politico</p>
-    </footer>
-</div>
-<div class="overlay-sc"></div>
-<script src="../js/index.js"></script>
+    <div class="overlay-sc"></div>
+    <script src="../js/index.js"></script>
 </body>
+
 </html>

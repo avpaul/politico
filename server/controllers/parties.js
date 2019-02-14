@@ -23,9 +23,9 @@ module.exports.createParty = (req, res) => {
         description: b.description,
     });
 
-    res.status(200);
+    res.status(201);
     res.json({
-        status: 200,
+        status: 201,
         data,
     });
 };

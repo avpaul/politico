@@ -8,7 +8,7 @@ chai.should();
 describe('#createParty', () => {
     context('POST /v1/parties', () => {
         // WHEN ALL DATA ARE COMPLETE
-        it('should return a response with 200 status code and the name and id of the created party', (done) => {
+        it('should return a response with 201 status code and the name and id of the created party', (done) => {
             chai.request(app)
                 .post('/v1/parties')
                 .type('form')
@@ -19,7 +19,7 @@ describe('#createParty', () => {
                     description: 'it is the first party in membership and it is the ruling party since 2003',
                 })
                 .end((err, res) => {
-                    res.should.have.status(200);
+                    res.should.have.status(201);
                     res.body.should.be.an('object');
                     res.body.data.should.be.an('array');
                     done();

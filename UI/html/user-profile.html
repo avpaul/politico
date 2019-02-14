@@ -1,139 +1,144 @@
 <!DOCTYPE html>
 <html lang="eng">
+
 <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Shape tomorrow by voting!</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css"/>
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Ubuntu:400,500,700" rel="stylesheet"/>
-    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png" sizes="54 54"/>
-    <link rel="stylesheet" href="../css/base.css"/>
-    <link rel="stylesheet" href="../css/layout.css"/>
-    <link rel="stylesheet" href="../css/components.css"/>
-    <link rel="stylesheet" href="../css/home.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Ubuntu:400,500,700" rel="stylesheet" />
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png" sizes="54 54" />
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/layout.css" />
+    <link rel="stylesheet" href="../css/shared.css" />
+    <link rel="stylesheet" href="../css/card.css" />
+    <link rel="stylesheet" href="../css/admin.css" />
+    <link rel="stylesheet" href="../css/profile.css" />
 </head>
+
 <body class="bg-dark">
-<div class="container">
-    <!-- navigation bar-->
-    <nav class="nav">
-        <a class="nav-icon" href="index.html">
-            <img src="../assets/politico.svg" alt="Politico"/>
-            <p class="icon-text">Politico</p>
-        </a>
-        <div class="menu">
-            <a class="link-item" href="./parties.html">parties</a>
-            <a class="link-item" href="./politicians.html">politicians</a>
-            <a class="link-item" href="./available-offices.html">offices</a>
-            <a class="link-item" href="./results.html">results</a>
-            <a class="link-item" href="./admin-panel.html">admin</a>
-            <a class="link-item" href="./user-profile.html">profile</a>
-            <button class="btn link-item">logout</button>
-        </div>
-        <button class="dropdown-trigger">
-            <img class="dropdown-trigger-img" src="../assets/profile.jpg" alt=""/>
-        </button>
-        <div class="dropdown">
-            <div class="user-info">
-                <img class="user-image" src="../assets/profile.jpg" alt=""/>
-                <p class="user-name">avpaul</p>
+    <div class="container">
+        <!-- navigation bar-->
+        <nav class="nav">
+            <a class="nav-icon" href="index.html">
+                <img src="../assets/politico.svg" alt="Politico" />
+                <p class="icon-text">Politico</p>
+            </a>
+            <div class="menu">
+                <a class="link-item" href="./parties.html">parties</a>
+                <a class="link-item" href="./politicians.html">politicians</a>
+                <a class="link-item" href="./available-offices.html">offices</a>
+                <a class="link-item" href="./results.html">results</a>
+                <a class="link-item" href="./user-profile.html">profile</a>
+                <button class="btn link-item">logout</button>
             </div>
-            <ul class="dropdown-menu mobile">
-                <li class="menu-item">
-                    <a class="link-item" href="./user-profile.html">my profile & votes</a>
-                </li>
-                <li class="menu-item">
-                    <a class="link-item" href="./parties.html">parties</a>
-                </li>
-                <li class="menu-item">
-                    <a class="link-item" href="./available-offices.html">available offices</a>
-                </li>
-                <li class="menu-item">
-                    <a class="link-item" href="./politicians.html">running politicians</a>
-                </li>
-                <li class="menu-item">
-                    <a class="link-item" href="./results.html">election results</a>
-                </li>
-                <li class="menu-item">
-                    <a class="link-item" href="./admin-panel.html">admin panel</a>
-                </li>
-                <li class="menu-item">
-                    <button class="btn link-item">logout</button>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <div class="profile-view">
-        <!--user info-->
-        <div class="card user-info">
-            <h3 class="text-accent m2">My Profile</h3>
-            <div class="center mb2"><img class="user-image mb2" src="../assets/profile.jpg"/>
-                <button class="btn red-outline text-primary">change</button>
-            </div>
-            <div class="field-group">
-                <label class="field-name" for="first-name">  First name:</label>
-                <input class="input" id="first-name" type="text" name="first-name"/>
-            </div>
-            <div class="field-group">
-                <label class="field-name" for="last-name">Last name:</label>
-                <input class="input" id="last-name" type="text" name="last-name"/>
-            </div>
-            <div class="field-group">
-                <label class="field-name" for="other-name">Other Name:</label>
-                <input class="input" id="other-name" type="text" name="other-name"/>
-            </div>
-            <div class="field-group">
-                <label class="field-name" for="user-email">Email:</label>
-                <input class="input" id="user-email" type="text" name="email"/>
-            </div>
-            <div class="field-group">
-                <label class="field-name" for="user-id">ID:</label>
-                <input class="input" id="user-id" type="text" name="id"/>
-            </div>
-            <div class="field-group">
-                <label class="field-name" for="user-passport">PassportUrl:</label>
-                <input class="input" id="user-passport" type="text" name="passport"/>
-            </div>
-            <div class="field-group">
-                <label class="field-name" for="user-address">Address:</label>
-                <input class="input" id="user-address" type="text" name="address"/>
-            </div>
-            <div class="field-group">
-                <label class="field-name" for="user-party">Party:</label>
-                <select class="text-capital field-input ml1" id="user-party" name="office">
-                    <option value="">Choose your party</option>
-                    <option value="democratic-party ">democratic party</option>
-                    <option value="green-party"> green party</option>
-                    <option value="liberals">liberals</option>
-                    <option value="workers-union"> workers union</option>
-                </select>
-            </div>
-            <button class="btn red-outline m1 updateUserInfo text-primary">save changes</button>
-        </div>
-        <div class="card text-primary user-votes">
-            <h3 class="text-accent mt1 mb1">My votes</h3>
-            <div class="card-content">
-                <div class="vote">
-                    <div class="voted-office">city mayor</div>
-                    <div class="voted-candidate">mulinda thomas</div>
+            <button class="dropdown-trigger">
+                <img class="dropdown-trigger-img" src="../assets/profile.jpg" alt="" />
+            </button>
+            <div class="dropdown">
+                <div class="user-info">
+                    <img class="user-image" src="../assets/profile.jpg" alt="" />
+                    <p class="user-name">avpaul</p>
                 </div>
-                <div class="vote">
-                    <div class="voted-office">head of ICT</div>
-                    <div class="voted-candidate">paul greg</div>
-                </div>
-                <div class="vote">
-                    <div class="voted-office">accountant</div>
-                    <div class="voted-candidate">mutoni elise</div>
-                </div>
+                <ul class="dropdown-menu mobile">
+                    <li class="menu-item">
+                        <a class="link-item" href="./user-profile.html">my profile & votes</a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="link-item" href="./parties.html">parties</a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="link-item" href="./available-offices.html">available offices</a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="link-item" href="./politicians.html">running politicians</a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="link-item" href="./results.html">election results</a>
+                    </li>
+                    <li class="menu-item">
+                        <button class="btn link-item">logout</button>
+                    </li>
+                </ul>
             </div>
-            <div class="card-action"><a class="btn red-outline" href="./results.html">see election results</a></div>
+        </nav>
+        <div class="profile-cards">
+            <a href="./admin-panel.html" class="btn show-panel">admin panel</a>
+            <!--user info-->
+            <form class="card form">
+                <h3 class="text-accent m2">My Profile</h3>
+                <div class="center mb2">
+                    <img class="user-image mb2" src="../assets/profile.jpg" />
+                    <button class="btn red-outline text-primary mt2">change</button>
+                </div>
+                <div class="field-group">
+                    <label class="field-name" for="first-name"> First name:</label>
+                    <input class="input" id="first-name" type="text" name="first-name" required />
+                </div>
+                <div class="field-group">
+                    <label class="field-name" for="last-name">Last name:</label>
+                    <input class="input" id="last-name" type="text" name="last-name" required />
+                </div>
+                <div class="field-group">
+                    <label class="field-name" for="other-name">Other Name:</label>
+                    <input class="input" id="other-name" type="text" name="other-name" />
+                </div>
+                <div class="field-group">
+                    <label class="field-name" for="user-email">Email:</label>
+                    <input class="input" id="user-email" type="email" name="email" required />
+                </div>
+                <div class="field-group">
+                    <label class="field-name" for="user-id">ID:</label>
+                    <input class="input" id="user-id" type="number" name="id" required min="14" max="14" />
+                </div>
+                <div class="field-group">
+                    <label class="field-name" for="user-passport">PassportUrl:</label>
+                    <input class="input" id="user-passport" type="text" name="passport" />
+                </div>
+                <div class="field-group">
+                    <label class="field-name" for="user-address">Address:</label>
+                    <input class="input" id="user-address" type="text" name="address" />
+                </div>
+                <div class="field-group">
+                    <label class="field-name" for="user-party">Party:</label>
+                    <select class="text-capital field-input ml1" id="user-party" name="office">
+                        <option value="">Choose your party</option>
+                        <option value="democratic-party ">democratic party</option>
+                        <option value="green-party"> green party</option>
+                        <option value="liberals">liberals</option>
+                        <option value="workers-union"> workers union</option>
+                    </select>
+                </div>
+                <button class="btn red-outline m1 updateUserInfo text-primary" type="submit">save changes</button>
+            </form>
+            <div class="card text-primary user-votes">
+                <h3 class="text-accent mt1 mb1">My votes</h3>
+                <div class="card-content">
+                    <div class="vote">
+                        <div class="voted-office">city mayor</div>
+                        <div class="voted-candidate">mulinda thomas</div>
+                    </div>
+                    <div class="vote">
+                        <div class="voted-office">head of ICT</div>
+                        <div class="voted-candidate">paul greg</div>
+                    </div>
+                    <div class="vote">
+                        <div class="voted-office">accountant</div>
+                        <div class="voted-candidate">mutoni elise</div>
+                    </div>
+                </div>
+                <div class="card-action"><a class="btn red-outline" href="./results.html">see election results</a></div>
+            </div>
         </div>
+        <footer class="p3">
+            <p class="footer-logo-text text-accent">&copy; 2019 Politico</p>
+        </footer>
     </div>
-    <footer class="p3">
-        <p class="footer-logo-text text-accent">&copy; 2019 Politico</p>
-    </footer>
-</div>
-<div class="overlay-sc"></div>
-<script src="../assets/index.js"></script>
+    <div class="overlay-sc"></div>
+    <script src="../js/index.js"></script>
+    <script src="../js/admin.js"></script>
+
 </body>
+
 </html>

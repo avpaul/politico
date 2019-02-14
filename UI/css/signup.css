@@ -1,0 +1,11 @@
+body {
+    background-image: url('../assets/banner-bg.jpg');
+}
+
+.container {
+    padding-top: 6rem;
+}
+
+.container.reset {
+    padding-top: 10rem;
+}
