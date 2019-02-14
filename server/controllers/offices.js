@@ -1,4 +1,5 @@
-const  db = require('../config/db');
+import db from '../config/db';
+
 const Validator = require('../helpers/validator');
 
 module.exports.create = (req, res) => {

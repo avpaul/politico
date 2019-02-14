@@ -4,9 +4,11 @@
   "private": true,
   "author": "avpaul <vabimana@gmail.com> ",
   "scripts": {
-    "start": "node ./server/bin/www",
-    "test": "nyc mocha ./server/tests",
-    "test:local": "nyc --reporter=html --reporter=lcov mocha ./server/tests",
+    "start": "babel-node  ./server/bin/www",
+    "start:dev": "nodemon ./server/bin/www --exec babel-node",
+    "heroku-postbuild": "npm install",
+    "test": "nyc mocha ./server/tests --require @babel/register",
+    "test:local": "nyc --reporter=html --reporter=lcov mocha ./server/tests --require @babel/register",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "homepage": "avpaul.github.io/politico",
@@ -28,6 +30,9 @@
     "pug": "2.0.0-beta11"
   },
   "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
     "browser-sync": "^2.26.3",
     "bs-html-injector": "^3.0.3",
     "chai": "^4.2.0",

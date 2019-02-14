@@ -6,13 +6,12 @@ install:
   - npm install
 script:
   - npm test
-  - npm install codeclimate-test-reporter
+  - npm run coverage
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 after_script:
-  - npm run coverage
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
 

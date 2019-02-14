@@ -188,67 +188,67 @@
 &nbsp;
 const router = express.Router();
 &nbsp;
-router.get('/', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
+router.get('/', <span class="fstat-no" title="function not covered" >(</span>req, res) =&gt; {
 <span class="cstat-no" title="statement not covered" >    res.render('home');</span>
 });
-router.get('/signup', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
+router.get('/signup', <span class="fstat-no" title="function not covered" >(</span>req, res) =&gt; {
 <span class="cstat-no" title="statement not covered" >    res.render('signup');</span>
 });
 &nbsp;
-router.get('/login', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
+router.get('/login', <span class="fstat-no" title="function not covered" >(</span>req, res) =&gt; {
 <span class="cstat-no" title="statement not covered" >    res.render('login');</span>
 });
 &nbsp;
-router.get('/reset', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
+router.get('/reset', <span class="fstat-no" title="function not covered" >(</span>req, res) =&gt; {
 <span class="cstat-no" title="statement not covered" >    res.render('/reset');</span>
 });
 &nbsp;
-router.get('/profile', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
+router.get('/profile', <span class="fstat-no" title="function not covered" >(</span>req, res) =&gt; {
 <span class="cstat-no" title="statement not covered" >    res.render('user-profile');</span>
 });
 &nbsp;
-router.get('/offices/new', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
+router.get('/offices/new', <span class="fstat-no" title="function not covered" >(</span>req, res) =&gt; {
 <span class="cstat-no" title="statement not covered" >    res.render('add-office');</span>
 });
-router.get('/offices/:id/edit', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
+router.get('/offices/:id/edit', <span class="fstat-no" title="function not covered" >(</span>req, res) =&gt; {
 <span class="cstat-no" title="statement not covered" >    res.render('edit-office');</span>
 });
 &nbsp;
-router.get('/parties/new', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
+router.get('/parties/new', <span class="fstat-no" title="function not covered" >(</span>req, res) =&gt; {
 <span class="cstat-no" title="statement not covered" >    res.render('add-party');</span>
 });
 &nbsp;
-router.get('/admin', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
+router.get('/admin', <span class="fstat-no" title="function not covered" >(</span>req, res) =&gt; {
 <span class="cstat-no" title="statement not covered" >    res.render('admin-panel');</span>
 });
 &nbsp;
-router.get('/availableoffices', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
+router.get('/availableoffices', <span class="fstat-no" title="function not covered" >(</span>req, res) =&gt; {
 <span class="cstat-no" title="statement not covered" >    res.render('available-offices');</span>
 });
 &nbsp;
-router.get('/candidates/:id', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
+router.get('/candidates/:id', <span class="fstat-no" title="function not covered" >(</span>req, res) =&gt; {
 <span class="cstat-no" title="statement not covered" >    res.render('candidate');</span>
 });
 &nbsp;
-router.get('/parties/:id', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
+router.get('/parties/:id', <span class="fstat-no" title="function not covered" >(</span>req, res) =&gt; {
 <span class="cstat-no" title="statement not covered" >    res.render('party');</span>
 });
-router.get('/parties/:id/edit', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
+router.get('/parties/:id/edit', <span class="fstat-no" title="function not covered" >(</span>req, res) =&gt; {
 <span class="cstat-no" title="statement not covered" >    res.render('edit-party');</span>
 });
 &nbsp;
-router.get('/parties', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
+router.get('/parties', <span class="fstat-no" title="function not covered" >(</span>req, res) =&gt; {
 <span class="cstat-no" title="statement not covered" >    res.render('parties');</span>
 });
 &nbsp;
-router.get('/politicians', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
+router.get('/politicians', <span class="fstat-no" title="function not covered" >(</span>req, res) =&gt; {
 <span class="cstat-no" title="statement not covered" >    res.render('politicians');</span>
 });
 &nbsp;
-router.get('/results', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
+router.get('/results', <span class="fstat-no" title="function not covered" >(</span>req, res) =&gt; {
 <span class="cstat-no" title="statement not covered" >    res.render('results');</span>
 });
-router.get('/politicians/:id', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
+router.get('/politicians/:id', <span class="fstat-no" title="function not covered" >(</span>req, res) =&gt; {
 <span class="cstat-no" title="statement not covered" >    res.render('candidate');</span>
 });
 &nbsp;
@@ -259,7 +259,7 @@ module.exports = router;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 14 2019 11:34:44 GMT+0200 (Central Africa Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 14 2019 12:53:31 GMT+0200 (Central Africa Time)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

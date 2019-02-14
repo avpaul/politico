@@ -1,6 +1,6 @@
-const chai = require('chai');
-const chaihttp = require('chai-http');
-const app = require('../../app');
+import chai from 'chai';
+import chaihttp from 'chai-http';
+import app from '../../app';
 
 chai.use(chaihttp);
 chai.should();
@@ -38,9 +38,7 @@ describe('#createParty', () => {
                 });
         });
     });
-});
 
-describe('#getParty', () => {
     // GET ONE PARTY
     context('GET /v1/parties/:id', () => {
         it('should return one party and a status code of 200', (done) => {
@@ -76,9 +74,7 @@ describe('#getParty', () => {
                 });
         });
     });
-});
 
-describe('#editParty', () => {
     context('PATCH /v1/parties/:id', () => {
         // WHEN ID & NAME IS PROVIDED
         it('should return 200 status and id & name of updated party', (done) => {
@@ -105,8 +101,7 @@ describe('#editParty', () => {
                 });
         });
     });
-    // WHEN CHANGING ALL PROPERTIES
-    describe('PUT /v1/parties', () => {
+    context('DELETE /v1/parties/:id', () => {
         it('should return 200 status code and name & id of the updated party', (done) => {
             chai.request(app)
                 .put('/v1/parties/1')
@@ -124,9 +119,7 @@ describe('#editParty', () => {
                 });
         });
     });
-});
 
-describe('#deleteParty', () => {
     context('DELETE /v1/parties/:id', () => {
         // WHEN THE ID IS PROVIDED
         it('should return a deleted party message and 200 status', (done) => {
