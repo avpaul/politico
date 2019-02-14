@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./server/bin/www",
     "test": "nyc mocha ./server/tests",
-    "test:local": "nyc --reporter=html --reporter=lcov mocha",
+    "test:local": "nyc --reporter=html --reporter=lcov mocha ./server/tests",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "homepage": "avpaul.github.io/politico",
