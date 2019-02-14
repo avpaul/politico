@@ -8,7 +8,7 @@
   <a href="https://peoplevote.herokuapp.com/">
     <img
       alt="Politico"
-      src="./UI/assets/Politico_256-72.svg"
+      src="./UI/assets/Politico_256-72.svg"    
       width="500"
     />
   </a>
