@@ -30,7 +30,8 @@ class Party {
         const partyIndex = this.parties.findIndex(party => party.id === Number(id));
         if (partyIndex <= -1) {
             return {
-                error: `party with ${id} not found`,
+                status: 404,
+                error: `party with id ${id} not found`,
             };
         }
         this.parties[partyIndex] = { id: Number(id), ...props };

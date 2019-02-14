@@ -44,7 +44,7 @@ describe('#offices', () => {
     context('GET /v1/offices/:id', () => {
         it('should return an array of one office and a 200 status code ', (done) => {
             chai.request(app)
-                .get('/v1/offices/0')
+                .get('/v1/offices/1')
                 .end((error, res) => {
                     res.should.have.status(200);
                     res.body.data.should.be.an('array');
@@ -60,7 +60,7 @@ describe('#offices', () => {
             chai.request(app)
                 .get('/v1/offices/100')
                 .end((error, res) => {
-                    res.should.have.status(400);
+                    res.should.have.status(404);
                     res.body.error.should.be.a('string');
                     done();
                 });

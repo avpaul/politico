@@ -4,9 +4,16 @@ const Validator = require('../helpers/validator');
 module.exports.createParty = (req, res) => {
     const validate = Validator.validate(req.body, ['name', 'logoUrl', 'description', 'hqAddress']);
     if (!validate.isValid) {
+        const error = [];
+        if (validate.missingProps.length > 0) {
+            error.push(`${validate.missingProps.toString()} missing`);
+        }
+        if (validate.propsWithoutValue.length > 0) {
+            error.push(`${validate.propsWithoutValue.toString()} value missing`);
+        }
         res.status(400).json({
             status: 400,
-            error: `${validate.missingProps.toString()} missing`,
+            error,
         });
         return;
     }
@@ -84,9 +91,16 @@ module.exports.changeName = (req, res) => {
 module.exports.changeAll = (req, res) => {
     const validate = Validator.validate(req.body, ['name', 'logoUrl', 'description', 'hqAddress']);
     if (!validate.isValid) {
+        const error = [];
+        if (validate.missingProps.length > 0) {
+            error.push(`${validate.missingProps.toString()} missing`);
+        }
+        if (validate.propsWithoutValue.length > 0) {
+            error.push(`${validate.propsWithoutValue.toString()} value missing`);
+        }
         res.status(400).json({
             status: 400,
-            error: `${validate.missingProps.toString()} missing`,
+            error,
         });
         return;
     }
@@ -105,8 +119,8 @@ module.exports.changeAll = (req, res) => {
         description: req.body.description,
     });
     if (data.error) {
-        res.status(400).json({
-            status: 400,
+        res.status(data.status || 400).json({
+            status: data.status || 400,
             error: data.error,
         });
         return;
@@ -130,9 +144,9 @@ module.exports.getOne = (req, res) => {
         });
         return;
     }
-    res.status(400);
+    res.status(404);
     res.json({
-        status: 400,
+        status: 404,
         error: `party with id ${req.params.id} not found`,
     });
 };
