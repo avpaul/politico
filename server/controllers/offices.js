@@ -1,8 +1,8 @@
 import db from '../config/db';
 
-const Validator = require('../helpers/validator');
+import Validator from '../helpers/validator';
 
-module.exports.create = (req, res) => {
+const create = (req, res) => {
     const validate = Validator.validate(req.body, ['type', 'name', 'description']);
     if (!validate.isValid) {
         const error = [];
@@ -41,7 +41,7 @@ module.exports.create = (req, res) => {
     });
 };
 
-module.exports.getOne = (req, res) => {
+const getOne = (req, res) => {
     const office = db.office.findOne(req.params.id);
     if (office) {
         res.status(200);
@@ -61,7 +61,7 @@ module.exports.getOne = (req, res) => {
     });
 };
 
-module.exports.getAll = (req, res) => {
+const getAll = (req, res) => {
     const offices = db.office.findAll();
     res.status(200);
     res.json({
@@ -70,3 +70,10 @@ module.exports.getAll = (req, res) => {
         data: offices,
     });
 };
+
+const office = {
+    create,
+    getAll,
+    getOne,
+};
+export default office;

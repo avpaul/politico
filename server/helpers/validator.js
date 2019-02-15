@@ -9,7 +9,7 @@ class Validator {
             let propHasValue;
             const propFound = (Object.prototype.hasOwnProperty.call(obj, prop));
             if (propFound) {
-                propHasValue = (obj[prop] !== '');
+                propHasValue = (obj[prop] !== '' && (obj[prop].trim().length !== 0));
             }
             if (!propFound) {
                 missingProps.push(prop);
@@ -29,4 +29,4 @@ class Validator {
     }
 }
 
-module.exports = Validator;
+export default Validator;

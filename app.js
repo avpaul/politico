@@ -5,6 +5,7 @@ import path from 'path';
 import apiRouter from './server/routes/api';
 import indexRouter from './server/routes/index';
 
+const port = process.env.PORT || '3000';
 const app = express();
 
 app.use(logger('dev'));
@@ -15,6 +16,7 @@ app.use(express.static(path.join(`${__dirname}/UI`)));
 
 app.use('/', indexRouter);
 app.use('/v1', apiRouter);
+
 app.use('*', (req, res) => {
     res.status(404).json({
         status: 404,
@@ -22,4 +24,6 @@ app.use('*', (req, res) => {
     });
 });
 
-module.exports = app;
+app.listen(port);
+
+export default app;

@@ -5,5 +5,12 @@
 import Party from '../models/party';
 import Office from '../models/offices';
 
-module.exports.party = new Party();
-module.exports.office = new Office();
+const party = new Party();
+const office = new Office();
+
+const db = {
+    party,
+    office,
+};
+
+export default db;

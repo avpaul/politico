@@ -8,9 +8,9 @@ chai.should();
 const office = {
     type: 'federal',
     name: 'mayor',
-    description: `Role of the mayor. As the head of the city, the mayor officially speaks 
-                  for both the government and the community as a whole. In all statutory 
-                  cities and in most charter cities, the mayor is the presiding officer 
+    description: `Role of the mayor. As the head of the city, the mayor officially speaks
+                  for both the government and the community as a whole. In all statutory
+                  cities and in most charter cities, the mayor is the presiding officer
                   and a regular member of the city council.`,
 };
 

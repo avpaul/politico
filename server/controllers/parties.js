@@ -1,8 +1,8 @@
 // db: database
-const db = require('../config/db');
-const Validator = require('../helpers/validator');
+import db from '../config/db';
+import Validator from '../helpers/validator';
 
-module.exports.createParty = (req, res) => {
+const createParty = (req, res) => {
     const validate = Validator.validate(req.body, ['name', 'logoUrl', 'description', 'hqAddress']);
     if (!validate.isValid) {
         const error = [];
@@ -41,7 +41,7 @@ module.exports.createParty = (req, res) => {
     });
 };
 
-module.exports.deleteParty = (req, res) => {
+const deleteParty = (req, res) => {
     const deleted = db.party.delete(req.params.id);
     if (deleted) {
         res.status(200).json({
@@ -59,7 +59,7 @@ module.exports.deleteParty = (req, res) => {
     }
 };
 
-module.exports.changeName = (req, res) => {
+const changeName = (req, res) => {
     const validate = Validator.validate(req.body, ['name']);
     if (!validate.isValid) {
         res.status(400);
@@ -89,7 +89,7 @@ module.exports.changeName = (req, res) => {
     });
 };
 
-module.exports.changeAll = (req, res) => {
+const changeAll = (req, res) => {
     const validate = Validator.validate(req.body, ['name', 'logoUrl', 'description', 'hqAddress']);
     if (!validate.isValid) {
         const error = [];
@@ -132,7 +132,7 @@ module.exports.changeAll = (req, res) => {
     });
 };
 
-module.exports.getOne = (req, res) => {
+const getOne = (req, res) => {
     const party = db.party.findOne(req.params.id);
     if (party) {
         res.status(200);
@@ -152,7 +152,7 @@ module.exports.getOne = (req, res) => {
     });
 };
 
-module.exports.getAll = (req, res) => {
+const getAll = (req, res) => {
     const parties = db.party.findAll();
     res.status(200);
     res.json({
@@ -161,3 +161,14 @@ module.exports.getAll = (req, res) => {
         data: parties,
     });
 };
+
+const parties = {
+    getOne,
+    getAll,
+    changeName,
+    changeAll,
+    createParty,
+    deleteParty,
+};
+
+export default parties;

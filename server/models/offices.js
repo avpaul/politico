@@ -33,4 +33,4 @@ class Office {
     }
 }
 
-module.exports = Office;
+export default Office;

@@ -14,4 +14,4 @@ router.post('/offices', offices.create);
 router.get('/offices', offices.getAll);
 router.get('/offices/:id', offices.getOne);
 
-module.exports = router;
+export default router;

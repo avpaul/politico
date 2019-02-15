@@ -6,4 +6,4 @@ const router = express.Router();
 router.get('/', (req, res) => {
     res.sendFile(path.join(`${__dirname}../../../UI/html/index.html`));
 });
-module.exports = router;
+export default router;
