@@ -3,8 +3,8 @@ class Party {
         this.parties = [];
     }
 
-    create(props) {
-        const duplicate = this.parties.some(party => party.name === props.name);
+    create(properties) {
+        const duplicate = this.parties.some(party => party.name === properties.name);
         if (duplicate) {
             return {
                 error: 'party with the same name exists',
@@ -12,15 +12,15 @@ class Party {
         }
         const numberOfParties = (this.parties.length);
         const id = (numberOfParties === 0) ? 1 : (this.parties[(numberOfParties - 1)].id + 1);
-        this.parties.push({ id, ...props });
-        const party = this.parties.find(el => el.id === id);
+        this.parties.push({ id, ...properties });
+        const party = this.parties.find(element => element.id === id);
         return [{
             id,
             name: party.name,
         }];
     }
 
-    updateAll(id, props) {
+    updateAll(id, properties) {
         const partyIndex = this.parties.findIndex(party => party.id === Number(id));
         if (partyIndex <= -1) {
             return {
@@ -28,13 +28,13 @@ class Party {
                 error: `party with id ${id} not found`,
             };
         }
-        const duplicate = this.parties.some(party => party.name === props.name);
+        const duplicate = this.parties.some(party => party.name === properties.name);
         if (duplicate) {
             return {
                 error: 'party with same name exists',
             };
         }
-        this.parties[partyIndex] = { id: Number(id), ...props };
+        this.parties[partyIndex] = { id: Number(id), ...properties };
         const party = this.parties[partyIndex];
         return [{
             id,

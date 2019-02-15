@@ -3,8 +3,8 @@ class Office {
         this.offices = [];
     }
 
-    create(props) {
-        const duplicate = this.offices.some(office => office.name === props.name);
+    create(properties) {
+        const duplicate = this.offices.some(office => office.name === properties.name);
         if (duplicate) {
             return {
                 error: 'office with the same name exists',
@@ -12,8 +12,8 @@ class Office {
         }
         const numberOfParties = (this.offices.length);
         const id = (numberOfParties === 0) ? 1 : (this.offices[(numberOfParties - 1)].id + 1);
-        this.offices.push({ id, ...props });
-        const office = this.offices.find(el => el.id === id);
+        this.offices.push({ id, ...properties });
+        const office = this.offices.find(element => element.id === id);
         return [{
             id,
             name: office.name,
