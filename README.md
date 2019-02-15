@@ -1,6 +1,6 @@
 # Politico
 [![Build Status](https://travis-ci.com/avpaul/politico.svg?branch=develop)](https://travis-ci.com/avpaul/politico)
-[![Coverage Status](https://coveralls.io/repos/github/avpaul/politico/badge.svg?branch=develop)](https://coveralls.io/github/avpaul/politico?branch=develop) 
+[![Coverage Status](https://coveralls.io/repos/github/avpaul/politico/badge.svg?branch=develop)](https://coveralls.io/github/avpaul/politico?branch=develop&kill_cache=1) 
 [![codecov](https://codecov.io/gh/avpaul/politico-api/branch/develop/graph/badge.svg)](https://codecov.io/gh/avpaul/politico-api)
 [![Maintainability](https://api.codeclimate.com/v1/badges/c089097efa55232f6aed/maintainability)](https://codeclimate.com/github/avpaul/politico/maintainability)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)

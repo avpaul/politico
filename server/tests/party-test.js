@@ -38,12 +38,12 @@ describe('#Party', () => {
                 });
         });
         // TRY TO CREATE A DUPLICATE
-        it('should return a response with 400 status code and an error message', (done) => {
+        it('should return a response with 403 status code and an error message', (done) => {
             chai.request(app)
                 .post('/v1/parties')
                 .send(party)
                 .end((err, res) => {
-                    res.should.have.status(400);
+                    res.should.have.status(403);
                     res.body.should.be.an('object');
                     res.body.error.should.be.a('string');
                     done();
