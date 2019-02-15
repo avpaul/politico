@@ -15,7 +15,7 @@ before_script:
 script:
   - npm test
   - nyc report --reporter=text-lcov > coverage.lcov && codecov
-  - nyc report --reporter=text-lcov > ./coverage/lcov.info
+  - nyc report --reporter=text-lcov cat > ./coverage/lcov.info
 after_script:
   - npm run coverage
   - ./cc-test-reporter after-build -t lcov --exit-code $TRAVIS_TEST_RESULT
