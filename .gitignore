@@ -4,3 +4,4 @@ coverage
 coverage.lcov
 report.*.json
 .nyc_output/
+/coverage/
