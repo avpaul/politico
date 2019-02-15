@@ -4,70 +4,81 @@ class Party {
     }
 
     create(props) {
-        const id = this.parties.length;
+        const duplicate = this.parties.some(party => party.name === props.name);
+        if (duplicate) {
+            return {
+                error: 'party with the same name exists',
+            };
+        }
+        const numberOfParties = (this.parties.length);
+        const id = (numberOfParties === 0) ? 1 : (this.parties[(numberOfParties - 1)].id + 1);
         this.parties.push({ id, ...props });
-        const name = this.parties[id].name;
+        const party = this.parties.find(el => el.id === id);
         return [{
             id,
-            name,
+            name: party.name,
         }];
     }
 
     updateAll(id, props) {
-        if (!this.parties[id]) {
+        const partyIndex = this.parties.findIndex(party => party.id === Number(id));
+        if (partyIndex <= -1) {
             return {
-                error: 'party not found',
+                status: 404,
+                error: `party with id ${id} not found`,
             };
         }
-        this.parties[id] = { ...props };
-        const name = this.parties[id].name;
+        const duplicate = this.parties.some(party => party.name === props.name);
+        if (duplicate) {
+            return {
+                error: 'party with same name exists',
+            };
+        }
+        this.parties[partyIndex] = { id: Number(id), ...props };
+        const party = this.parties[partyIndex];
         return [{
             id,
-            name,
+            name: party.name,
         }];
     }
 
     delete(id) {
-        const p = this.parties[id];
-        let rmParties;
-        if (p) {
-            rmParties = this.parties.filter(party => party !== p);
-            this.parties = rmParties;
+        const partyToDelete = this.parties.findIndex(party => party.id === Number(id));
+        if (partyToDelete >= 0) {
+            this.parties.splice(partyToDelete, 1);
             return true;
         }
         return false;
     }
 
     findOne(id) {
-        const party = this.parties[id];
-        if (party) {
-            return party;
+        const partyIndex = this.parties.findIndex(party => party.id === Number(id));
+        if (partyIndex >= 0) {
+            return this.parties[partyIndex];
         }
         return null;
     }
 
-    findAll(n) {
-        if (!n) {
-            return this.parties;
-        }
-        const nParties = (n > this.parties.length) ? this.parties.length : n;
-        const ps = [];
-        for (let i = 0; i < nParties; (i += 1)) {
-            if (this.parties[i]) ps.push(this.parties[i]);
-        }
-        return ps;
+    findAll() {
+        return this.parties;
     }
 
-    changeName(id, n) {
-        if (!this.parties[id]) {
+    changeName(id, name) {
+        const partyIndex = this.parties.findIndex(party => party.id === Number(id));
+        if (partyIndex <= -1) {
+            return false;
+        }
+        const duplicate = this.parties.some(party => party.name === name);
+        if (duplicate) {
             return {
-                error: 'party not found',
+                error: 'party with the same name exists',
             };
         }
-        this.parties[id].name = n;
+
+        this.parties[partyIndex].name = name;
         return [{
             id,
-            name: this.parties[id].name,
+            name: this.parties[partyIndex].name,
         }];
     }
 }

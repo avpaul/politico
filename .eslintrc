@@ -1,8 +1,12 @@
 {
     "extends": "airbnb",
+    "env": {
+        "mocha": true
+    },
     "rules": {
         "func-names": ["error","never"],
         "no-undef": "warn",
-        "indent": ["error",4]
+        "indent": ["error",4],
+        "import/no-extraneous-dependencies": ["never", {"devDependencies": false, "optionalDependencies": false, "peerDependencies": false}]
     }
 }
