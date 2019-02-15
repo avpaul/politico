@@ -1,14 +1,15 @@
 # Politico
 [![Build Status](https://travis-ci.com/avpaul/politico.svg?branch=develop)](https://travis-ci.com/avpaul/politico)
-[![Coverage Status](https://coveralls.io/repos/github/avpaul/politico-api/badge.svg?branch=develop)](https://coveralls.io/github/avpaul/politico-api?branch=develop) 
-[![Maintainability](https://api.codeclimate.com/v1/badges/7f1405edf9b964256eb1/maintainability)](https://codeclimate.com/github/avpaul/politico-api/maintainability) 
+[![Coverage Status](https://coveralls.io/repos/github/avpaul/politico/badge.svg?branch=develop)](https://coveralls.io/github/avpaul/politico?branch=develop) 
+[![codecov](https://codecov.io/gh/avpaul/politico-api/branch/develop/graph/badge.svg)](https://codecov.io/gh/avpaul/politico-api)
+[![Maintainability](https://api.codeclimate.com/v1/badges/c089097efa55232f6aed/maintainability)](https://codeclimate.com/github/avpaul/politico/maintainability)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 <p align="center">
-  <a href="https://peoplevote.herokuapp.com/">
+  <a href="http://avpaul.github.io/politico">
     <img
       alt="Politico"
-      src="./UI/assets/Politico_256-72.svg"    
+      src="http://avpaul.github.io/politico/UI/assets/Politico_256-72.svg"    
       width="500"
     />
   </a>
