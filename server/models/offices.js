@@ -13,10 +13,10 @@ class Office {
         const numberOfParties = (this.offices.length);
         const id = (numberOfParties === 0) ? 1 : (this.offices[(numberOfParties - 1)].id + 1);
         this.offices.push({ id, ...props });
-        const name = this.offices.find(office => office.id === id).name;
+        const office = this.offices.find(el => el.id === id);
         return [{
             id,
-            name,
+            name: office.name,
         }];
     }
 

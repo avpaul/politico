@@ -13,10 +13,10 @@ class Party {
         const numberOfParties = (this.parties.length);
         const id = (numberOfParties === 0) ? 1 : (this.parties[(numberOfParties - 1)].id + 1);
         this.parties.push({ id, ...props });
-        const name = this.parties.find(party => party.id === id).name;
+        const party = this.parties.find(el => el.id === id);
         return [{
             id,
-            name,
+            name: party.name,
         }];
     }
 
@@ -35,10 +35,10 @@ class Party {
             };
         }
         this.parties[partyIndex] = { id: Number(id), ...props };
-        const name = this.parties[partyIndex].name;
+        const party = this.parties[partyIndex];
         return [{
             id,
-            name,
+            name: party.name,
         }];
     }
 
