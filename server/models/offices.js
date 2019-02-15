@@ -4,35 +4,32 @@ class Office {
     }
 
     create(props) {
-        const id = this.offices.length;
+        const duplicate = this.offices.some(office => office.name === props.name);
+        if (duplicate) {
+            return {
+                error: 'office with the same name exists',
+            };
+        }
+        const numberOfParties = (this.offices.length);
+        const id = (numberOfParties === 0) ? 1 : (this.offices[(numberOfParties - 1)].id + 1);
         this.offices.push({ id, ...props });
-        const n = this.offices[id].name;
-        const t = this.offices[id].type;
+        const office = this.offices.find(el => el.id === id);
         return [{
             id,
-            name: n,
-            type: t,
+            name: office.name,
         }];
     }
 
     findOne(id) {
-        const office = this.offices[id];
-        if (office) {
-            return office;
+        const officeIndex = this.offices.findIndex(office => office.id === Number(id));
+        if (officeIndex >= 0) {
+            return this.offices[officeIndex];
         }
         return null;
     }
 
-    findAll(n) {
-        if (!n) {
-            return this.offices;
-        }
-        const nOffices = (n > this.offices.length) ? this.offices.length : n;
-        const of = [];
-        for (let i = 0; i < nOffices; (i += 1)) {
-            if (this.offices[i]) of.push(this.offices[i]);
-        }
-        return of;
+    findAll() {
+        return this.offices;
     }
 }
 

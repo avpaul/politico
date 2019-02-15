@@ -1,7 +1,6 @@
-// import express from 'express';
-const express = require('express');
-const parties = require('../controllers/parties');
-const offices = require('../controllers/offices');
+import express from 'express';
+import parties from '../controllers/parties';
+import offices from '../controllers/offices';
 
 const router = express.Router();
 

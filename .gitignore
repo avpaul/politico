@@ -3,3 +3,4 @@ node_modules/
 report.*.json
 /.coveralls.yml
 .nyc_output/
+/coverage/

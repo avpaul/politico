@@ -2,13 +2,19 @@ language: node_js
 node_js:
   - "11.8.0"
 sudo: false
+env:
+  global:
+    - CC_TEST_REPORTER_ID=95dea691c508987b1e479d7f551f62f821ab13a0609ab5d73f9be06678c5b71e
 install:
   - npm install
+  - npm install -g codecov
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 script:
   - npm test
-after_script: npm run coverage
-
-
-
-
-
+  - nyc report --reporter=text-lcov > coverage.lcov && codecov
+after_script:
+  - npm run coverage
+  - ./cc-test-reporter after-build -t lcov --exit-code $TRAVIS_TEST_RESULT

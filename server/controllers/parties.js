@@ -1,59 +1,67 @@
+// db: database
 const db = require('../config/db');
-
-function checkRequired(res, body) {
-    if (!body.name || !body.logoUrl || !body.description) {
-        res.status(400);
-        res.json({
-            status: 400,
-            error: 'no data found',
-        });
-        return true;
-    }
-    return false;
-}
+const Validator = require('../helpers/validator');
 
 module.exports.createParty = (req, res) => {
-    const b = req.body;
-    if (checkRequired(res, b)) return;
+    const validate = Validator.validate(req.body, ['name', 'logoUrl', 'description', 'hqAddress']);
+    if (!validate.isValid) {
+        const error = [];
+        if (validate.missingProps.length > 0) {
+            error.push(`${validate.missingProps.toString()} missing`);
+        }
+        if (validate.propsWithoutValue.length > 0) {
+            error.push(`${validate.propsWithoutValue.toString()} value missing`);
+        }
+        res.status(400).json({
+            status: 400,
+            error,
+        });
+        return;
+    }
+    if (!Validator.isStringOnly(req.body, 'name')) {
+        res.status(400).json({
+            status: 400,
+            error: 'name must not contain any number',
+        });
+        return;
+    }
 
-    const data = db.party.create({
-        name: b.name,
-        hqAddress: b.hqAddress,
-        logoUrl: b.logoUrl,
-        description: b.description,
-    });
-
-    res.status(201);
-    res.json({
+    const data = db.party.create(req.body);
+    if (data.error) {
+        res.status(400).json({
+            status: 400,
+            error: data.error,
+        });
+        return;
+    }
+    res.status(201).json({
         status: 201,
+        message: 'party created',
         data,
     });
 };
 
 module.exports.deleteParty = (req, res) => {
-    const id = req.params.id;
-    const deleted = db.party.delete(id);
+    const deleted = db.party.delete(req.params.id);
     if (deleted) {
-        res.status(200);
-        res.json({
+        res.status(200).json({
             status: 200,
             data: [{
-                message: 'party deleted',
+                message: `party with id ${req.params.id} deleted`,
             }],
         });
     } else {
         res.status(404);
         res.json({
             status: 404,
-            error: 'id not found',
+            error: `party with id ${req.params.id} not found`,
         });
     }
 };
 
 module.exports.changeName = (req, res) => {
-    const id = req.params.id;
-    const name = req.body.name;
-    if (!name) {
+    const validate = Validator.validate(req.body, ['name']);
+    if (!validate.isValid) {
         res.status(400);
         res.json({
             status: 400,
@@ -61,66 +69,95 @@ module.exports.changeName = (req, res) => {
         });
         return;
     }
-    const d = db.party.changeName(id, name);
-    res.status(200);
-    res.json({
+    const data = db.party.changeName(req.params.id, req.body.name);
+    if (!data) {
+        res.status(404).json({
+            status: 404,
+            error: `party with id ${req.params.id} not found`,
+        });
+    }
+    if (data.error) {
+        res.status(400).json({
+            status: 400,
+            error: data.error,
+        });
+        return;
+    }
+    res.status(200).json({
         status: 200,
-        data: d,
+        data,
     });
 };
 
 module.exports.changeAll = (req, res) => {
-    const id = req.params.id;
-    const b = req.body;
-    if (checkRequired(res, b)) return;
+    const validate = Validator.validate(req.body, ['name', 'logoUrl', 'description', 'hqAddress']);
+    if (!validate.isValid) {
+        const error = [];
+        if (validate.missingProps.length > 0) {
+            error.push(`${validate.missingProps.toString()} missing`);
+        }
+        if (validate.propsWithoutValue.length > 0) {
+            error.push(`${validate.propsWithoutValue.toString()} value missing`);
+        }
+        res.status(400).json({
+            status: 400,
+            error,
+        });
+        return;
+    }
+    if (!Validator.isStringOnly(req.body, 'name')) {
+        res.status(400).json({
+            status: 400,
+            error: 'name must not contain any number',
+        });
+        return;
+    }
 
-    const data = db.party.updateAll(id, {
-        name: b.name,
-        hqAddress: b.hqAddress,
-        logoUrl: b.logoUrl,
-        description: b.description,
+    const data = db.party.updateAll(req.params.id, {
+        name: req.body.name,
+        hqAddress: req.body.hqAddress,
+        logoUrl: req.body.logoUrl,
+        description: req.body.description,
     });
-    res.status(200);
-    res.json({
+    if (data.error) {
+        res.status(data.status || 400).json({
+            status: data.status || 400,
+            error: data.error,
+        });
+        return;
+    }
+    res.status(200).json({
         status: 200,
         data,
     });
 };
 
 module.exports.getOne = (req, res) => {
-    const id = req.params.id;
-    const d = db.party.findOne(id);
-    if (d) {
+    const party = db.party.findOne(req.params.id);
+    if (party) {
         res.status(200);
         res.json({
             status: 200,
+            message: `party with id ${req.params.id} found`,
             data: [
-                d,
+                party,
             ],
         });
         return;
     }
-    res.status(400);
+    res.status(404);
     res.json({
-        status: 400,
-        error: 'id doesn\'t exist',
+        status: 404,
+        error: `party with id ${req.params.id} not found`,
     });
 };
 
 module.exports.getAll = (req, res) => {
-    const n = (req.body.number) ? Number(req.body.number) : null;
-    const d = db.party.findAll(n);
-    if (d) {
-        res.status(200);
-        res.json({
-            status: 200,
-            data: d,
-        });
-        return;
-    }
+    const parties = db.party.findAll();
     res.status(200);
     res.json({
         status: 200,
-        error: 'no party found',
+        message: `${parties.length} parties found`,
+        data: parties,
     });
 };
