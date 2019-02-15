@@ -28,8 +28,8 @@ module.exports.createParty = (req, res) => {
 
     const data = db.party.create(req.body);
     if (data.error) {
-        res.status(400).json({
-            status: 400,
+        res.status(403).json({
+            status: 403,
             error: data.error,
         });
         return;
@@ -77,8 +77,8 @@ module.exports.changeName = (req, res) => {
         });
     }
     if (data.error) {
-        res.status(400).json({
-            status: 400,
+        res.status(403).json({
+            status: 403,
             error: data.error,
         });
         return;
@@ -120,8 +120,8 @@ module.exports.changeAll = (req, res) => {
         description: req.body.description,
     });
     if (data.error) {
-        res.status(data.status || 400).json({
-            status: data.status || 400,
+        res.status(data.status || 403).json({
+            status: data.status || 403,
             error: data.error,
         });
         return;

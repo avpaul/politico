@@ -28,8 +28,8 @@ module.exports.create = (req, res) => {
 
     const data = db.office.create(req.body);
     if (data.error) {
-        res.status(400).json({
-            status: 400,
+        res.status(403).json({
+            status: 403,
             error: data.error,
         });
         return;
