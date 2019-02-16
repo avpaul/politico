@@ -4,3 +4,4 @@ report.*.json
 /.coveralls.yml
 .nyc_output/
 /coverage/
+/.env

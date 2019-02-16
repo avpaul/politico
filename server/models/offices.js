@@ -1,7 +1,6 @@
+import db from '../config/db';
+
 class Office {
-    constructor() {
-        this.offices = [];
-    }
 
     create(properties) {
         const duplicate = this.offices.some(office => office.name === properties.name);
