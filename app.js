@@ -1,6 +1,7 @@
 import express from 'express';
 import logger from 'morgan';
 import path from 'path';
+import './server/config/db';
 
 import apiRouter from './server/routes/api';
 import indexRouter from './server/routes/index';

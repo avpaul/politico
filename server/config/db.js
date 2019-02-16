@@ -1,16 +1,26 @@
-/*  This file creates a database network-like by initializing all models to maintain
- *  data persistence as along as the connection stays alive
- *  or not restarted  */
+import { Pool } from 'pg';
+import ENV from 'dotenv';
 
-import Party from '../models/party';
-import Office from '../models/offices';
+ENV.config();
 
-const party = new Party();
-const office = new Office();
+class Database {
+    constructor() {
+        this.DB_URL = (process.env.MODE === 'prod') ? process.env.REMOTE_DATABASE_URL : process.env.LOCAL_DATABASE_URL;
+        this.pool = new Pool({
+            connectionString: this.DB_URL,
+        });
+        this.pool.on('connect', () => {
+            console.log('connected to the database');
+        });
+        // this.pool.on('error', (err, client) => {
+        //     console.error(`unexpected error on idle client ${client}`);
+        //     process.exit(-1);
+        // });
+        // this.pool.on('remove', () => {
+        //     console.log('client removed');
+        //     process.exit(0);
+        // });
+    }
+}
 
-const db = {
-    party,
-    office,
-};
-
-export default db;
+export default new Database();
