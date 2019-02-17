@@ -44,17 +44,36 @@ class Offices {
                 message: 'office created',
                 data: response.rows,
             }))
-            .catch(error => res.status(400).json({
-                status: 400,
-                error: error.message,
-            }));
+            .catch((err) => {
+                if (err.code === '23505') {
+                    const keyName = err.detail.substr(err.detail.indexOf('(') + 1, (err.detail.indexOf(')') - (err.detail.indexOf('(') + 1)));
+                    return res.status(404)
+                        .json({
+                            status: 404,
+                            error: err.message,
+                            key: keyName,
+                        });
+                }
+                return res.status(400)
+                    .json({
+                        status: 400,
+                        error: err.message,
+                    });
+            });
     }
 
     static getOne(req, res) {
+        if (Validator.isNumberOnly(req.params, 'id')) {
+            res.status(400).json({
+                status: 400,
+                error: 'id must not contain any letter',
+            });
+            return;
+        }
         const query = `SELECT * FROM offices WHERE id = ${req.params.id}`;
         db.pool.query(query)
             .then((response) => {
-                if (response.rows.length === 0) {
+                if (response.rowCount === 0) {
                     return res.status(404)
                         .json({
                             status: 404,
