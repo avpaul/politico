@@ -70,9 +70,9 @@ class Users {
             .catch((err) => {
                 if (err.code === '23505') {
                     const keyName = err.detail.substr(err.detail.indexOf('(') + 1, (err.detail.indexOf(')') - (err.detail.indexOf('(') + 1)));
-                    return res.status(404)
+                    return res.status(400)
                         .json({
-                            status: 404,
+                            status: 400,
                             error: err.message,
                             key: keyName,
                         });
@@ -86,7 +86,74 @@ class Users {
     }
 
     static login(req, res) {
+        const validate = Validator.validate(req.body, ['email', 'password', 'isAdmin']);
+        if (!validate.isValid) {
+            const error = [];
+            if (validate.missingProps.length > 0) {
+                error.push(`${validate.missingProps.toString()} missing`);
+            }
+            if (validate.propsWithoutValue.length > 0) {
+                error.push(`${validate.propsWithoutValue.toString()} value missing`);
+            }
+            return res.status(400).json({
+                status: 400,
+                error,
+            });
+        }
+        if (!Validator.isValidEmail(req.body, 'email')) {
+            return res.status(400).json({
+                status: 400,
+                error: 'email is not valid',
+            });
+        }
+        if (!Validator.isValidPassword(req.body, 'password')) {
+            return res.status(400).json({
+                status: 400,
+                error: 'password is not valid',
+            });
+        }
 
+        const query = `SELECT * FROM users WHERE email = '${req.body.email.trim()}'`;
+        return db.pool.query(query)
+            .then((response) => {
+                if (response.rowCount > 0) {
+                    const hash = crypto.pbkdf2Sync(
+                        req.body.password.trim(),
+                        response.rows[0].salt,
+                        1000,
+                        64,
+                        'sha512',
+                    )
+                        .toString('hex');
+                    if (hash === response.rows[0].hash) {
+                        return res.status(200)
+                            .json({
+                                status: 200,
+                                data: [{
+                                    token: '',
+                                    user: response.rows,
+                                }],
+                            });
+                    }
+                    return res.status(400)
+                        .json({
+                            status: 400,
+                            error: 'password is incorect',
+                        });
+                }
+                return res.status(404)
+                    .json({
+                        status: 404,
+                        error: `User with email ${req.body.email} doens't exist`,
+                    });
+            })
+            .catch((err) => {
+                res.status(400)
+                    .json({
+                        status: 400,
+                        error: err.message,
+                    });
+            });
     }
 }
 
