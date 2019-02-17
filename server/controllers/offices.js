@@ -105,5 +105,9 @@ class Offices {
                 error: error.message,
             }));
     }
+
+    static register(req, res) {
+
+    }
 }
 export default Offices;
