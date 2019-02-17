@@ -4,8 +4,8 @@ import path from 'path';
 import './server/config/db';
 
 import apiRouter from './server/routes/api';
-import indexRouter from './server/routes/index';
 import userRouter from './server/routes/users';
+import indexRouter from './server/routes/index';
 
 const port = process.env.PORT || '3000';
 const app = express();

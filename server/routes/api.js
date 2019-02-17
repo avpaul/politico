@@ -13,5 +13,6 @@ router.get('/parties/:id', parties.getOne);
 router.post('/offices', offices.create);
 router.get('/offices', offices.getAll);
 router.get('/offices/:id', offices.getOne);
+router.post('/offices/:id/register', offices.register);
 
 export default router;
