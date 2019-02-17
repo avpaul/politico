@@ -62,7 +62,10 @@ class Users {
             .then(response => res.status(201).json({
                 status: 201,
                 message: 'users created',
-                data: response.rows,
+                data: [{
+                    token: '',
+                    user: response.rows,
+                }],
             }))
             .catch((err) => {
                 if (err.code === '23505') {
@@ -80,6 +83,10 @@ class Users {
                         error: err.message,
                     });
             });
+    }
+
+    static login(req, res) {
+
     }
 }
 
