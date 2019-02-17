@@ -6,7 +6,7 @@ ENV.config();
 
 class Database {
     constructor() {
-        this.DB_URL = (process.env.MODE === 'prod') ? process.env.REMOTE_DATABASE_URL : process.env.LOCAL_TEST_DATABASE_URL;
+        this.DB_URL = (process.env.MODE === 'prod') ? process.env.REMOTE_DATABASE_URL : process.env.LOCAL_DATABASE_URL;
         this.pool = new Pool({
             connectionString: this.DB_URL,
         });

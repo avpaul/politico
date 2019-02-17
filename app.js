@@ -5,6 +5,7 @@ import './server/config/db';
 
 import apiRouter from './server/routes/api';
 import indexRouter from './server/routes/index';
+import userRouter from './server/routes/users';
 
 const port = process.env.PORT || '3000';
 const app = express();
@@ -17,6 +18,7 @@ app.use(express.static(path.join(`${__dirname}/UI`)));
 
 app.use('/', indexRouter);
 app.use('/v1', apiRouter);
+app.use('/auth', userRouter);
 
 app.use('*', (req, res) => {
     res.status(404).json({

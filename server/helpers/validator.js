@@ -37,6 +37,16 @@ class Validator {
         const value = obj[prop];
         return /^(http|https):\/\//.test(value);
     }
+
+    static isValidPassword(obj, prop) {
+        const value = obj[prop];
+        return /\w{6,}/.test(value);
+    }
+
+    static isValidEmail(obj, prop) {
+        const value = obj[prop];
+        return /^(\w{3,})@(\w)/.test(value);
+    }
 }
 
 export default Validator;

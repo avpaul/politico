@@ -14,11 +14,11 @@ class Database {
         });
         this.pool.on('error', (err, client) => {
             console.error(`unexpected error on idle client ${client}`);
-            process.exit(-1);
+            // process.exit(-1);
         });
         this.pool.on('remove', () => {
             console.log('client removed');
-            process.exit(0);
+            // process.exit(0);
         });
     }
 }
