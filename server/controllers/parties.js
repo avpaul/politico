@@ -18,13 +18,13 @@ class Parties {
                 error,
             });
         }
-        if (Validator.isStringOnly(req.body, 'name')) {
+        if (!Validator.isStringOnly(req.body, 'name')) {
             return res.status(400).json({
                 status: 400,
                 error: 'name must not contain any number',
             });
         }
-        if (Validator.isUri(req.body, 'logoUrl')) {
+        if (!Validator.isUri(req.body, 'logoUrl')) {
             return res.status(400).json({
                 status: 400,
                 error: 'logoUrl is not valid',
@@ -35,10 +35,11 @@ class Parties {
                     VALUES($1,$2,$3,$4)
                     returning *
         `;
-        return db.pool.query(query, [req.body.name,
-            req.body.hqAddress,
-            req.body.logoUrl,
-            req.body.description,
+        return db.pool.query(query, [
+            req.body.name.trim(),
+            req.body.hqAddress.trim(),
+            req.body.logoUrl.trim(),
+            req.body.description.trim(),
         ])
             .then(response => res.status(201).json({
                 status: 201,
@@ -199,10 +200,10 @@ class Parties {
         `;
         const selectQuery = `SELECT * FROM parties WHERE id = ${req.params.id}`;
         const values = [
-            req.body.name,
-            req.body.hqAddress,
-            req.body.logoUrl,
-            req.body.description,
+            req.body.name.trim(),
+            req.body.hqAddress.trim(),
+            req.body.logoUrl.trim(),
+            req.body.description.trim(),
         ];
 
         db.pool.query(selectQuery)
