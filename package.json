@@ -11,8 +11,8 @@
     "test:local": "nyc --reporter=html --reporter=lcov mocha ./server/tests --require @babel/register --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint": "./node_modules/.bin/eslint ./server",
-    "createdb" : "babel-node ./server/config/createTables.js",
-    "deletedb" : "babel-node ./server/config/createTables.js dropTables"
+    "createdb": "babel-node ./server/config/createTables.js",
+    "deletedb": "babel-node ./server/config/createTables.js dropTables"
   },
   "homepage": "avpaul.github.io/politico",
   "repository": {
@@ -28,6 +28,7 @@
     "debug": "~2.6.9",
     "dotenv": "^6.2.0",
     "express": "~4.16.0",
+    "joi": "^14.3.1",
     "morgan": "~1.9.0",
     "pg": "^7.8.0"
   },

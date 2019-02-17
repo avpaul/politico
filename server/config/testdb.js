@@ -1,16 +1,17 @@
 import { Pool } from 'pg';
 import ENV from 'dotenv';
+import TableCreator from './createTables';
 
 ENV.config();
 
 class Database {
     constructor() {
-        this.DB_URL = (process.env.MODE === 'prod') ? process.env.REMOTE_DATABASE_URL : process.env.LOCAL_DATABASE_URL;
+        this.DB_URL = (process.env.MODE === 'prod') ? process.env.REMOTE_DATABASE_URL : process.env.LOCAL_TEST_DATABASE_URL;
         this.pool = new Pool({
             connectionString: this.DB_URL,
         });
         this.pool.on('connect', () => {
-            console.log('connected to the database');
+            console.log('connected to test database');
         });
         this.pool.on('error', (err, client) => {
             console.error(`unexpected error on idle client ${client}`);
@@ -20,6 +21,8 @@ class Database {
             console.log('client removed');
             process.exit(0);
         });
+
+        new TableCreator(this.pool);
     }
 }
 

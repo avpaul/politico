@@ -27,6 +27,16 @@ class Validator {
         const value = obj[prop];
         return !(/\d/g.test(value));
     }
+
+    static isNumberOnly(obj, prop) {
+        const value = obj[prop];
+        return !(/\w/g.test(value));
+    }
+
+    static isUri(obj, prop) {
+        const value = obj[prop];
+        return /^(http|https):\/\//.test(value);
+    }
 }
 
 export default Validator;
