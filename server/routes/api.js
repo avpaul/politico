@@ -1,6 +1,7 @@
 import express from 'express';
 import parties from '../controllers/parties';
 import offices from '../controllers/offices';
+import office from '../controllers/office';
 
 const router = express.Router();
 
@@ -15,5 +16,6 @@ router.get('/offices', offices.getAll);
 router.get('/offices/:id', offices.getOne);
 router.post('/offices/:id/register', offices.register);
 router.post('/vote', offices.vote);
+router.get('/office/:id/result', office.getResult);
 
 export default router;

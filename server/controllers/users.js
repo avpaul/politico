@@ -1,6 +1,11 @@
 import crypto from 'crypto';
+import nodemailer from 'nodemailer';
+import ENV from 'dotenv';
 import db from '../config/db';
 import Validator from '../helpers/validator';
+import token from '../helpers/jwt';
+
+ENV.config();
 
 class Users {
     static create(req, res) {
@@ -63,7 +68,12 @@ class Users {
                 status: 201,
                 message: 'users created',
                 data: [{
-                    token: '',
+                    token: token.generateToken({
+                        id: response.rows[0].id,
+                        email: response.rows[0].email,
+                        firstname: response.rows[0].firstname,
+                        lastname: response.rows[0].lastname,
+                    }),
                     user: response.rows,
                 }],
             }))
@@ -130,7 +140,12 @@ class Users {
                             .json({
                                 status: 200,
                                 data: [{
-                                    token: '',
+                                    token: token.generateToken({
+                                        id: response.rows[0].id,
+                                        email: response.rows[0].email,
+                                        firstname: response.rows[0].firstname,
+                                        lastname: response.rows[0].lastname,
+                                    }),
                                     user: response.rows,
                                 }],
                             });
@@ -154,6 +169,55 @@ class Users {
                         error: err.message,
                     });
             });
+    }
+
+    static reset(req, res) {
+        if (!Validator.isValidEmail(req.body, 'email')) {
+            return res.status(400).json({
+                status: 400,
+                error: 'email is not valid',
+            });
+        }
+
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.EMAIL,
+                pass: process.env.EMAIL_PASSWORD,
+            },
+        });
+        const resetLink = '';
+        const mailOptions = {
+            from: process.env.EMAIL,
+            to: req.body.email.trim(),
+            subject: 'Reset email request',
+            html: '',
+        };
+
+        const query = `SELECT email FROM users WHERE email = ${req.body.email.trim()}`;
+        return db.pool.query(query)
+            .then(async (users) => {
+                if (users.rowCount > 0 && users.rows[0].email === req.body.email.trim()) {
+                    await transporter.sendMail(mailOptions);
+                    return res.status(200).json({
+                        status: 400,
+                        data: [{
+                            message: 'Check your email for password reset link',
+                            email: req.body.email,
+                        }],
+                    });
+                }
+                return res.status(404)
+                    .json({
+                        status: 404,
+                        error: `User with email ${req.body.email} doesn't exist`,
+                    });
+            })
+            .catch(err => res.status(400)
+                .json({
+                    status: 400,
+                    error: err.message,
+                }));
     }
 }
 
