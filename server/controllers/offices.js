@@ -203,7 +203,6 @@ class Offices {
     }
 
     static vote(req, res) {
-        console.log(req.body);
         const validateBody = Validator.validate(req.body, ['office', 'candidate', 'voter']);
         if (!validateBody.isValid) {
             const error = [];
