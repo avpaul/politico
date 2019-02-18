@@ -21,9 +21,18 @@
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.16.0",
+<<<<<<< HEAD
     "http-errors": "~1.6.2",
     "morgan": "~1.9.0",
     "pug": "2.0.0-beta11"
+=======
+    "express-jwt": "^5.3.1",
+    "joi": "^14.3.1",
+    "jsonwebtoken": "^8.4.0",
+    "morgan": "~1.9.0",
+    "nodemailer": "^5.1.1",
+    "pg": "^7.8.0"
+>>>>>>> [Feature #163556562,#164058651] Add get election results feature and set up JWT
   },
   "devDependencies": {
     "chai": "^4.2.0",
