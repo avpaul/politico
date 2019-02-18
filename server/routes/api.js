@@ -14,5 +14,6 @@ router.post('/offices', offices.create);
 router.get('/offices', offices.getAll);
 router.get('/offices/:id', offices.getOne);
 router.post('/offices/:id/register', offices.register);
+router.post('/vote', offices.vote);
 
 export default router;

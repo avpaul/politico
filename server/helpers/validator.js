@@ -9,6 +9,15 @@ class Validator {
             let propHasValue;
             const propFound = (Object.prototype.hasOwnProperty.call(obj, prop));
             if (propFound) {
+                if (typeof obj[prop] === 'object') {
+                    for (const key in obj[prop]) {
+                        if (Object.prototype.hasOwnProperty.call(obj[prop], key)) {
+                            propHasValue = true;
+                            return;
+                        }
+                    }
+                    propHasValue = false;
+                }
                 propHasValue = (obj[prop] !== '' && (obj[prop].trim().length !== 0));
             }
             if (!propFound) {
