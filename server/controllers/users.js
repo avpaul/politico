@@ -73,8 +73,9 @@ class Users {
                         email: response.rows[0].email,
                         firstname: response.rows[0].firstname,
                         lastname: response.rows[0].lastname,
+                        isadmin: response.rows[0].isadmin,
                     }),
-                    user: response.rows,
+                    user: response.rows[0],
                 }],
             }))
             .catch((err) => {
@@ -145,8 +146,9 @@ class Users {
                                         email: response.rows[0].email,
                                         firstname: response.rows[0].firstname,
                                         lastname: response.rows[0].lastname,
+                                        isadmin: response.rows[0].isadmin,
                                     }),
-                                    user: response.rows,
+                                    user: response.rows[0],
                                 }],
                             });
                     }

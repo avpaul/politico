@@ -1,9 +1,18 @@
 import chai from 'chai';
 import chaihttp from 'chai-http';
+import ENV from 'dotenv';
 import app from '../../app';
+import db from '../config/db';
+
+ENV.config();
 
 chai.use(chaihttp);
 chai.should();
+
+let admin = {
+    id: process.env.TEST_ADMIN_ID,
+    token: '',
+};
 
 const office = {
     type: 'federal',
@@ -15,11 +24,29 @@ const office = {
 };
 
 describe('#offices', () => {
+    before((done) => {
+        chai.request(app)
+            .post('/v1/auth/login')
+            .type('application/x-www-form-urlencoded')
+            .send({
+                email: process.env.TEST_ADMIN_EMAIL,
+                password: process.env.TEST_ADMIN_PASSWORD,
+                isAdmin: true,
+            })
+            .end((err, res) => {
+                admin.token = res.body.data[0].token;
+                done();
+            });
+    });
+
     // CREATE OFFICE
     context('POST /v1/offices', () => {
         it('should return created office name and 201 status code', (done) => {
+            console.log(admin.token);
+
             chai.request(app)
                 .post('/v1/offices')
+                .set('Authorization', admin.token)
                 .send(office)
                 .end((error, res) => {
                     res.should.have.status(201);

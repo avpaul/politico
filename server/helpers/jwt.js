@@ -10,10 +10,12 @@ class Token {
         email,
         firstname,
         lastname,
+        isadmin,
     }) {
         return jwt.sign({
             id,
             email,
+            isadmin,
             name: `${firstname} ${lastname}`,
             exp: ((Date.now() / 1000) + (30 * 60)),
         },
@@ -44,8 +46,8 @@ class Token {
     static checkToken() {
         return ejwt({
             secret: process.env.TOKEN_SECRET,
-            userProperty: 'payload',
-            getToken: (req) => {
+            userProperty: 'user',
+            getToken: function fromHeaderOrCookie(req) {
                 if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
                     return req.headers.authorization.split(' ')[1];
                 }

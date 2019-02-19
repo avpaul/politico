@@ -4,6 +4,14 @@ import Validator from '../helpers/validator';
 
 class Parties {
     static createParty(req, res) {
+        if (req.user && !req.user.isadmin) {
+            res.status(400)
+                .json({
+                    status: 401,
+                    error: 'Creating a party requires admin access',
+                });
+            return;
+        }
         const validate = Validator.validate(req.body, ['name', 'logoUrl', 'description', 'hqAddress']);
         if (!validate.isValid) {
             const error = [];
@@ -13,29 +21,32 @@ class Parties {
             if (validate.propsWithoutValue.length > 0) {
                 error.push(`${validate.propsWithoutValue.toString()} value missing`);
             }
-            return res.status(400).json({
+            res.status(400).json({
                 status: 400,
                 error,
             });
+            return;
         }
         if (!Validator.isStringOnly(req.body, 'name')) {
-            return res.status(400).json({
+            res.status(400).json({
                 status: 400,
                 error: 'name must not contain any number',
             });
+            return;
         }
         if (!Validator.isUri(req.body, 'logoUrl')) {
-            return res.status(400).json({
+            res.status(400).json({
                 status: 400,
                 error: 'logoUrl is not valid',
             });
+            return;
         }
         const query = `INSERT INTO  
                     parties(name,hqaddress,logourl,description)
                     VALUES($1,$2,$3,$4)
                     returning *
         `;
-        return db.pool.query(query, [
+        db.pool.query(query, [
             req.body.name.trim(),
             req.body.hqAddress.trim(),
             req.body.logoUrl.trim(),
@@ -65,6 +76,14 @@ class Parties {
     }
 
     static deleteParty(req, res) {
+        if (req.user && !req.user.isadmin) {
+            res.status(400)
+                .json({
+                    status: 401,
+                    error: 'Deleting a party requires admin access',
+                });
+            return;
+        }
         if (Validator.isNumberOnly(req.params, 'id')) {
             res.status(400).json({
                 status: 400,
@@ -102,6 +121,14 @@ class Parties {
     }
 
     static changeName(req, res) {
+        if (req.user && !req.user.isadmin) {
+            res.status(400)
+                .json({
+                    status: 401,
+                    error: 'Changing a party name requires admin access',
+                });
+            return;
+        }
         if (Validator.isNumberOnly(req.params, 'id')) {
             res.status(400).json({
                 status: 400,
@@ -164,6 +191,14 @@ class Parties {
     }
 
     static changeAll(req, res) {
+        if (req.user && !req.user.isadmin) {
+            res.status(400)
+                .json({
+                    status: 401,
+                    error: 'Updating a party requires admin access',
+                });
+            return;
+        }
         if (Validator.isNumberOnly(req.params, 'id')) {
             res.status(400).json({
                 status: 400,

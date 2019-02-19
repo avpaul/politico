@@ -11,6 +11,8 @@ class Office {
             return;
         }
 
+        // shoul return [{candidate,office,result}]
+        // first get candidate id and get all votes for that id
         const query = `SELECT * FROM votes
             WHERE office = ${req.params.id}
         `;

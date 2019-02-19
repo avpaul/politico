@@ -3,6 +3,14 @@ import Validator from '../helpers/validator';
 
 class Offices {
     static create(req, res) {
+        if (!req.user.isadmin) {
+            res.status(400)
+                .json({
+                    status: 401,
+                    error: 'Creating an office requires admin access',
+                });
+            return;
+        }
         const validate = Validator.validate(req.body, ['type', 'name', 'description']);
         if (!validate.isValid) {
             const error = [];
@@ -22,6 +30,19 @@ class Offices {
             res.status(400).json({
                 status: 400,
                 error: 'office name or type can not contain any number',
+            });
+            return;
+        }
+        const partyType = [
+            'federal',
+            'legislative',
+            'state',
+            'local government',
+        ];
+        if (partyType.findIndex(req.body.typ.trim())) {
+            res.status(400).json({
+                status: 400,
+                error: 'Office type must be federal, state, legislative or local government',
             });
             return;
         }
@@ -107,6 +128,14 @@ class Offices {
     }
 
     static register(req, res) {
+        if (req.user && !req.user.isadmin) {
+            res.status(400)
+                .json({
+                    status: 401,
+                    error: 'Registering a candidate requires admin access',
+                });
+            return;
+        }
         if (Validator.isNumberOnly(req.params, 'id')) {
             res.status(400).json({
                 status: 400,
@@ -203,6 +232,14 @@ class Offices {
     }
 
     static vote(req, res) {
+        if (!req.user) {
+            res.status(400)
+                .json({
+                    status: 400,
+                    error: 'token missing',
+                });
+            return;
+        }
         const validateBody = Validator.validate(req.body, ['office', 'candidate', 'voter']);
         if (!validateBody.isValid) {
             const error = [];
@@ -263,6 +300,14 @@ class Offices {
             });
             return;
         }
+        if (req.user.id !== req.body.voter) {
+            res.status(404)
+                .json({
+                    status: 404,
+                    error: 'The token sent didn\'t match this user',
+                });
+            return;
+        }
 
         const officeQuery = `SELECT * FROM offices WHERE id = ${req.body.office}`;
         const userQuery = `SELECT * FROM users WHERE id = ${req.body.voter}`;
@@ -277,6 +322,7 @@ class Offices {
             )
             returning *
         `;
+
         db.pool.query(officeQuery)
             .then((response) => {
                 if (response.rowCount > 0) {
@@ -286,7 +332,10 @@ class Offices {
                                 return db.pool.query(candidateQuery)
                                     .then((candidate) => {
                                         if (candidate.rowCount > 0) {
-                                            return db.pool.query(voteQuery, [(new Date()).toUTCString()])
+                                            return db.pool.query(
+                                                voteQuery,
+                                                [(new Date()).toUTCString()],
+                                            )
                                                 .then(vote => res.status(201)
                                                     .json({
                                                         status: 201,
