@@ -5,13 +5,13 @@
   "author": "avpaul <vabimana@gmail.com> ",
   "scripts": {
     "start": "babel-node  ./app.js",
-    "start:dev": "nodemon ./app.js --exec babel-node",
+    "start:dev": "ENV=DEVELOPMENT nodemon ./app.js --exec babel-node",
     "heroku-postbuild": "npm install",
     "test": "nyc mocha ./server/tests --require @babel/register --exit",
     "test:local": "nyc --reporter=html --reporter=lcov mocha ./server/tests --require @babel/register --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint": "./node_modules/.bin/eslint ./server",
-    "createdb": "babel-node ./server/config/createTables.js"
+    "createdb": "ENV=TESTING babel-node ./server/config/createTables.js"
   },
   "homepage": "avpaul.github.io/politico",
   "repository": {

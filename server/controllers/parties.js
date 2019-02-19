@@ -60,9 +60,9 @@ class Parties {
             .catch((err) => {
                 if (err.code === '23505') {
                     const keyName = err.detail.substr(err.detail.indexOf('(') + 1, (err.detail.indexOf(')') - (err.detail.indexOf('(') + 1)));
-                    return res.status(400)
+                    return res.status(403)
                         .json({
-                            status: 400,
+                            status: 403,
                             error: err.message,
                             key: keyName,
                         });
@@ -84,7 +84,7 @@ class Parties {
                 });
             return;
         }
-        if (Validator.isNumberOnly(req.params, 'id')) {
+        if (!Validator.isNumberOnly(req.params, 'id')) {
             res.status(400).json({
                 status: 400,
                 error: 'id must not contain any letter',
@@ -129,7 +129,14 @@ class Parties {
                 });
             return;
         }
-        if (Validator.isNumberOnly(req.params, 'id')) {
+        if (!Validator.isNumberOnly(req.params, 'id')) {
+            res.status(400).json({
+                status: 400,
+                error: 'id must not contain any letter',
+            });
+            return;
+        }
+        if (!Validator.isNumberOnly(req.params, 'id')) {
             res.status(400).json({
                 status: 400,
                 error: 'id must not contain any letter',
@@ -199,7 +206,7 @@ class Parties {
                 });
             return;
         }
-        if (Validator.isNumberOnly(req.params, 'id')) {
+        if (!Validator.isNumberOnly(req.params, 'id')) {
             res.status(400).json({
                 status: 400,
                 error: 'id must not contain any letter',
@@ -221,7 +228,7 @@ class Parties {
             });
             return;
         }
-        if (Validator.isStringOnly(req.body, 'name')) {
+        if (!(Validator.isStringOnly(req.body, 'name'))) {
             res.status(400).json({
                 status: 400,
                 error: 'name must not contain any number',
@@ -280,7 +287,7 @@ class Parties {
     }
 
     static getOne(req, res) {
-        if (Validator.isNumberOnly(req.params, 'id')) {
+        if (!Validator.isNumberOnly(req.params, 'id')) {
             res.status(400).json({
                 status: 400,
                 error: 'id must not contain any letter',

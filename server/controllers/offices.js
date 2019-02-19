@@ -26,6 +26,7 @@ class Offices {
             });
             return;
         }
+
         if (!Validator.isStringOnly(req.body, 'name') || !Validator.isStringOnly(req.body, 'type')) {
             res.status(400).json({
                 status: 400,
@@ -39,7 +40,7 @@ class Offices {
             'state',
             'local government',
         ];
-        if (partyType.findIndex(req.body.typ.trim())) {
+        if (partyType.findIndex(item => item === req.body.type) < 0) {
             res.status(400).json({
                 status: 400,
                 error: 'Office type must be federal, state, legislative or local government',
@@ -84,7 +85,7 @@ class Offices {
     }
 
     static getOne(req, res) {
-        if (Validator.isNumberOnly(req.params, 'id')) {
+        if (!Validator.isNumberOnly(req.params, 'id')) {
             res.status(400).json({
                 status: 400,
                 error: 'id must not contain any letter',
@@ -129,7 +130,7 @@ class Offices {
 
     static register(req, res) {
         if (req.user && !req.user.isadmin) {
-            res.status(400)
+            res.status(401)
                 .json({
                     status: 401,
                     error: 'Registering a candidate requires admin access',

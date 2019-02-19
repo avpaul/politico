@@ -41,14 +41,15 @@ class Tables {
 
             `CREATE TABLE IF NOT EXISTS
         candidates(
-            id SERIAL PRIMARY KEY,
-            office SERIAL REFERENCES offices ON DELETE CASCADE ON UPDATE CASCADE,
-            candidate SERIAL REFERENCES users ON DELETE CASCADE ON UPDATE CASCADE
+            id SERIAL NOT NULL,
+            office SERIAL REFERENCES offices(id) ON DELETE CASCADE ON UPDATE CASCADE,
+            candidate SERIAL REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
+            PRIMARY KEY(office,candidate)
         );
         `,
             `CREATE TABLE IF NOT EXISTS
         votes(
-            id SERIAL PRIMARY KEY,
+            id SERIAL,
             createdon TIMESTAMP,
             createdby TIMESTAMP,
             office SERIAL,
@@ -61,8 +62,8 @@ class Tables {
         petitions(
             id SERIAL PRIMARY KEY,
             createdOn TIMESTAMP,
-            createdBy TIMESTAMP REFERENCES users ON DELETE CASCADE ON UPDATE CASCADE,
-            office SERIAL REFERENCES offices ON DELETE CASCADE ON UPDATE CASCADE,
+            createdBy SERIAL REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
+            office SERIAL REFERENCES offices(id) ON DELETE CASCADE ON UPDATE CASCADE,
             description TEXT
         );
         `];
