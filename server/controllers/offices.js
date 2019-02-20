@@ -137,7 +137,7 @@ class Offices {
                 });
             return;
         }
-        if (Validator.isNumberOnly(req.params, 'id')) {
+        if (!Validator.isNumberOnly(req.params, 'id')) {
             res.status(400).json({
                 status: 400,
                 error: 'id must not contain any letter',
@@ -159,7 +159,7 @@ class Offices {
             });
             return;
         }
-        if (Validator.isNumberOnly(req.body, 'userId')) {
+        if (!Validator.isNumberOnly(req.body, 'userId')) {
             res.status(400).json({
                 status: 400,
                 error: 'userId must be a number',
@@ -334,9 +334,9 @@ class Offices {
                                     .then((candidate) => {
                                         if (candidate.rowCount > 0) {
                                             return db.pool.query(
-                                                voteQuery,
-                                                [(new Date()).toUTCString()],
-                                            )
+                                                    voteQuery,
+                                                    [(new Date()).toUTCString()],
+                                                )
                                                 .then(vote => res.status(201)
                                                     .json({
                                                         status: 201,

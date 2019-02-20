@@ -24,37 +24,38 @@ const regularUser = {
     isAdmin: false,
 };
 
-describe('#index', () => {
-    before((done) => {
-        chai.request(app)
-            .post('/v1/auth/signup')
-            .type('application/x-www-form-urlencoded')
-            .send(testAdmin)
-            .end((err, res) => {
-                process.env.TEST_ADMIN_TOKEN = `Bearer ${res.body.data[0].token}`;
-                done();
-            });
-    });
+before((done) => {
+    chai.request(app)
+        .post('/v1/auth/signup')
+        .type('application/x-www-form-urlencoded')
+        .send(testAdmin)
+        .end((err, res) => {
+            process.env.TEST_ADMIN_TOKEN = `Bearer ${res.body.data[0].token}`;
+            done();
+        });
+});
 
-    after((done) => {
-        db.pool.query('DELETE FROM users; DELETE FROM offices; DELETE FROM parties')
-            .then(res => done()).catch((err) => {
-                console.log(err.message);
-                done();
-            });
-    });
+after((done) => {
+    db.pool.query('DELETE FROM users; DELETE FROM offices; DELETE FROM parties')
+        .then(res => done()).catch((err) => {
+            console.log(err.message);
+            done();
+        });
+});
+
+describe('#index', () => {
     context('/v1/auth/signup', () => {
         it('should return a 201 status code, token and created user', (done) => {
             chai.request(app)
                 .post('/v1/auth/signup')
-                .type('application/x-www-form-urlencoded')
+                .set('Content-Type', 'application/x-www-form-urlencoded')
                 .send(regularUser)
                 .end((err, res) => {
                     res.should.have.status(201);
                     res.body.data.should.be.an('array');
                     res.body.data[0].token.should.be.a('string');
                     res.body.data[0].user.should.be.an('object');
-                    process.env.TEST_ADMIN_ID = res.body.data[0].user.id;
+                    process.env.TEST_USER_ID = res.body.data[0].user.id;
                     done();
                 });
         });
@@ -63,7 +64,7 @@ describe('#index', () => {
         it('should return a 200 status code, token and created user', (done) => {
             chai.request(app)
                 .post('/v1/auth/login')
-                .type('application/x-www-form-urlencoded')
+                .set('Content-Type', 'application/x-www-form-urlencoded')
                 .send({
                     email: regularUser.email,
                     password: regularUser.password,

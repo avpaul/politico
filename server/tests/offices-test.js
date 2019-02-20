@@ -24,8 +24,6 @@ const office = {
 };
 
 describe('#offices', () => {
-
-
     // CREATE OFFICE
     context('POST /v1/offices', () => {
         it('should return created office name and 201 status code', (done) => {
@@ -72,6 +70,25 @@ describe('#offices', () => {
                     res.body.data[0].name.should.eql(office.name);
                     res.body.data[0].type.should.eql(office.type);
                     res.body.data[0].id.should.eql(office.id);
+                    done();
+                });
+        });
+    });
+
+    // REGISTER A CANDIDATE
+    describe('POST /v1/offices/:id/register', () => {
+        it('should return a 201 status code and the candidate(user)id registered and the office id registered for', (done) => {
+            chai.request(app)
+                .post(`/v1/offices/${office.id}/register`)
+                .set('Authorization', process.env.TEST_ADMIN_TOKEN)
+                .send({
+                    userId: process.env.TEST_USER_ID,
+                })
+                .end((err, res) => {
+                    res.should.have.status(201);
+                    res.body.data.should.be.an('object');
+                    res.body.data.office.should.eql(Number(office.id));
+                    res.body.data.user.should.eql(Number(process.env.TEST_USER_ID));
                     done();
                 });
         });

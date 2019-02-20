@@ -168,7 +168,6 @@ describe('#Party', () => {
                     description: 'it is the first party in membership and it is the ruling party since 2003',
                 })
                 .end((error, res) => {
-                    console.log(res.body.error);
                     res.should.have.status(200);
                     res.body.should.be.an('object');
                     res.body.data.should.be.an('array');
@@ -187,8 +186,6 @@ describe('#Party', () => {
                     description: 'it is the first party in membership and it is the ruling party since 2003',
                 })
                 .end((error, res) => {
-                    console.log(res.body.error);
-
                     res.should.have.status(404);
                     res.body.should.be.an('object');
                     res.body.error.should.be.a('string');
