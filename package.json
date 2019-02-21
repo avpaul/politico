@@ -5,7 +5,7 @@
     "author": "avpaul <vabimana@gmail.com> ",
     "scripts": {
         "start": "babel-node  ./app.js",
-        "start:dev": "ENV=DEVELOPMENT nodemon ./app.js --exec babel-node",
+        "start:dev": "nodemon ./app.js --exec babel-node",
         "heroku-postbuild": "npm install",
         "test": "nyc mocha ./server/tests --require @babel/register --exit",
         "test:local": "nyc --reporter=html --reporter=lcov mocha ./server/tests --require @babel/register --exit",

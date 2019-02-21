@@ -40,7 +40,7 @@ before((done) => {
 });
 
 after((done) => {
-    db.pool.query(`DELETE FROM users; DELETE FROM offices; DELETE FROM parties; DELETE FROM candidates; DELETE FROM votes`)
+    db.pool.query(`DELETE FROM users CASCADE; DELETE FROM offices CASCADE; DELETE FROM parties CASCADE; DELETE FROM candidates; DELETE FROM votes`)
         .then(res => done()).catch((err) => {
             console.log(err.message);
             done();
