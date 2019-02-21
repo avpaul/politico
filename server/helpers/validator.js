@@ -9,15 +9,6 @@ class Validator {
             let propHasValue;
             const propFound = (Object.prototype.hasOwnProperty.call(obj, prop));
             if (propFound) {
-                if (typeof obj[prop] === 'object') {
-                    for (const key in obj[prop]) {
-                        if (Object.prototype.hasOwnProperty.call(obj[prop], key)) {
-                            propHasValue = true;
-                            return;
-                        }
-                    }
-                    propHasValue = false;
-                }
                 propHasValue = (obj[prop] !== '' && (obj[prop].trim().length !== 0));
             }
             if (!propFound) {
@@ -49,12 +40,12 @@ class Validator {
 
     static isValidPassword(obj, prop) {
         const value = obj[prop];
-        return /\w{6,}/.test(value);
+        return (value.length >= 6);
     }
 
     static isValidEmail(obj, prop) {
         const value = obj[prop];
-        return /^(\w{3,})@(\w)/.test(value);
+        return /^(\w+|(\w+\.\w+))@(\w)/.test(value);
     }
 }
 

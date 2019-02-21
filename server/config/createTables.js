@@ -1,11 +1,17 @@
+import ENV from 'dotenv';
 import db from './db';
 
-class Tables {
-    // sql query for creating all tables
+ENV.config();
+
+class Setup {
     constructor() {
-        this.TABLES = [
-            `CREATE TABLE IF NOT EXISTS
-         users(
+        this.pool = db.pool;
+        this.createTables();
+    }
+
+    async createTables() {
+        const users = `
+        CREATE TABLE IF NOT EXISTS users (
             id SERIAL PRIMARY KEY,
             firstname VARCHAR(255) NOT NULL,
             lastname VARCHAR(255)  NOT NULL,
@@ -17,72 +23,101 @@ class Tables {
             isAdmin BOOLEAN DEFAULT false,
             salt TEXT NOT NULL,
             hash TEXT NOT NULL
-         );
-        `,
+        );`;
 
-            `CREATE TABLE IF NOT EXISTS
-        parties(
+        await this.pool.query(users)
+            .then((res) => {
+                // console.log(res);
+            })
+            .catch((error) => {
+                console.log(error.message);
+            });
+
+        const parties = `
+        CREATE TABLE IF NOT EXISTS parties (
             id SERIAL PRIMARY KEY,
             name VARCHAR(255) NOT NULL UNIQUE,
             hqAddress VARCHAR(255) NOT NULL UNIQUE,
             logoUrl TEXT ,
             description TEXT
-        );
-        `,
+        );`;
 
-            `CREATE TABLE IF NOT EXISTS
-        offices(
+        await  this.pool.query(parties)
+            .then((res) => {
+                // console.log(res);
+            })
+            .catch((error) => {
+                console.log(error.message);
+            });
+
+        const office = `
+        CREATE TABLE IF NOT EXISTS offices (
             id SERIAL PRIMARY KEY,
-            type VARCHAR(255) NOT NULL,
-            name VARCHAR(255) NOT NULL ,
+            type VARCHAR(255) NOT NULL UNIQUE,
+            name VARCHAR(255) NOT NULL UNIQUE,
             description TEXT
-        );
-        `,
+        );`;
 
-            `CREATE TABLE IF NOT EXISTS
-        candidates(
+        await this.pool.query(office)
+            .then((res) => {
+                // console.log(res);
+            })
+            .catch((error) => {
+                console.log(error.message);
+            });
+
+        const candidate = `
+        CREATE TABLE IF NOT EXISTS candidates (
             id SERIAL NOT NULL,
-            office SERIAL REFERENCES offices(id) ON DELETE CASCADE ON UPDATE CASCADE,
-            candidate SERIAL REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
+            office SERIAL REFERENCES offices(id),
+            candidate SERIAL REFERENCES users(id),
             PRIMARY KEY(office,candidate)
-        );
-        `,
-            `CREATE TABLE IF NOT EXISTS
-        votes(
+        );`;
+
+        await this.pool.query(candidate)
+            .then((res) => {
+                // console.log(res);
+            })
+            .catch((error) => {
+                console.log(error.message);
+            });
+
+        const votes = `
+        CREATE TABLE IF NOT EXISTS votes (
             id SERIAL,
             createdon TIMESTAMP,
-            createdby TIMESTAMP,
+            createdby SERIAL,
             office SERIAL,
             candidate SERIAL,
             PRIMARY KEY (office,createdby),
             FOREIGN KEY(candidate,office) REFERENCES candidates(candidate,office) ON DELETE CASCADE ON UPDATE CASCADE
-        );
-        `,
-            `CREATE TABLE IF NOT EXISTS
-        petitions(
+        );`;
+
+        await this.pool.query(votes)
+            .then((res) => {
+                // console.log(res);
+            })
+            .catch((error) => {
+                console.log(error.message);
+            });
+
+        const petition = `
+        CREATE TABLE IF NOT EXISTS petition (
             id SERIAL PRIMARY KEY,
             createdOn TIMESTAMP,
             createdBy SERIAL REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
             office SERIAL REFERENCES offices(id) ON DELETE CASCADE ON UPDATE CASCADE,
             description TEXT
-        );
-        `];
-        this.createTables();
-    }
+        );`;
 
-    createTables() {
-        this.TABLES.forEach(async (table) => {
-            await db.pool.query(table)
-                .then((res) => {
-                    console.log(res);
-                    db.pool.end();
-                })
-                .catch((err) => {
-                    console.log(err.message);
-                    db.pool.end();
-                });
-        });
+        await this.pool.query(petition)
+            .then((res) => {
+                // console.log(res);
+            })
+            .catch((error) => {
+                console.log(error.message);
+            });
     }
 }
 
-export default new Tables();
+export default new Setup();

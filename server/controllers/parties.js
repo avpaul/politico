@@ -14,12 +14,12 @@ class Parties {
         }
         const validate = Validator.validate(req.body, ['name', 'logoUrl', 'description', 'hqAddress']);
         if (!validate.isValid) {
-            const error = [];
+            let error = '';
             if (validate.missingProps.length > 0) {
-                error.push(`${validate.missingProps.toString()} missing`);
+                error += (`${validate.missingProps.toString()} missing`);
             }
             if (validate.propsWithoutValue.length > 0) {
-                error.push(`${validate.propsWithoutValue.toString()} value missing`);
+                error += (`${validate.propsWithoutValue.toString()} value missing`);
             }
             res.status(400).json({
                 status: 400,
@@ -215,12 +215,12 @@ class Parties {
         }
         const validate = Validator.validate(req.body, ['name', 'logoUrl', 'description', 'hqAddress']);
         if (!validate.isValid) {
-            const error = [];
+            let error = '';
             if (validate.missingProps.length > 0) {
-                error.push(`${validate.missingProps.toString()} missing`);
+                error += (`${validate.missingProps.toString()} missing`);
             }
             if (validate.propsWithoutValue.length > 0) {
-                error.push(`${validate.propsWithoutValue.toString()} value missing`);
+                error += (`${validate.propsWithoutValue.toString()} value missing`);
             }
             res.status(400).json({
                 status: 400,
