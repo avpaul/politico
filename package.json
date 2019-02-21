@@ -1,54 +1,56 @@
 {
-  "name": "politico-api",
-  "version": "0.0.0",
-  "private": true,
-  "author": "avpaul <vabimana@gmail.com> ",
-  "scripts": {
-    "start": "babel-node  ./app.js",
-    "start:dev": "ENV=DEVELOPMENT nodemon ./app.js --exec babel-node",
-    "heroku-postbuild": "npm install",
-    "test": "nyc mocha ./server/tests --require @babel/register --exit",
-    "test:local": "nyc --reporter=html --reporter=lcov mocha ./server/tests --require @babel/register --exit",
-    "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "lint": "./node_modules/.bin/eslint ./server",
-    "createdb": "ENV=TESTING babel-node ./server/config/createTables.js"
-  },
-  "homepage": "avpaul.github.io/politico",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/avpaul/politico"
-  },
-  "engines": {
-    "node": "11.8.0",
-    "npm": "6.5.0"
-  },
-  "dependencies": {
-    "acorn": "^6.0.6",
-    "debug": "~2.6.9",
-    "dotenv": "^6.2.0",
-    "express": "~4.16.0",
-    "express-jwt": "^5.3.1",
-    "joi": "^14.3.1",
-    "jsonwebtoken": "^8.4.0",
-    "morgan": "~1.9.0",
-    "nodemailer": "^5.1.1",
-    "pg": "^7.8.0"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/node": "^7.2.2",
-    "@babel/preset-env": "^7.3.1",
-    "chai": "^4.2.0",
-    "chai-http": "^4.2.1",
-    "coveralls": "^3.0.2",
-    "eslint": "^5.3.0",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-plugin-import": "^2.15.0",
-    "eslint-plugin-jsx-a11y": "^6.2.0",
-    "eslint-plugin-react": "^7.12.4",
-    "make-runnable": "^1.3.6",
-    "mocha": "^5.2.0",
-    "mocha-lcov-reporter": "^1.3.0",
-    "nyc": "^13.1.0"
-  }
+    "name": "politico-api",
+    "version": "0.0.0",
+    "private": true,
+    "author": "avpaul <vabimana@gmail.com> ",
+    "scripts": {
+        "start": "babel-node  ./app.js",
+        "start:dev": "ENV=DEVELOPMENT nodemon ./app.js --exec babel-node",
+        "heroku-postbuild": "npm install",
+        "test": "nyc mocha ./server/tests --require @babel/register --exit",
+        "test:local": "nyc --reporter=html --reporter=lcov mocha ./server/tests --require @babel/register --exit",
+        "coverage": "nyc report --reporter=text-lcov | coveralls",
+        "lint": "./node_modules/.bin/eslint ./server",
+        "createdb": "babel-node ./server/config/createTables.js",
+        "createAmin": "babel-node ./server/helpers/createAdmin.js"
+    },
+    "homepage": "avpaul.github.io/politico",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/avpaul/politico"
+    },
+    "engines": {
+        "node": "11.8.0",
+        "npm": "6.5.0"
+    },
+    "dependencies": {
+        "acorn": "^6.0.6",
+        "babel-polyfill": "^6.26.0",
+        "debug": "~2.6.9",
+        "dotenv": "^6.2.0",
+        "express": "~4.16.0",
+        "express-jwt": "^5.3.1",
+        "joi": "^14.3.1",
+        "jsonwebtoken": "^8.4.0",
+        "morgan": "~1.9.0",
+        "nodemailer": "^5.1.1",
+        "pg": "^7.8.0"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.2.2",
+        "@babel/node": "^7.2.2",
+        "@babel/preset-env": "^7.3.1",
+        "chai": "^4.2.0",
+        "chai-http": "^4.2.1",
+        "coveralls": "^3.0.2",
+        "eslint": "^5.3.0",
+        "eslint-config-airbnb": "^17.1.0",
+        "eslint-plugin-import": "^2.15.0",
+        "eslint-plugin-jsx-a11y": "^6.2.0",
+        "eslint-plugin-react": "^7.12.4",
+        "make-runnable": "^1.3.6",
+        "mocha": "^5.2.0",
+        "mocha-lcov-reporter": "^1.3.0",
+        "nyc": "^13.1.0"
+    }
 }

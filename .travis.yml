@@ -2,22 +2,19 @@ language: node_js
 node_js:
   - "11.8.0"
 services: postgresql
-sudo: false
 env:
   global:
-    - CC_TEST_REPORTER_ID=95dea691c508987b1e479d7f551f62f821ab13a0609ab5d73f9be06678c5b71e
+    ENV=TRAVIS
+sudo: false
 install:
   - npm install
   - npm install -g codecov
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
 script:
   - npm run createdb
-  - ENV=TRAVIS npm test
+  - npm run createAmin
+  - npm test
   - nyc report --reporter=text-lcov > coverage.lcov && codecov
 after_script:
   - npm run coverage
-  - ./cc-test-reporter after-build -t lcov --exit-code $TRAVIS_TEST_RESULT

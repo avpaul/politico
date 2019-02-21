@@ -33,8 +33,8 @@ class Tables {
             `CREATE TABLE IF NOT EXISTS
         offices(
             id SERIAL PRIMARY KEY,
-            type VARCHAR(255) NOT NULL,
-            name VARCHAR(255) NOT NULL ,
+            type VARCHAR(255) NOT NULL UNIQUE,
+            name VARCHAR(255) NOT NULL UNIQUE,
             description TEXT
         );
         `,
@@ -51,7 +51,7 @@ class Tables {
         votes(
             id SERIAL,
             createdon TIMESTAMP,
-            createdby TIMESTAMP,
+            createdby SERIAL,
             office SERIAL,
             candidate SERIAL,
             PRIMARY KEY (office,createdby),

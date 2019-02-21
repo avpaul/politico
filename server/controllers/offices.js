@@ -13,12 +13,12 @@ class Offices {
         }
         const validate = Validator.validate(req.body, ['type', 'name', 'description']);
         if (!validate.isValid) {
-            const error = [];
+            let error = '';
             if (validate.missingProps.length > 0) {
-                error.push(`${validate.missingProps.toString()} missing`);
+                error += (`${validate.missingProps.toString()} missing`);
             }
             if (validate.propsWithoutValue.length > 0) {
-                error.push(`${validate.propsWithoutValue.toString()} value missing`);
+                error += (`${validate.propsWithoutValue.toString()} value missing`);
             }
             res.status(400).json({
                 status: 400,
@@ -69,9 +69,9 @@ class Offices {
             .catch((err) => {
                 if (err.code === '23505') {
                     const keyName = err.detail.substr(err.detail.indexOf('(') + 1, (err.detail.indexOf(')') - (err.detail.indexOf('(') + 1)));
-                    return res.status(404)
+                    return res.status(400)
                         .json({
-                            status: 404,
+                            status: 2900,
                             error: err.message,
                             key: keyName,
                         });
@@ -146,12 +146,12 @@ class Offices {
         }
         const validate = Validator.validate(req.body, ['userId']);
         if (!validate.isValid) {
-            const error = [];
+            let error = '';
             if (validate.missingProps.length > 0) {
-                error.push(`${validate.missingProps.toString()} missing`);
+                error += (`${validate.missingProps.toString()} missing`);
             }
             if (validate.propsWithoutValue.length > 0) {
-                error.push(`${validate.propsWithoutValue.toString()} value missing`);
+                error += (`${validate.propsWithoutValue.toString()} value missing`);
             }
             res.status(400).json({
                 status: 400,
@@ -243,12 +243,12 @@ class Offices {
         }
         const validateBody = Validator.validate(req.body, ['office', 'candidate', 'voter']);
         if (!validateBody.isValid) {
-            const error = [];
+            let error = '';
             if (validateBody.missingProps.length > 0) {
-                error.push(`${validateBody.missingProps.toString()} missing`);
+                error += (`${validateBody.missingProps.toString()} missing`);
             }
             if (validateBody.propsWithoutValue.length > 0) {
-                error.push(`${validateBody.propsWithoutValue.toString()} value missing`);
+                error += (` ${validateBody.propsWithoutValue.toString()} value missing`);
             }
             res.status(400).json({
                 status: 400,
@@ -256,52 +256,23 @@ class Offices {
             });
             return;
         }
-        if (Validator.isNumberOnly(req.body, 'office')) {
+        if (!Validator.isNumberOnly(req.body, 'office')) {
             res.status(400).json({
                 status: 400,
-                error: 'userId must be a number',
+                error: 'office id must be a number',
             });
             return;
         }
 
-        if (Validator.isNumberOnly(req.body, 'voter')) {
+        if (!Validator.isNumberOnly(req.body, 'voter')) {
             res.status(400).json({
                 status: 400,
-                error: 'voter must be a number',
+                error: 'voter id must be a number',
             });
             return;
         }
 
-        const validateCandidate = Validator.validate(req.body.candidate, ['userId', 'office']);
-        if (!validateCandidate.isValid) {
-            const error = [];
-            if (validateCandidate.missingProps.length > 0) {
-                error.push(`candidate ${validateCandidate.missingProps.toString()} missing`);
-            }
-            if (validateCandidate.propsWithoutValue.length > 0) {
-                error.push(`candidate ${validateCandidate.propsWithoutValue.toString()} value missing`);
-            }
-            res.status(400).json({
-                status: 400,
-                error,
-            });
-            return;
-        }
-        if (Validator.isNumberOnly(req.body.candidate, 'userId')) {
-            res.status(400).json({
-                status: 400,
-                error: 'candidate user id must be a number',
-            });
-            return;
-        }
-        if (Validator.isNumberOnly(req.body.candidate, 'office')) {
-            res.status(400).json({
-                status: 400,
-                error: 'candidate office id must be a number',
-            });
-            return;
-        }
-        if (req.user.id !== req.body.voter) {
+        if (req.user.id !== Number(req.body.voter)) {
             res.status(404)
                 .json({
                     status: 404,
@@ -312,14 +283,14 @@ class Offices {
 
         const officeQuery = `SELECT * FROM offices WHERE id = ${req.body.office}`;
         const userQuery = `SELECT * FROM users WHERE id = ${req.body.voter}`;
-        const candidateQuery = ` SELECT * FROM candidates WHERE candidate = ${req.body.candidate.userId} and office = ${req.body.candidate.office}`;
+        const candidateQuery = ` SELECT * FROM candidates WHERE candidate = ${req.body.candidate} and office = ${req.body.office}`;
         const voteQuery = `INSERT INTO 
             votes(createdOn,createdBy,candidate,office)
             VALUES (
                 $1,
                 (SELECT id FROM users WHERE id = ${req.body.voter}),
-                (SELECT candidate FROM candidates WHERE office = ${req.body.candidate.office} and candidate = ${req.body.candidate.userId}),
-                (SELECT office FROM candidates WHERE office = ${req.body.candidate.office} and candidate = ${req.body.candidate.userId})
+                (SELECT candidate FROM candidates WHERE office = ${req.body.office} and candidate = ${req.body.candidate}),
+                (SELECT office FROM candidates WHERE office = ${req.body.office} and candidate = ${req.body.candidate})
             )
             returning *
         `;
@@ -334,9 +305,9 @@ class Offices {
                                     .then((candidate) => {
                                         if (candidate.rowCount > 0) {
                                             return db.pool.query(
-                                                    voteQuery,
-                                                    [(new Date()).toUTCString()],
-                                                )
+                                                voteQuery,
+                                                [(new Date()).toUTCString()],
+                                            )
                                                 .then(vote => res.status(201)
                                                     .json({
                                                         status: 201,
@@ -366,7 +337,7 @@ class Offices {
                                         return res.status(404)
                                             .json({
                                                 status: 404,
-                                                error: `Candidate ${JSON.stringify(req.body.candidate)} not found`,
+                                                error: `Candidate not found`,
                                             });
                                     })
                                     .catch(err => res.status(400)

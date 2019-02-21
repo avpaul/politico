@@ -27,7 +27,7 @@ const badParty = {
 };
 
 describe('#Party', () => {
-    describe('POST /v1/parties', () => {
+    context('POST /v1/parties', () => {
         // WHEN ALL DATA ARE COMPLETE
         it('should return a response with 201 status code and the name and id of the created party', (done) => {
             chai.request(app)
@@ -65,8 +65,7 @@ describe('#Party', () => {
                 .end((err, res) => {
                     res.should.have.status(400);
                     res.body.should.be.an('object');
-                    res.body.error.should.be.an('array');
-                    res.body.error[0].should.be.a('string');
+                    res.body.error.should.be.an('string');
                     done();
                 });
         });
@@ -86,7 +85,7 @@ describe('#Party', () => {
     });
 
     // GET ONE PARTY
-    describe('GET /v1/parties/:id', () => {
+    context('GET /v1/parties/:id', () => {
         it('should return one party and a status code of 200', (done) => {
             chai.request(app)
                 .get(`/v1/parties/${party.id}`)
@@ -112,7 +111,7 @@ describe('#Party', () => {
         });
     });
     // GET all PARTIES
-    describe('GET /v1/parties', () => {
+    context('GET /v1/parties', () => {
         it('should return an array of all parties with a 200 status code', (done) => {
             chai.request(app)
                 .get('/v1/parties')
@@ -127,7 +126,7 @@ describe('#Party', () => {
         });
     });
 
-    describe('PATCH /v1/parties/:id', () => {
+    context('PATCH /v1/parties/:id', () => {
         // WHEN ID & NAME IS PROVIDED
         it('should return 200 status and id & name of updated party', (done) => {
             chai.request(app)
@@ -156,7 +155,7 @@ describe('#Party', () => {
                 });
         });
     });
-    describe('PUT /v1/parties/:id', () => {
+    context('PUT /v1/parties/:id', () => {
         it('should return 200 status code and name & id of the updated party', (done) => {
             chai.request(app)
                 .put(`/v1/parties/${party.id}`)
@@ -175,6 +174,25 @@ describe('#Party', () => {
                     done();
                 });
         });
+
+        it('should return 400 status code and error message', (done) => {
+            chai.request(app)
+                .put(`/v1/parties/${party.id}`)
+                .set('Authorization', process.env.TEST_ADMIN_TOKEN)
+                .send({
+                    name: 'rwanda patriotic front',
+                    hqAddress: '',
+                    logoUrl: 'https://www.fpr.rw/resources/images/fpr.jpg',
+                    description: 'it is the first party in membership and it is the ruling party since 2003',
+                })
+                .end((error, res) => {
+                    res.should.have.status(400);
+                    res.body.error.should.be.a('string');
+                    done();
+                });
+        });
+
+
         it('should return 404 status code and an error message', (done) => {
             chai.request(app)
                 .put('/v1/parties/1000')
@@ -194,7 +212,7 @@ describe('#Party', () => {
         });
     });
 
-    describe('DELETE /v1/parties/:id', () => {
+    context('DELETE /v1/parties/:id', () => {
         // WHEN THE ID IS PROVIDED
         it('should return a deleted party message and 200 status', (done) => {
             chai.request(app)

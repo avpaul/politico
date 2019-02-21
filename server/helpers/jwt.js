@@ -25,16 +25,9 @@ class Token {
         });
     }
 
-    static resetEmailToken({
-        id,
-        email,
-        firstname,
-        lastname,
-    }) {
+    static resetEmailToken(email) {
         return jwt.sign({
-            id,
             email,
-            name: `${firstname} ${lastname}`,
             exp: ((Date.now() / 1000) + (60 * 60)),
         },
         process.env.TOKEN_SECRET,
