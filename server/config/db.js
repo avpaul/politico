@@ -5,7 +5,7 @@ ENV.config();
 
 class Database {
     constructor() {
-        this.DB_URL = process.env[`${process.env.ENV}_DATABASE_URL`];
+        this.DB_URL = process.env.DATABASE_URL || process.env[`${process.env.ENV}_DATABASE_URL`];
         this.pool = new Pool({
             connectionString: this.DB_URL,
         });
