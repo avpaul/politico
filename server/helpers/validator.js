@@ -44,8 +44,8 @@ class Validator {
     }
 
     static isValidEmail(obj, prop) {
-        const value = obj[prop];
-        return /^(\w+|(\w+\.\w+))@(\w)/.test(value);
+        const value = obj[prop].trim();
+        return /^(\w+|(\w+\.\w+))@(\w+)([.]\w+)/.test(value);
     }
 }
 

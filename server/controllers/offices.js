@@ -323,7 +323,7 @@ class Offices {
                                                         return res.status(404)
                                                             .json({
                                                                 status: 404,
-                                                                error: err.message,
+                                                                error: 'Duplicate values no accepted',
                                                                 key: keyName,
                                                             });
                                                     }

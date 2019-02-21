@@ -14,14 +14,13 @@ const testAdmin = {
     lastname: 'smith',
     email: process.env.TEST_EMAIL,
     password: process.env.TEST_EMAIL_PASSWORD,
-    isAdmin: true,
 };
 const regularUser = {
     firstname: 'pauline',
     lastname: 'keza',
     email: process.env.TEST_ADMIN_EMAIL,
     password: process.env.TEST_USER_PASSWORD,
-    isAdmin: false,
+    confirmPassword: process.env.TEST_USER_PASSWORD,
 };
 
 before((done) => {
@@ -40,8 +39,8 @@ before((done) => {
 });
 
 after((done) => {
-    db.pool.query(`DELETE FROM users CASCADE; DELETE FROM offices CASCADE; DELETE FROM parties CASCADE; DELETE FROM candidates; DELETE FROM votes`)
-        .then(res => done()).catch((err) => {
+    db.pool.query('DELETE FROM users CASCADE; DELETE FROM offices CASCADE; DELETE FROM parties CASCADE; DELETE FROM candidates; DELETE FROM votes')
+        .then(() => done()).catch((err) => {
             console.log(err.message);
             done();
         });
@@ -86,7 +85,6 @@ describe('#index', () => {
                     firstname: 'pauline',
                     lastname: 'keza',
                     email: '',
-                    isAdmin: false,
                 })
                 .end((err, res) => {
                     res.should.have.status(400);
@@ -121,7 +119,6 @@ describe('#index', () => {
                 .send({
                     email: regularUser.email,
                     password: regularUser.password,
-                    isAdmin: regularUser.isAdmin,
                 })
                 .end((err, res) => {
                     res.should.have.status(200);
@@ -190,10 +187,10 @@ describe('#index', () => {
         });
     });
 
-    context('/v1/auth/reset', () => {
+    context('/v1/auth/resetlink', () => {
         it('should return a 200 status code,a message to check the user email inbox', (done) => {
             chai.request(app)
-                .post('/v1/auth/reset')
+                .post('/v1/auth/resetlink')
                 .set('Content-Type', 'application/x-www-form-urlencoded')
                 .send({
                     email: process.env.TEST_ADMIN_EMAIL,
@@ -208,10 +205,10 @@ describe('#index', () => {
         });
     });
 
-    context('/v1/auth/reset', () => {
+    context('/v1/auth/resetlink', () => {
         it('should return a 400 status code and an error message', (done) => {
             chai.request(app)
-                .post('/v1/auth/reset')
+                .post('/v1/auth/resetlink')
                 .set('Content-Type', 'application/x-www-form-urlencoded')
                 .send({
                     email: '',
@@ -225,10 +222,10 @@ describe('#index', () => {
     });
 
     // WHEN YOU SEND AN EMAIL OF A NON REGISTERED USER
-    context('/v1/auth/reset', () => {
+    context('/v1/auth/resetlink', () => {
         it('should return a 404 status code and an error message', (done) => {
             chai.request(app)
-                .post('/v1/auth/reset')
+                .post('/v1/auth/resetlink')
                 .set('Content-Type', 'application/x-www-form-urlencoded')
                 .send({
                     email: 'princesultan@reg.com',

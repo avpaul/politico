@@ -50,7 +50,7 @@ class Parties {
             req.body.name.trim(),
             req.body.hqAddress.trim(),
             req.body.logoUrl.trim(),
-            req.body.description.trim(),
+            req.body.description.trim().replace(/(\r\n|\n|\r)/gm, ''),
         ])
             .then(response => res.status(201).json({
                 status: 201,
