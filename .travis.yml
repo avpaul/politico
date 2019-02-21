@@ -1,6 +1,7 @@
 language: node_js
 node_js:
   - "11.8.0"
+services: postgresql
 sudo: false
 env:
   global:
@@ -9,11 +10,13 @@ install:
   - npm install
   - npm install -g codecov
 before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 script:
-  - npm test
+  - npm run createdb
+  - ENV=TRAVIS npm test
   - nyc report --reporter=text-lcov > coverage.lcov && codecov
 after_script:
   - npm run coverage

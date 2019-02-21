@@ -34,12 +34,12 @@ class Validator {
 
     static isStringOnly(obj, prop) {
         const value = obj[prop];
-        return !(/\d/g.test(value));
+        return !(/[0-9]/g.test(value));
     }
 
     static isNumberOnly(obj, prop) {
         const value = obj[prop];
-        return !(/\w/g.test(value));
+        return !(/[aA-zZ]/g.test(value));
     }
 
     static isUri(obj, prop) {

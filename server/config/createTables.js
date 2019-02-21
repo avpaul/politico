@@ -41,27 +41,29 @@ class Tables {
 
             `CREATE TABLE IF NOT EXISTS
         candidates(
-            id SERIAL PRIMARY KEY,
-            office SERIAL REFERENCES offices ,
-            party SERIAL REFERENCES parties,
-            candidate SERIAL REFERENCES users
+            id SERIAL NOT NULL,
+            office SERIAL REFERENCES offices(id) ON DELETE CASCADE ON UPDATE CASCADE,
+            candidate SERIAL REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
+            PRIMARY KEY(office,candidate)
         );
         `,
             `CREATE TABLE IF NOT EXISTS
         votes(
-            id SERIAL PRIMARY KEY,
-            createdOn TIMESTAMP,
-            createdBy TIMESTAMP,
-            office SERIAL REFERENCES offices,
-            candidate SERIAL REFERENCES users
+            id SERIAL,
+            createdon TIMESTAMP,
+            createdby TIMESTAMP,
+            office SERIAL,
+            candidate SERIAL,
+            PRIMARY KEY (office,createdby),
+            FOREIGN KEY(candidate,office) REFERENCES candidates(candidate,office) ON DELETE CASCADE ON UPDATE CASCADE
         );
         `,
             `CREATE TABLE IF NOT EXISTS
         petitions(
             id SERIAL PRIMARY KEY,
             createdOn TIMESTAMP,
-            createdBy TIMESTAMP,
-            office SERIAL REFERENCES offices,
+            createdBy SERIAL REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
+            office SERIAL REFERENCES offices(id) ON DELETE CASCADE ON UPDATE CASCADE,
             description TEXT
         );
         `];
@@ -69,29 +71,14 @@ class Tables {
     }
 
     createTables() {
-        this.TABLES.forEach((table) => {
-            db.pool.query(table)
+        this.TABLES.forEach(async (table) => {
+            await db.pool.query(table)
                 .then((res) => {
                     console.log(res);
                     db.pool.end();
                 })
                 .catch((err) => {
-                    console.log(err);
-                    db.pool.end();
-                });
-        });
-    }
-
-    static dropTables() {
-        const tables = ['users', 'parties', 'offices', 'votes', 'candidates', 'petitions'];
-        tables.forEach((table) => {
-            db.pool.query(`DROP TABLE IF EXISTS ${table}`)
-                .then((res) => {
-                    console.log(res);
-                    db.pool.end();
-                })
-                .catch((err) => {
-                    console.log(err);
+                    console.log(err.message);
                     db.pool.end();
                 });
         });
