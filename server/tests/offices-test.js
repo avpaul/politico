@@ -141,8 +141,10 @@ describe('#offices', () => {
                 .end((err, res) => {
                     res.should.have.status(201);
                     res.body.data.should.be.an('object');
-                    res.body.data.office.should.eql(Number(office.id));
-                    res.body.data.user.should.eql(Number(process.env.TEST_USER_ID));
+                    res.body.data.office.should.be.an('object');
+                    res.body.data.office.id.should.eql(Number(office.id));
+                    res.body.data.user.should.be.an('object');
+                    res.body.data.user.id.should.eql(Number(process.env.TEST_USER_ID));
                     done();
                 });
         });
@@ -170,6 +172,29 @@ describe('#offices', () => {
         it('should return a 201 status code', (done) => {
             chai.request(app)
                 .post('/v1/vote')
+                .query({ token: process.env.TEST_USER_TOKEN })
+                .set('Content-Type', 'application/x-www-form-urlencoded')
+                .send({
+                    office: office.id,
+                    voter: process.env.TEST_USER_ID,
+                    candidate: process.env.TEST_USER_ID,
+                })
+                .end((err, res) => {
+                    res.should.have.status(201);
+                    res.body.data.should.be.an('object');
+                    res.body.data.office.id.should.eql(office.id);
+                    res.body.data.candidate.id.should.eql(Number(process.env.TEST_USER_ID));
+                    res.body.data.voter.id.should.eql(Number(process.env.TEST_USER_ID));
+                    done();
+                });
+        });
+    });
+
+    // ADMIN CAN'T VOTE
+    describe('POST /v1/vote', () => {
+        it('should return a 400 status code and an error message', (done) => {
+            chai.request(app)
+                .post('/v1/vote')
                 .set('Authorization', process.env.TEST_ADMIN_TOKEN)
                 .set('Content-Type', 'application/x-www-form-urlencoded')
                 .send({
@@ -178,11 +203,8 @@ describe('#offices', () => {
                     candidate: process.env.TEST_USER_ID,
                 })
                 .end((err, res) => {
-                    res.should.have.status(201);
-                    res.body.data.should.be.an('object');
-                    res.body.data.office.should.eql(office.id);
-                    res.body.data.candidate.should.eql(Number(process.env.TEST_USER_ID));
-                    res.body.data.voter.should.eql(Number(process.env.TEST_ADMIN_ID));
+                    res.should.have.status(400);
+                    res.body.error.should.be.a('string');
                     done();
                 });
         });
@@ -216,7 +238,7 @@ describe('#offices', () => {
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.data.should.be.an('array');
-                    res.body.data[0].office.should.eql(office.id);
+                    res.body.data[0].office.id.should.eql(office.id);
                     res.body.data[0].result.should.eql(1);
                     done();
                 });

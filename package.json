@@ -12,7 +12,7 @@
         "coverage": "nyc report --reporter=text-lcov | coveralls",
         "lint": "./node_modules/.bin/eslint ./server",
         "createdb": "babel-node ./server/config/createTables.js",
-        "createAmin": "babel-node ./server/helpers/createAdmin.js"
+        "createAdmin": "babel-node ./server/helpers/createAdmin.js"
     },
     "homepage": "avpaul.github.io/politico",
     "repository": {

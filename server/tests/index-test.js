@@ -39,7 +39,7 @@ before((done) => {
 });
 
 after((done) => {
-    db.pool.query('DELETE FROM users CASCADE; DELETE FROM offices CASCADE; DELETE FROM parties CASCADE; DELETE FROM candidates; DELETE FROM votes')
+    db.pool.query('DROP TABLE users CASCADE; DROP TABLE  offices CASCADE; DROP TABLE parties CASCADE; DROP TABLE candidates; DROP TABLE votes')
         .then(() => done()).catch((err) => {
             console.log(err.message);
             done();
@@ -121,6 +121,7 @@ describe('#index', () => {
                     password: regularUser.password,
                 })
                 .end((err, res) => {
+                    process.env.TEST_USER_TOKEN = res.body.data[0].token;
                     res.should.have.status(200);
                     res.body.data.should.be.an('array');
                     res.body.data[0].token.should.be.a('string');
