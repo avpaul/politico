@@ -9,7 +9,7 @@ ENV.config();
 
 class Users {
     static create(req, res) {
-        const validate = Validator.validate(req.body, ['email', 'password', 'firstname', 'lastname']);
+        const validate = Validator.validate(req.body, ['email', 'password', 'confirmPassword', 'firstname', 'lastname']);
         if (!validate.isValid) {
             let error = '';
             if (validate.missingProps.length > 0) {
@@ -18,34 +18,55 @@ class Users {
             if (validate.propsWithoutValue.length > 0) {
                 error += (`${validate.propsWithoutValue.toString()} value missing`);
             }
-            return res.status(400).json({
+            res.status(400).json({
                 status: 400,
                 error,
             });
+            return;
         }
         if (!Validator.isStringOnly(req.body, 'firstname')) {
-            return res.status(400).json({
+            res.status(400).json({
                 status: 400,
                 error: 'fisrtname must not contain any number',
             });
+            return;
         }
         if (!Validator.isStringOnly(req.body, 'lastname')) {
-            return res.status(400).json({
+            res.status(400).json({
                 status: 400,
                 error: 'lastname must not contain any number',
             });
+            return;
         }
         if (!Validator.isValidEmail(req.body, 'email')) {
-            return res.status(400).json({
+            res.status(400).json({
                 status: 400,
                 error: 'email is not valid',
             });
+            return;
         }
         if (!Validator.isValidPassword(req.body, 'password')) {
-            return res.status(400).json({
+            res.status(400).json({
                 status: 400,
                 error: 'password is not valid',
             });
+            return;
+        }
+
+        if (!Validator.isValidPassword(req.body, 'confirmPassword')) {
+            res.status(400).json({
+                status: 400,
+                error: 'confirm password is not valid',
+            });
+            return;
+        }
+
+        if (req.body.password.trim() !== req.body.confirmPassword.trim()) {
+            res.status(400).json({
+                status: 400,
+                error: 'password not identical',
+            });
+            return;
         }
 
         const salt = crypto.randomBytes(16).toString('hex');
@@ -56,7 +77,7 @@ class Users {
                     VALUES($1,$2,$3,$4,$5)
                     returning *
         `;
-        return db.pool.query(query, [
+        db.pool.query(query, [
             req.body.firstname.trim(),
             req.body.lastname.trim(),
             req.body.email.trim(),
@@ -65,7 +86,7 @@ class Users {
         ])
             .then(response => res.status(201).json({
                 status: 201,
-                message: 'users created',
+                message: 'user created',
                 data: [{
                     token: token.generateToken({
                         id: response.rows[0].id,
@@ -83,7 +104,7 @@ class Users {
                     return res.status(400)
                         .json({
                             status: 400,
-                            error: `User with ${keyName} ${req.body.email} exists`,
+                            error: `User with ${keyName} ${req.body.email.trim()} exists`,
                             key: keyName,
                         });
                 }
@@ -128,7 +149,7 @@ class Users {
             .then((response) => {
                 if (response.rowCount > 0) {
                     const hash = crypto.pbkdf2Sync(
-                        req.body.password.trim(),
+                        req.body.password,
                         response.rows[0].salt,
                         1000,
                         64,
@@ -172,7 +193,7 @@ class Users {
             });
     }
 
-    static reset(req, res) {
+    static resetLink(req, res) {
         const validate = Validator.validate(req.body, ['email']);
         if (!validate.isValid) {
             let error = '';
@@ -233,6 +254,100 @@ class Users {
                 .json({
                     status: 400,
                     error: err.message,
+                }));
+    }
+
+    static reset(req, res) {
+        const validate = Validator.validate(req.body, ['email', 'password', 'confirmPassword']);
+        if (!validate.isValid) {
+            let error = '';
+            if (validate.missingProps.length > 0) {
+                error += (`${validate.missingProps.toString()} missing`);
+            }
+            if (validate.propsWithoutValue.length > 0) {
+                error += (`${validate.propsWithoutValue.toString()} value missing`);
+            }
+            res.status(400).json({
+                status: 400,
+                error,
+            });
+            return;
+        }
+
+        if (!Validator.isValidEmail(req.body, 'email')) {
+            res.status(400).json({
+                status: 400,
+                error: 'email is not valid',
+            });
+            return;
+        }
+        if (!Validator.isValidPassword(req.body, 'password')) {
+            res.status(400).json({
+                status: 400,
+                error: 'password is not valid',
+            });
+            return;
+        }
+
+        if (!Validator.isValidPassword(req.body, 'confirmPassword')) {
+            res.status(400).json({
+                status: 400,
+                error: 'confirm password is not valid',
+            });
+            return;
+        }
+
+        if (req.body.password.trim() !== req.body.confirmPassword.trim()) {
+            res.status(400).json({
+                status: 400,
+                error: 'new password not identical',
+            });
+        }
+
+        const getUser = 'SELECT * FROM users WHERE email = $1';
+        const resetUserQuery = 'UPDATE users SET hash = $1 returning *';
+
+        db.pool.query(getUser, [req.body.email.trim()])
+            .then((user) => {
+                if (user.rowCount > 0) {
+                    if (user.rows[0].email === req.body.email.trim() && req.body.email.trim() === req.user.email) {
+                        const hash = crypto.pbkdf2Sync(req.body.password, user.rows[0].salt, 1000, 64, 'sha512').toString('hex');
+                        db.pool.query(resetUserQuery, [hash])
+                            .then((newUser) => {
+                                res.status(200)
+                                    .json({
+                                        status: 200,
+                                        user: newUser.rows[0],
+                                    });
+                            })
+                            .catch(err => res.status(400)
+                                .json({
+                                    status: 400,
+                                    error: err.message,
+                                }));
+                        return;
+                    }
+                    res.status(400)
+                        .json({
+                            status: 400,
+                            error: 'Token email and sent email doesn\'t match',
+                        });
+                }
+            })
+            .catch(err => res.status(400)
+                .json({
+                    status: 400,
+                    error: err.message,
+                }));
+    }
+
+    static getAll(req, res) {
+        const getUsersQuery = 'SELECT * FROM users';
+        db.pool.query(getUsersQuery)
+            .then(users => res.status(200)
+                .json({
+                    status: 200,
+                    users: users.rows,
                 }));
     }
 }

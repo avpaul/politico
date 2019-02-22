@@ -19,9 +19,19 @@ class Office {
                 if (candidates.rowCount > 0) {
                     const pResults = candidates.rows.map(async (candidate) => {
                         const votes = await db.pool.query(voteCountQuery, [candidate.candidate]);
+                        const candidateUser = await db.pool.query(`SELECT * FROM users WHERE id = ${candidate.candidate}`);
+                        const officeInfo = await db.pool.query(`SELECT * FROM offices WHERE id = ${req.params.id}`);
                         return {
-                            candidate: candidate.candidate,
-                            office: Number(req.params.id),
+                            candidate: {
+                                id: candidateUser.rows[0].id,
+                                firstname: candidateUser.rows[0].firstname,
+                                lastname: candidateUser.rows[0].lastname,
+                            },
+                            office: {
+                                id: officeInfo.rows[0].id,
+                                type: officeInfo.rows[0].type,
+                                name: officeInfo.rows[0].name,
+                            },
                             result: Number(votes.rows[0].count),
                         };
                     });
@@ -32,7 +42,13 @@ class Office {
                             status: 200,
                             data: results,
                         });
+                    return;
                 }
+                res.status(404)
+                    .json({
+                        status: 404,
+                        error: 'no vote found for that office',
+                    });
             })
             .catch(err => res.status(400)
                 .json({

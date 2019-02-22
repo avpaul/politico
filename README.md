@@ -1,8 +1,8 @@
 # Politico
-[![Build Status](https://travis-ci.com/avpaul/politico.svg?branch=develop)](https://travis-ci.com/avpaul/politico)
-[![Coverage Status](https://coveralls.io/repos/github/avpaul/politico/badge.svg?branch=develop)](https://coveralls.io/github/avpaul/politico?branch=develop&kill_cache=1) 
-[![codecov](https://codecov.io/gh/avpaul/politico-api/branch/develop/graph/badge.svg)](https://codecov.io/gh/avpaul/politico-api)
-[![Maintainability](https://api.codeclimate.com/v1/badges/c089097efa55232f6aed/maintainability)](https://codeclimate.com/github/avpaul/politico/maintainability)
+[![Build Status](https://travis-ci.com/avpaul/politico-db.svg?branch=develop)](https://travis-ci.com/avpaul/politico-db)
+[![Coverage Status](https://coveralls.io/repos/github/avpaul/politico-db/badge.svg?branch=develop)](https://coveralls.io/github/avpaul/politico-db?branch=develop&kill_cache=1) 
+[![codecov](https://codecov.io/gh/avpaul/politico-db/branch/develop/graph/badge.svg)](https://codecov.io/gh/avpaul/politico-db)
+[![Maintainability](https://api.codeclimate.com/v1/badges/c089097efa55232f6aed/maintainability)](https://codeclimate.com/github/avpaul/politico-db/maintainability)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 <p align="center">
@@ -27,7 +27,7 @@ to doing business across the five continents from home! It's time to take our el
 election and have there votes counted online.
 
 ### Gh-pages and heroku app links
-Politico front end is hosted on gh-pages [Politico UI](http://avpaul.github.io/politico) and the API end points are hosted on heroku [Politico API](https://peoplevote.herokuapp.com)
+Politico front end is hosted on gh-pages [Politico UI](http://avpaul.github.io/politico) and the API end points are hosted on heroku [Politico API](https://peoplevotedb.herokuapp.com)
 
 ### Framework and Technologies used
 *Built with*
@@ -45,7 +45,7 @@ Politico front end is hosted on gh-pages [Politico UI](http://avpaul.github.io/p
 ### Installation
 Clone this repo locally and install dependencies
 ```
-$ git clone https://github.com/avpaul/politico-api.git 
+$ git clone https://github.com/avpaul/politico-db.git 
 $ cd ./politico-api
 $ npm install
 ```

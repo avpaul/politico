@@ -100,23 +100,6 @@ class Setup {
             .catch((error) => {
                 console.log(error.message);
             });
-
-        const petition = `
-        CREATE TABLE IF NOT EXISTS petition (
-            id SERIAL PRIMARY KEY,
-            createdOn TIMESTAMP,
-            createdBy SERIAL REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
-            office SERIAL REFERENCES offices(id) ON DELETE CASCADE ON UPDATE CASCADE,
-            description TEXT
-        );`;
-
-        await this.pool.query(petition)
-            .then((res) => {
-                // console.log(res);
-            })
-            .catch((error) => {
-                console.log(error.message);
-            });
     }
 }
 

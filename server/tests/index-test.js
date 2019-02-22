@@ -9,19 +9,12 @@ ENV.config();
 chai.use(chaihttp);
 chai.should();
 
-const testAdmin = {
-    firstname: 'paul',
-    lastname: 'smith',
-    email: process.env.TEST_EMAIL,
-    password: process.env.TEST_EMAIL_PASSWORD,
-    isAdmin: true,
-};
 const regularUser = {
     firstname: 'pauline',
     lastname: 'keza',
     email: process.env.TEST_ADMIN_EMAIL,
     password: process.env.TEST_USER_PASSWORD,
-    isAdmin: false,
+    confirmPassword: process.env.TEST_USER_PASSWORD,
 };
 
 before((done) => {
@@ -40,8 +33,8 @@ before((done) => {
 });
 
 after((done) => {
-    db.pool.query(`DELETE FROM users CASCADE; DELETE FROM offices CASCADE; DELETE FROM parties CASCADE; DELETE FROM candidates; DELETE FROM votes`)
-        .then(res => done()).catch((err) => {
+    db.pool.query(' DROP TABLE votes; DROP TABLE parties CASCADE; DROP TABLE candidates; DROP TABLE users CASCADE; DROP TABLE  offices CASCADE; ')
+        .then(() => done()).catch((err) => {
             console.log(err.message);
             done();
         });
@@ -86,7 +79,6 @@ describe('#index', () => {
                     firstname: 'pauline',
                     lastname: 'keza',
                     email: '',
-                    isAdmin: false,
                 })
                 .end((err, res) => {
                     res.should.have.status(400);
@@ -121,9 +113,9 @@ describe('#index', () => {
                 .send({
                     email: regularUser.email,
                     password: regularUser.password,
-                    isAdmin: regularUser.isAdmin,
                 })
                 .end((err, res) => {
+                    process.env.TEST_USER_TOKEN = res.body.data[0].token;
                     res.should.have.status(200);
                     res.body.data.should.be.an('array');
                     res.body.data[0].token.should.be.a('string');
@@ -159,7 +151,6 @@ describe('#index', () => {
                 .send({
                     email: `w${regularUser.email}`,
                     password: regularUser.password,
-                    isAdmin: regularUser.isAdmin,
                 })
                 .end((err, res) => {
                     res.should.have.status(404);
@@ -179,7 +170,6 @@ describe('#index', () => {
                 .send({
                     email: regularUser.email,
                     password: `${regularUser.password}.`,
-                    isAdmin: regularUser.isAdmin,
                 })
                 .end((err, res) => {
                     res.should.have.status(400);
@@ -190,10 +180,10 @@ describe('#index', () => {
         });
     });
 
-    context('/v1/auth/reset', () => {
+    context('/v1/auth/resetlink', () => {
         it('should return a 200 status code,a message to check the user email inbox', (done) => {
             chai.request(app)
-                .post('/v1/auth/reset')
+                .post('/v1/auth/resetlink')
                 .set('Content-Type', 'application/x-www-form-urlencoded')
                 .send({
                     email: process.env.TEST_ADMIN_EMAIL,
@@ -208,10 +198,10 @@ describe('#index', () => {
         });
     });
 
-    context('/v1/auth/reset', () => {
+    context('/v1/auth/resetlink', () => {
         it('should return a 400 status code and an error message', (done) => {
             chai.request(app)
-                .post('/v1/auth/reset')
+                .post('/v1/auth/resetlink')
                 .set('Content-Type', 'application/x-www-form-urlencoded')
                 .send({
                     email: '',
@@ -225,10 +215,10 @@ describe('#index', () => {
     });
 
     // WHEN YOU SEND AN EMAIL OF A NON REGISTERED USER
-    context('/v1/auth/reset', () => {
+    context('/v1/auth/resetlink', () => {
         it('should return a 404 status code and an error message', (done) => {
             chai.request(app)
-                .post('/v1/auth/reset')
+                .post('/v1/auth/resetlink')
                 .set('Content-Type', 'application/x-www-form-urlencoded')
                 .send({
                     email: 'princesultan@reg.com',
@@ -237,6 +227,60 @@ describe('#index', () => {
                     res.should.have.status(404);
                     res.body.should.be.an('object');
                     res.body.error.should.be.a('string');
+                    done();
+                });
+        });
+    });
+
+    // RESET A PASSWORD
+    context('/v1/auth/reset', () => {
+        it('should return a 200 status code and user', (done) => {
+            chai.request(app)
+                .post('/v1/auth/reset')
+                .set('Authorization', process.env.TEST_ADMIN_TOKEN)
+                .set('Content-Type', 'application/x-www-form-urlencoded')
+                .send({
+                    email: process.env.TEST_EMAIL,
+                    password: process.env.TEST_USER_PASSWORD,
+                    confirmPassword: process.env.TEST_USER_PASSWORD,
+                })
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.an('object');
+                    done();
+                });
+        });
+    });
+
+    // RESET A PASSWORD WITHOUT DATA IN BODY
+    context('/v1/auth/reset', () => {
+        it('should return a 400 status code and error message', (done) => {
+            chai.request(app)
+                .post('/v1/auth/reset')
+                .set('Authorization', process.env.TEST_ADMIN_TOKEN)
+                .set('Content-Type', 'application/x-www-form-urlencoded')
+                .send({
+                    email: process.env.TEST_EMAIL,
+                    password: '',
+                    confirmPassword: 'EEED00FDS',
+                })
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    res.body.should.be.an('object');
+                    res.body.error.should.be.a('string');
+                    done();
+                });
+        });
+    });
+
+    context('#Get all created users', () => {
+        it('should return a 200 status code and an array of created users', (done) => {
+            chai.request(app)
+                .get('/v1/auth/users')
+                .end((error, res) => {
+                    res.should.have.status(200);
+                    res.body.users.should.be.an('array');
+                    res.body.users.length.should.be.eql(2);
                     done();
                 });
         });

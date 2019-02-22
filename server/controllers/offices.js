@@ -189,18 +189,26 @@ class Offices {
                                             .json({
                                                 status: 201,
                                                 data: {
-                                                    office: candidate.rows[0].office,
-                                                    user: candidate.rows[0].candidate,
+                                                    office: {
+                                                        id: candidate.rows[0].office,
+                                                        name: response.rows[0].name,
+                                                        type: response.rows[0].type,
+                                                    },
+                                                    user: {
+                                                        id: candidate.rows[0].candidate,
+                                                        firstname: user.rows[0].firstname,
+                                                        lastname: user.rows[0].lastname,
+                                                    },
                                                 },
                                             });
                                     })
                                     .catch((err) => {
                                         if (err.code === '23505') {
                                             const keyName = err.detail.substr(err.detail.indexOf('(') + 1, (err.detail.indexOf(')') - (err.detail.indexOf('(') + 1)));
-                                            return res.status(404)
+                                            return res.status(400)
                                                 .json({
-                                                    status: 404,
-                                                    error: err.message,
+                                                    status: 400,
+                                                    error: 'Duplicate values not accepted',
                                                     key: keyName,
                                                 });
                                         }
@@ -238,6 +246,15 @@ class Offices {
                 .json({
                     status: 400,
                     error: 'token missing',
+                });
+            return;
+        }
+
+        if (req.user.isadmin) {
+            res.status(400)
+                .json({
+                    status: 400,
+                    error: 'Admin can\'t vote',
                 });
             return;
         }
@@ -308,23 +325,36 @@ class Offices {
                                                 voteQuery,
                                                 [(new Date()).toUTCString()],
                                             )
-                                                .then(vote => res.status(201)
-                                                    .json({
-                                                        status: 201,
-                                                        data: {
-                                                            office: vote.rows[0].office,
-                                                            candidate: vote.rows[0].candidate,
-                                                            voter: vote.rows[0].createdby,
-                                                        },
-                                                    }))
+                                                .then(async (vote) => {
+                                                    const candidateInfo = await db.pool.query(`SELECT * FROM users WHERE id = ${vote.rows[0].candidate}`);
+                                                    res.status(201)
+                                                        .json({
+                                                            status: 201,
+                                                            data: {
+                                                                office: {
+                                                                    id: vote.rows[0].office,
+                                                                    name: response.rows[0].name,
+                                                                    type: response.rows[0].type,
+                                                                },
+                                                                candidate: {
+                                                                    id: vote.rows[0].candidate,
+                                                                    firstname: candidateInfo.rows[0].firstname,
+                                                                    lastname: candidateInfo.rows[0].lastname,
+                                                                },
+                                                                voter: {
+                                                                    id: vote.rows[0].createdby,
+                                                                    firstname: user.rows[0].firstname,
+                                                                    lastname: user.rows[0].lastname,
+                                                                },
+                                                            },
+                                                        });
+                                                })
                                                 .catch((err) => {
                                                     if (err.code === '23505') {
-                                                        const keyName = err.detail.substr(err.detail.indexOf('(') + 1, (err.detail.indexOf(')') - (err.detail.indexOf('(') + 1)));
-                                                        return res.status(404)
+                                                        return res.status(400)
                                                             .json({
-                                                                status: 404,
-                                                                error: err.message,
-                                                                key: keyName,
+                                                                status: 400,
+                                                                error: 'You are allowed to vote only one time on each office',
                                                             });
                                                     }
                                                     return res.status(400)
@@ -337,7 +367,7 @@ class Offices {
                                         return res.status(404)
                                             .json({
                                                 status: 404,
-                                                error: `Candidate not found`,
+                                                error: 'Candidate not found',
                                             });
                                     })
                                     .catch(err => res.status(400)
