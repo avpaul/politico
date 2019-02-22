@@ -98,3 +98,5 @@ footer {
     z-index: -100;
 
 }
+
+@media only screen and (min-width: 768px) {}
