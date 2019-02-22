@@ -150,6 +150,24 @@ describe('#offices', () => {
         });
     });
 
+    // DUPLICATE A CANDIDATE
+    describe('POST /v1/offices/:id/register', () => {
+        it('should return a 400 status code and an error message', (done) => {
+            chai.request(app)
+                .post(`/v1/offices/${office.id}/register`)
+                .set('Authorization', process.env.TEST_ADMIN_TOKEN)
+                .send({
+                    userId: process.env.TEST_USER_ID,
+                })
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    res.body.should.be.an('object');
+                    res.body.error.should.be.a('string');
+                    done();
+                });
+        });
+    });
+
     // REGISTER A CANDIDATE WITHOUT AN ID
     describe('POST /v1/offices/:id/register', () => {
         it('should return a 400 status code and an error message', (done) => {
@@ -185,6 +203,48 @@ describe('#offices', () => {
                     res.body.data.office.id.should.eql(office.id);
                     res.body.data.candidate.id.should.eql(Number(process.env.TEST_USER_ID));
                     res.body.data.voter.id.should.eql(Number(process.env.TEST_USER_ID));
+                    done();
+                });
+        });
+    });
+
+    // VOTE A CANDIDATE two times
+    describe('POST /v1/vote', () => {
+        it('should return a 400 status code and an error message', (done) => {
+            chai.request(app)
+                .post('/v1/vote')
+                .query({ token: process.env.TEST_USER_TOKEN })
+                .set('Content-Type', 'application/x-www-form-urlencoded')
+                .send({
+                    office: office.id,
+                    voter: process.env.TEST_USER_ID,
+                    candidate: process.env.TEST_USER_ID,
+                })
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    res.body.should.be.an('object');
+                    res.body.error.should.be.a('string');
+                    done();
+                });
+        });
+    });
+
+    // SEND INCOMPLETE DATA TO VOTE A CANDIDATE
+    describe('POST /v1/vote', () => {
+        it('should return a 400 status code and an error message', (done) => {
+            chai.request(app)
+                .post('/v1/vote')
+                .query({ token: process.env.TEST_USER_TOKEN })
+                .set('Content-Type', 'application/x-www-form-urlencoded')
+                .send({
+                    office: office.id,
+                    voter: '',
+                    candidate: '',
+                })
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    res.body.should.be.an('object');
+                    res.body.error.should.be.a('string');
                     done();
                 });
         });

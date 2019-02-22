@@ -205,9 +205,9 @@ class Offices {
                                     .catch((err) => {
                                         if (err.code === '23505') {
                                             const keyName = err.detail.substr(err.detail.indexOf('(') + 1, (err.detail.indexOf(')') - (err.detail.indexOf('(') + 1)));
-                                            return res.status(404)
+                                            return res.status(400)
                                                 .json({
-                                                    status: 404,
+                                                    status: 400,
                                                     error: 'Duplicate values not accepted',
                                                     key: keyName,
                                                 });
@@ -351,9 +351,9 @@ class Offices {
                                                 })
                                                 .catch((err) => {
                                                     if (err.code === '23505') {
-                                                        return res.status(404)
+                                                        return res.status(400)
                                                             .json({
-                                                                status: 404,
+                                                                status: 400,
                                                                 error: 'You are allowed to vote only one time on each office',
                                                             });
                                                     }
