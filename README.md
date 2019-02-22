@@ -73,6 +73,8 @@ POST | /v1/office | true | Create a ​ political office
 GET | /v1/office | true | Fetch all ​ political offices​ records
 GET | /v1/offices/<office_id> | true | Fetch a specific ​ political office​ record
 
+### READ MORE IN THE API DOCUMENTATION [HERE](https://peoplevotedb.herokuapp.com/apidocs/) 
+
 ### Tests
 ```
 $ npm test
