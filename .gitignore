@@ -1,7 +1,8 @@
 .idea/
-node_modules/
-coverage
+/node_modules/
 coverage.lcov
 report.*.json
 .nyc_output/
 /coverage/
+/.coveralls.yml
+/.env
