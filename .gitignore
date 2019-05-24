@@ -1,7 +1,9 @@
 .idea/
 node_modules/
 report.*.json
-/.coveralls.yml
+.coveralls.yml
 .nyc_output/
-/coverage/
-/.env
+coverage/
+.env
+.DS_Store
+UI/.DS_Store

@@ -51,7 +51,7 @@ class Users {
                 error: 'password is not valid',
             });
             return;
-        }
+        } 
 
         if (!Validator.isValidPassword(req.body, 'confirmPassword')) {
             res.status(400).json({

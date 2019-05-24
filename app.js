@@ -2,6 +2,7 @@ import express from 'express';
 import logger from 'morgan';
 import path from 'path';
 import ENV from 'dotenv';
+import cors from 'cors';
 import './server/config/db';
 
 import apiRouter from './server/routes/api';
@@ -13,6 +14,7 @@ ENV.config();
 const port = process.env.PORT || '3000';
 const app = express();
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -20,8 +22,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(`${__dirname}/UI`)));
 
 app.use('/', indexRouter);
-app.use('/v1', apiRouter);
-app.use('/v1/auth', userRouter);
+app.use('/api//v1', apiRouter);
+app.use('/api/v1/auth', userRouter);
 
 app.use('*', (req, res) => {
     res.status(404).json({
