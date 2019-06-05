@@ -114,6 +114,7 @@ class Users {
     }
 
     static login(req, res) {
+        const { email, password } = req.body;
         const validate = Validator.validate(req.body, ['email', 'password']);
         if (!validate.isValid) {
             let error = '';
@@ -141,13 +142,13 @@ class Users {
             });
         }
 
-        const query = `SELECT (id,email,firstName,lastName,isAdmin,party,address,salt) FROM users WHERE email = '${req.body.email.trim()}'`;
+        const query = `SELECT id,email,firstName,lastName,isAdmin,party,address,salt FROM users WHERE email = '${email}'`;
         return db.pool
             .query(query)
             .then((response) => {
                 if (response.rowCount > 0) {
                     const hash = crypto
-                        .pbkdf2Sync(req.body.password, response.rows[0].salt, 1000, 64, 'sha512')
+                        .pbkdf2Sync(password, response.rows[0].salt, 1000, 64, 'sha512')
                         .toString('hex');
                     if (hash === response.rows[0].hash) {
                         const user = response.rows[0];
