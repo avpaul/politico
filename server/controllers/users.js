@@ -9,14 +9,14 @@ ENV.config();
 
 class Users {
     static create(req, res) {
-        const validate = Validator.validate(req.body, ['email', 'password', 'confirmPassword', 'firstname', 'lastname']);
+        const validate = Validator.validate(req.body, ['email', 'password', 'confirmPassword']);
         if (!validate.isValid) {
             let error = '';
             if (validate.missingProps.length > 0) {
-                error += (`${validate.missingProps.toString()} missing`);
+                error += `${validate.missingProps.toString()} missing`;
             }
             if (validate.propsWithoutValue.length > 0) {
-                error += (`${validate.propsWithoutValue.toString()} value missing`);
+                error += `${validate.propsWithoutValue.toString()} value missing`;
             }
             res.status(400).json({
                 status: 400,
@@ -24,20 +24,7 @@ class Users {
             });
             return;
         }
-        if (!Validator.isStringOnly(req.body, 'firstname')) {
-            res.status(400).json({
-                status: 400,
-                error: 'fisrtname must not contain any number',
-            });
-            return;
-        }
-        if (!Validator.isStringOnly(req.body, 'lastname')) {
-            res.status(400).json({
-                status: 400,
-                error: 'lastname must not contain any number',
-            });
-            return;
-        }
+
         if (!Validator.isValidEmail(req.body, 'email')) {
             res.status(400).json({
                 status: 400,
@@ -51,7 +38,7 @@ class Users {
                 error: 'password is not valid',
             });
             return;
-        } 
+        }
 
         if (!Validator.isValidPassword(req.body, 'confirmPassword')) {
             res.status(400).json({
@@ -73,47 +60,57 @@ class Users {
         const hash = crypto.pbkdf2Sync(req.body.password, salt, 1000, 64, 'sha512').toString('hex');
 
         const query = `INSERT INTO  
-                    users(firstname,lastname,email,salt,hash)
-                    VALUES($1,$2,$3,$4,$5)
-                    returning *
+                    users(email,salt,hash)
+                    VALUES($1,$2,$3)
+                    returning email
         `;
-        db.pool.query(query, [
-            req.body.firstname.trim(),
-            req.body.lastname.trim(),
-            req.body.email.trim(),
-            salt,
-            hash,
-        ])
+        db.pool
+            .query(query, [req.body.email.trim(), salt, hash])
             .then(response => res.status(201).json({
                 status: 201,
                 message: 'user created',
-                data: [{
-                    token: token.generateToken({
-                        id: response.rows[0].id,
-                        email: response.rows[0].email,
-                        firstname: response.rows[0].firstname,
-                        lastname: response.rows[0].lastname,
-                        isAdmin: response.rows[0].isadmin,
-                    }),
-                    user: response.rows[0],
-                }],
+                user: response.rows[0],
             }))
             .catch((err) => {
                 if (err.code === '23505') {
-                    const keyName = err.detail.substr(err.detail.indexOf('(') + 1, (err.detail.indexOf(')') - (err.detail.indexOf('(') + 1)));
-                    return res.status(400)
-                        .json({
-                            status: 400,
-                            error: `User with ${keyName} ${req.body.email.trim()} exists`,
-                            key: keyName,
-                        });
-                }
-                return res.status(400)
-                    .json({
+                    const keyName = err.detail.substr(
+                        err.detail.indexOf('(') + 1,
+                        err.detail.indexOf(')') - (err.detail.indexOf('(') + 1),
+                    );
+                    return res.status(400).json({
                         status: 400,
-                        error: err.message,
+                        error: `User with ${keyName} ${req.body.email.trim()} exists`,
+                        key: keyName,
                     });
+                }
+                return res.status(400).json({
+                    status: 400,
+                    error: err.message,
+                });
             });
+    }
+
+    static updateProfile(req, res) {
+        const {
+            email, firstName, lastName, phoneNumber, userProfile, party, address,
+        } = req.body;
+        const query = `INSERT INTO  
+                    users(email,firstName,lastName,phoneNumber,userProfile,party,address)
+                    VALUES($1,$2,$3,$4,$5)
+                    returning email,firstName,lastName,phoneNumber,userProfile,party,address
+        `;
+
+        db.pool
+            .query(query, [email, firstName, lastName, phoneNumber, userProfile, party, address])
+            .then(response => res.status(201).json({
+                status: 201,
+                message: 'User updated',
+                user: response.rows[0],
+            }))
+            .catch(err => res.status(400).json({
+                status: 400,
+                error: err.message,
+            }));
     }
 
     static login(req, res) {
@@ -121,10 +118,10 @@ class Users {
         if (!validate.isValid) {
             let error = '';
             if (validate.missingProps.length > 0) {
-                error += (`${validate.missingProps.toString()} missing`);
+                error += `${validate.missingProps.toString()} missing`;
             }
             if (validate.propsWithoutValue.length > 0) {
-                error += (`${validate.propsWithoutValue.toString()} value missing`);
+                error += `${validate.propsWithoutValue.toString()} value missing`;
             }
             return res.status(400).json({
                 status: 400,
@@ -134,62 +131,55 @@ class Users {
         if (!Validator.isValidEmail(req.body, 'email')) {
             return res.status(400).json({
                 status: 400,
-                error: 'email is not valid',
+                error: 'Email is not valid',
             });
         }
         if (!Validator.isValidPassword(req.body, 'password')) {
             return res.status(400).json({
                 status: 400,
-                error: 'password is not valid',
+                error: 'Password is not valid',
             });
         }
 
-        const query = `SELECT * FROM users WHERE email = '${req.body.email.trim()}'`;
-        return db.pool.query(query)
+        const query = `SELECT (id,email,firstName,lastName,isAdmin,party,address) FROM users WHERE email = '${req.body.email.trim()}'`;
+        return db.pool
+            .query(query)
             .then((response) => {
                 if (response.rowCount > 0) {
-                    const hash = crypto.pbkdf2Sync(
-                        req.body.password,
-                        response.rows[0].salt,
-                        1000,
-                        64,
-                        'sha512',
-                    )
+                    const hash = crypto
+                        .pbkdf2Sync(req.body.password, response.rows[0].salt, 1000, 64, 'sha512')
                         .toString('hex');
                     if (hash === response.rows[0].hash) {
-                        return res.status(200)
-                            .json({
-                                status: 200,
-                                data: [{
-                                    token: token.generateToken({
-                                        id: response.rows[0].id,
-                                        email: response.rows[0].email,
-                                        firstname: response.rows[0].firstname,
-                                        lastname: response.rows[0].lastname,
-                                        isadmin: response.rows[0].isadmin,
-                                    }),
-                                    user: response.rows[0],
-                                }],
-                            });
-                    }
-                    return res.status(400)
-                        .json({
-                            status: 400,
-                            error: 'password is incorect',
+                        const user = response.rows[0];
+                        return res.status(200).json({
+                            status: 200,
+                            token: token.generateToken(
+                                {
+                                    id: user.id,
+                                    email: user.email,
+                                    firstName: user.firstName,
+                                    lastName: user.lastName,
+                                    isAdmin: user.isAdmin,
+                                },
+                                user,
+                            ),
                         });
-                }
-                return res.status(404)
-                    .json({
-                        status: 404,
-                        error: `User with email ${req.body.email} doens't exist`,
+                    }
+                    return res.status(400).json({
+                        status: 400,
+                        error: 'Password is incorrect',
                     });
+                }
+                return res.status(404).json({
+                    status: 404,
+                    error: `User with email ${req.body.email} doesn't exist`,
+                });
             })
             .catch((err) => {
-                res.status(400)
-                    .json({
-                        status: 400,
-                        error: err.message,
-                    });
+                res.status(400).json({
+                    status: 400,
+                    error: err.message,
+                });
             });
     }
 
@@ -198,10 +188,10 @@ class Users {
         if (!validate.isValid) {
             let error = '';
             if (validate.missingProps.length > 0) {
-                error += (`${validate.missingProps.toString()} missing`);
+                error += `${validate.missingProps.toString()} missing`;
             }
             if (validate.propsWithoutValue.length > 0) {
-                error += (`${validate.propsWithoutValue.toString()} value missing`);
+                error += `${validate.propsWithoutValue.toString()} value missing`;
             }
             return res.status(400).json({
                 status: 400,
@@ -222,7 +212,9 @@ class Users {
                 pass: process.env.TEST_EMAIL_PASSWORD,
             },
         });
-        const resetLink = `https://peoplevote.herokuapp.com/reset?token=${token.resetEmailToken(req.body.email)}`;
+        const resetLink = `https://peoplevote.herokuapp.com/reset?token=${token.resetEmailToken(
+            req.body.email,
+        )}`;
         const mailOptions = {
             from: process.env.EMAIL,
             to: req.body.email.trim(),
@@ -232,29 +224,30 @@ class Users {
         };
 
         const query = `SELECT email FROM users WHERE email = '${req.body.email.trim()}'`;
-        return db.pool.query(query)
+        return db.pool
+            .query(query)
             .then(async (users) => {
                 if (users.rowCount > 0 && users.rows[0].email === req.body.email.trim()) {
                     transporter.sendMail(mailOptions);
                     return res.status(200).json({
                         status: 400,
-                        data: [{
-                            message: 'Check your email for password reset link',
-                            email: req.body.email,
-                        }],
+                        data: [
+                            {
+                                message: 'Check your email for password reset link',
+                                email: req.body.email,
+                            },
+                        ],
                     });
                 }
-                return res.status(404)
-                    .json({
-                        status: 404,
-                        error: `User with email ${req.body.email} doesn't exist`,
-                    });
+                return res.status(404).json({
+                    status: 404,
+                    error: `User with email ${req.body.email} doesn't exist`,
+                });
             })
-            .catch(err => res.status(400)
-                .json({
-                    status: 400,
-                    error: err.message,
-                }));
+            .catch(err => res.status(400).json({
+                status: 400,
+                error: err.message,
+            }));
     }
 
     static reset(req, res) {
@@ -262,10 +255,10 @@ class Users {
         if (!validate.isValid) {
             let error = '';
             if (validate.missingProps.length > 0) {
-                error += (`${validate.missingProps.toString()} missing`);
+                error += `${validate.missingProps.toString()} missing`;
             }
             if (validate.propsWithoutValue.length > 0) {
-                error += (`${validate.propsWithoutValue.toString()} value missing`);
+                error += `${validate.propsWithoutValue.toString()} value missing`;
             }
             res.status(400).json({
                 status: 400,
@@ -307,48 +300,49 @@ class Users {
         const getUser = 'SELECT * FROM users WHERE email = $1';
         const resetUserQuery = 'UPDATE users SET hash = $1 returning *';
 
-        db.pool.query(getUser, [req.body.email.trim()])
+        db.pool
+            .query(getUser, [req.body.email.trim()])
             .then((user) => {
                 if (user.rowCount > 0) {
-                    if (user.rows[0].email === req.body.email.trim() && req.body.email.trim() === req.user.email) {
-                        const hash = crypto.pbkdf2Sync(req.body.password, user.rows[0].salt, 1000, 64, 'sha512').toString('hex');
-                        db.pool.query(resetUserQuery, [hash])
+                    if (
+                        user.rows[0].email === req.body.email.trim()
+                        && req.body.email.trim() === req.user.email
+                    ) {
+                        const hash = crypto
+                            .pbkdf2Sync(req.body.password, user.rows[0].salt, 1000, 64, 'sha512')
+                            .toString('hex');
+                        db.pool
+                            .query(resetUserQuery, [hash])
                             .then((newUser) => {
-                                res.status(200)
-                                    .json({
-                                        status: 200,
-                                        user: newUser.rows[0],
-                                    });
+                                res.status(200).json({
+                                    status: 200,
+                                    user: newUser.rows[0],
+                                });
                             })
-                            .catch(err => res.status(400)
-                                .json({
-                                    status: 400,
-                                    error: err.message,
-                                }));
+                            .catch(err => res.status(400).json({
+                                status: 400,
+                                error: err.message,
+                            }));
                         return;
                     }
-                    res.status(400)
-                        .json({
-                            status: 400,
-                            error: 'Token email and sent email doesn\'t match',
-                        });
+                    res.status(400).json({
+                        status: 400,
+                        error: "Token email and sent email doesn't match",
+                    });
                 }
             })
-            .catch(err => res.status(400)
-                .json({
-                    status: 400,
-                    error: err.message,
-                }));
+            .catch(err => res.status(400).json({
+                status: 400,
+                error: err.message,
+            }));
     }
 
     static getAll(req, res) {
         const getUsersQuery = 'SELECT * FROM users';
-        db.pool.query(getUsersQuery)
-            .then(users => res.status(200)
-                .json({
-                    status: 200,
-                    users: users.rows,
-                }));
+        db.pool.query(getUsersQuery).then(users => res.status(200).json({
+            status: 200,
+            users: users.rows,
+        }));
     }
 }
 

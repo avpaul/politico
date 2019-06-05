@@ -13,14 +13,16 @@ class Setup {
         const users = `
         CREATE TABLE IF NOT EXISTS users (
             id SERIAL PRIMARY KEY,
-            firstname VARCHAR(255) NOT NULL,
-            lastname VARCHAR(255)  NOT NULL,
-            othername VARCHAR(255),
+            firstName VARCHAR(255) NOT NULL,
+            lastName VARCHAR(255)  NOT NULL,
+            otherName VARCHAR(255),
             email VARCHAR(255) NOT NULL UNIQUE,
             phoneNumber INTEGER UNIQUE,
             passportUrl TEXT UNIQUE,
             userProfile TEXT,
             isAdmin BOOLEAN DEFAULT false,
+            party TEXT,
+            address TEXT,
             salt TEXT NOT NULL,
             hash TEXT NOT NULL
         );`;

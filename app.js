@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(`${__dirname}/UI`)));
 
 app.use('/', indexRouter);
-app.use('/api//v1', apiRouter);
+app.use('/api/v1', apiRouter);
 app.use('/api/v1/auth', userRouter);
 
 app.use('*', (req, res) => {
