@@ -95,15 +95,15 @@ class Users {
             email, firstName, lastName, phoneNumber, userProfile, party, address,
         } = req.body;
         const query = `INSERT INTO  
-                    users(email,firstName,lastName,phoneNumber,userProfile,party,address)
-                    VALUES($1,$2,$3,$4,$5)
-                    returning email,firstName,lastName,phoneNumber,userProfile,party,address
+                    users(email,firstname,lastname,phonenumber,userprofile,party,address)
+                    VALUES($1,$2,$3,$4,$5,$6,$7)
+                    returning email,firstname,lastname,phonenumber,userprofile,party,address
         `;
 
         db.pool
             .query(query, [email, firstName, lastName, phoneNumber, userProfile, party, address])
-            .then(response => res.status(201).json({
-                status: 201,
+            .then(response => res.status(200).json({
+                status: 200,
                 message: 'User updated',
                 user: response.rows[0],
             }))
@@ -142,7 +142,7 @@ class Users {
             });
         }
 
-        const query = `SELECT id,email,firstName,lastName,isAdmin,party,address,salt FROM users WHERE email = '${email}'`;
+        const query = `SELECT * FROM users WHERE email = '${email}'`;
         return db.pool
             .query(query)
             .then((response) => {
@@ -153,19 +153,27 @@ class Users {
                     if (hash === response.rows[0].hash) {
                         const user = response.rows[0];
                         delete user.salt;
+                        delete user.hash;
                         delete user.id;
                         return res.status(200).json({
                             status: 200,
-                            token: token.generateToken(
-                                {
-                                    id: user.id,
-                                    email: user.email,
-                                    firstName: user.firstName,
-                                    lastName: user.lastName,
-                                    isAdmin: user.isAdmin,
-                                },
-                                user,
-                            ),
+                            token: token.generateToken({
+                                id: user.id,
+                                email: user.email,
+                                firstName: user.firstname,
+                                lastName: user.lastname,
+                                isAdmin: user.isadmin,
+                            }),
+                            user: {
+                                firstName: user.firstname,
+                                lastName: user.lastname,
+                                isAdmin: user.isadmin,
+                                userProfile: user.userprofile,
+                                phoneNumber: user.phonenumber,
+                                party: user.party,
+                                address: user.address,
+                                email: user.email,
+                            },
                         });
                     }
                     return res.status(400).json({
@@ -175,7 +183,7 @@ class Users {
                 }
                 return res.status(404).json({
                     status: 404,
-                    error: `User with email ${req.body.email} doesn't exist`,
+                    error: "User with this email doesn't exist",
                 });
             })
             .catch((err) => {
