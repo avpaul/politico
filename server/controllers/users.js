@@ -141,7 +141,7 @@ class Users {
             });
         }
 
-        const query = `SELECT (id,email,firstName,lastName,isAdmin,party,address) FROM users WHERE email = '${req.body.email.trim()}'`;
+        const query = `SELECT (id,email,firstName,lastName,isAdmin,party,address,salt) FROM users WHERE email = '${req.body.email.trim()}'`;
         return db.pool
             .query(query)
             .then((response) => {
@@ -151,6 +151,8 @@ class Users {
                         .toString('hex');
                     if (hash === response.rows[0].hash) {
                         const user = response.rows[0];
+                        delete user.salt;
+                        delete user.id;
                         return res.status(200).json({
                             status: 200,
                             token: token.generateToken(

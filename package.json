@@ -14,7 +14,7 @@
         "createdb": "babel-node ./server/config/createTables.js",
         "createAdmin": "babel-node ./server/helpers/createAdmin.js"
     },
-    "homepage": "avpaul.github.io/politico",
+    "homepage": "https://www.avpaul.github.io/politico",
     "repository": {
         "type": "git",
         "url": "https://github.com/avpaul/politico"

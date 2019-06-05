@@ -13,8 +13,8 @@ class Setup {
         const users = `
         CREATE TABLE IF NOT EXISTS users (
             id SERIAL PRIMARY KEY,
-            firstName VARCHAR(255) NOT NULL,
-            lastName VARCHAR(255)  NOT NULL,
+            firstName VARCHAR(255),
+            lastName VARCHAR(255),
             otherName VARCHAR(255),
             email VARCHAR(255) NOT NULL UNIQUE,
             phoneNumber INTEGER UNIQUE,
