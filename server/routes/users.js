@@ -10,7 +10,7 @@ router.post('/signup', Users.create);
 router.post('/login', Users.login);
 router.post('/resetlink', Users.resetLink);
 router.post('/reset', auth, Users.reset);
-router.put('/update', Users.updateProfile);
+router.put('/update', auth, Users.updateProfile);
 router.get('/users', Users.getAll);
 
 export default router;

@@ -6,42 +6,45 @@ ENV.config();
 
 class Token {
     static generateToken({
-        id,
-        email,
-        firstname,
-        lastname,
-        isadmin,
+        id, email, firstname, lastname, isadmin,
     }) {
-        return jwt.sign({
-            id,
-            email,
-            isadmin,
-            name: `${firstname} ${lastname}`,
-            exp: ((Date.now() / 1000) + (30 * 60)),
-        },
-        process.env.TOKEN_SECRET,
-        {
-            audience: '/auth',
-        });
+        return jwt.sign(
+            {
+                id,
+                email,
+                isadmin,
+                name: `${firstname} ${lastname}`,
+                exp: Date.now() / 1000 + 30 * 60,
+            },
+            process.env.TOKEN_SECRET,
+            {
+                audience: '/auth',
+            },
+        );
     }
 
     static resetEmailToken(email) {
-        return jwt.sign({
-            email,
-            exp: ((Date.now() / 1000) + (60 * 60)),
-        },
-        process.env.TOKEN_SECRET,
-        {
-            audience: '/auth/reset',
-        });
+        return jwt.sign(
+            {
+                email,
+                exp: Date.now() / 1000 + 60 * 60,
+            },
+            process.env.TOKEN_SECRET,
+            {
+                audience: '/auth/reset',
+            },
+        );
     }
 
     static checkToken() {
         return ejwt({
             secret: process.env.TOKEN_SECRET,
             userProperty: 'user',
-            getToken: function fromHeaderOrCookie(req) {
-                if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
+            getToken: (req) => {
+                if (
+                    req.headers.authorization
+                    && req.headers.authorization.split(' ')[0] === 'Bearer'
+                ) {
                     return req.headers.authorization.split(' ')[1];
                 }
                 if (req.query && req.query.token) {

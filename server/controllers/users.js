@@ -94,19 +94,31 @@ class Users {
         const {
             email, firstName, lastName, phoneNumber, userProfile, party, address,
         } = req.body;
-        const query = `INSERT INTO  
-                    users(email,firstname,lastname,phonenumber,userprofile,party,address)
-                    VALUES($1,$2,$3,$4,$5,$6,$7)
-                    returning email,firstname,lastname,phonenumber,userprofile,party,address
+        const query = `UPDATE users 
+                    SET firstname=$2, lastname=$3, phonenumber=$4, userprofile=$5, party=$6, address=$7
+                    WHERE email=$1
+                    returning email,firstname,lastname,phonenumber,userprofile,party,address;
         `;
 
         db.pool
             .query(query, [email, firstName, lastName, phoneNumber, userProfile, party, address])
-            .then(response => res.status(200).json({
-                status: 200,
-                message: 'User updated',
-                user: response.rows[0],
-            }))
+            .then((response) => {
+                const user = response.rows[0];
+                return res.status(200).json({
+                    status: 200,
+                    message: 'User updated',
+                    user: {
+                        firstName: user.firstname,
+                        lastName: user.lastname,
+                        isAdmin: user.isadmin,
+                        userProfile: user.userprofile,
+                        phoneNumber: user.phonenumber,
+                        party: user.party,
+                        address: user.address,
+                        email: user.email,
+                    },
+                });
+            })
             .catch(err => res.status(400).json({
                 status: 400,
                 error: err.message,

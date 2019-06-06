@@ -17,11 +17,11 @@ class Setup {
             lastName VARCHAR(255),
             otherName VARCHAR(255),
             email VARCHAR(255) NOT NULL UNIQUE,
-            phoneNumber INTEGER UNIQUE,
+            phoneNumber VARCHAR(255) UNIQUE,
             passportUrl TEXT UNIQUE,
             userProfile TEXT,
             isAdmin BOOLEAN DEFAULT false,
-            party TEXT,
+            party VARCHAR(255),
             address TEXT,
             salt TEXT NOT NULL,
             hash TEXT NOT NULL
